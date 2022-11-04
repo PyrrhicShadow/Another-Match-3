@@ -121,8 +121,12 @@ public class FindMatches : MonoBehaviour {
         List<GameObject> dots = new List<GameObject>(); 
         for (int i = 0; i < board.getHeight(); i++) {
             if (board.getDot(col, i) != null) {
+                Dot dot = board.getDot(col, i).GetComponent<Dot>(); 
+                if (dot.isRowBomb()) {
+                    dots.Union(getRowDots(i)); 
+                }
                 dots.Add(board.getDot(col, i));  
-                board.getDot(col, i).GetComponent<Dot>().setMatched(true);  
+                dot.setMatched(true);  
             }
         }
         return dots; 
@@ -133,8 +137,12 @@ public class FindMatches : MonoBehaviour {
         List<GameObject> dots = new List<GameObject>(); 
         for (int i = 0; i < board.getWidth(); i++) {
             if (board.getDot(i, row) != null) {
+                Dot dot = board.getDot(i, row).GetComponent<Dot>();
+                if (dot.isColBomb()) {
+                    dots.Union(getColDots(i)); 
+                }
                 dots.Add(board.getDot(i, row)); 
-                board.getDot(i, row).GetComponent<Dot>().setMatched(true);  
+                dot.setMatched(true);  
             }
         }
         return dots; 
