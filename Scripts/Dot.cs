@@ -292,13 +292,14 @@ public class Dot : MonoBehaviour {
             Destroy(marker);  
         }
         else if (colorBomb) {
-            Debug.Log("This functionality is currently missing."); 
-            // colorBomb = false; 
-            // GameObject[] dots = board.getDots(); 
-            // GameObject dotToUse = dots[Random.Range(0, dots.Length)];
-            // this.gameObject.tag = dotToUse.tag; 
-            // mySprite.sprite = dotToUse.GetComponent<Dot>().getSprite(); 
-            // Debug.Log("Player returned a color bomb into a " + this.tag + " dot");
+            // Debug.Log("This functionality is currently missing."); 
+            colorBomb = false; 
+            GameObject[] dots = board.getDots(); 
+            GameObject dotToUse = Instantiate(dots[Random.Range(0, dots.Length)], transform.position, Quaternion.identity);
+            this.gameObject.tag = dotToUse.tag; 
+            mySprite.sprite = dotToUse.GetComponent<SpriteRenderer>().sprite; 
+            Destroy(dotToUse);
+            Debug.Log("Player returned a color bomb into a " + this.tag + " dot");
         }
         else {
             Debug.Log("No bomb detected.");

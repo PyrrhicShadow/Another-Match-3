@@ -38,6 +38,7 @@ public class Board : MonoBehaviour {
     private GameObject[,] allDots; 
     private FindMatches findMatches; 
     private ScoreManager scoreManager; 
+    private FloatingTextManager floatingTextManager; 
     private int streakValue = 1; 
     
     [Header("Board components")]
@@ -55,6 +56,7 @@ public class Board : MonoBehaviour {
     private GameObject destroyEffect; 
     [SerializeField]
     private float particleLifetime = 0.5f; 
+    private float refillDelay = 0.5f; 
 
     [Header("Dot types")]
     [SerializeField]
@@ -68,6 +70,7 @@ public class Board : MonoBehaviour {
         allDots = new GameObject[width, height]; 
         findMatches = FindObjectOfType<FindMatches>(); 
         scoreManager = FindObjectOfType<ScoreManager>(); 
+        floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
         breakableTiles = new BackgroundTile[width, height]; 
         SetUp(); 
     }
@@ -105,7 +108,7 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
-        setEyeRatio(scoreManager.getScore() / (balance / 30)); 
+        setEyeRatio(scoreManager.getScore() / (balance / 5)); 
     }
 
     /// <summary>Turns on breakability for all tiles marked breakable</summary>
@@ -284,10 +287,12 @@ public class Board : MonoBehaviour {
 
     /// <summary>Checks findMatches for bomb-making, adds score, breaks breakable tiles, then destroys matched dot</summary>
     private void DestroyMatchesAt(int x, int y) {
-        if (allDots[x, y].GetComponent<Dot>().isMatched()) {
+        Dot dot = allDots[x, y].GetComponent<Dot>(); 
+        if (dot.isMatched()) {
             // How many elements are in the matched pieces list from findMatches? 
             if (findMatches.getCurrentMatches().Count > 3) {
                 findMatches.makeBomb(); 
+                floatingTextManager.Show("Awesome!", 20, Color.white, new Vector3(dot.transform.position.x, dot.transform.position.y, 0f), Vector3.up * 40f, 1f); 
             }
 
             // checks if a tile needs to be broken, then breaks it
@@ -303,7 +308,7 @@ public class Board : MonoBehaviour {
             Destroy(particle, particleLifetime); 
             Destroy(allDots[x, y]); 
             // add the broken dot to the score 
-            scoreManager.IncreaseScore(allDots[x, y].GetComponent<Dot>().getPoints()* streakValue); 
+            scoreManager.IncreaseScore(dot.getPoints() * streakValue); 
             allDots[x, y] = null; 
         }
     }
@@ -336,7 +341,7 @@ public class Board : MonoBehaviour {
             }
             nullCount = 0; 
         }
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(refillDelay * 0.5f); 
 
         StartCoroutine(FillBoardCo()); 
     }
@@ -384,21 +389,22 @@ public class Board : MonoBehaviour {
     /// <summary>If there are still matches on the board, destroy them</summary>
     private IEnumerator FillBoardCo() {
         RefillBoard(); 
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(refillDelay); 
 
         while(MatchesOnBoard()) {
             streakValue ++; 
-            yield return new WaitForSeconds(0.5f); 
-            DestroyMatches();  
+            DestroyMatches(); 
+            yield return new WaitForSeconds(2 * refillDelay); 
         }
         findMatches.getCurrentMatches().Clear(); 
         currentDot = null; 
 
-        yield return new WaitForSeconds(0.5f); 
         if (isDeadLocked()) {
             Debug.Log("Deadlocked!"); 
             ShuffleBoard(); 
         }
+
+        yield return new WaitForSeconds(refillDelay); 
         currentState = GameState.move; 
         streakValue = 1; 
     }

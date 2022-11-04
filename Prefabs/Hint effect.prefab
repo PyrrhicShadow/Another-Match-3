@@ -1042,25 +1042,16 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 0.9991873
-          outSlope: 0.9991873
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.14324985
-          value: 0.14313343
-          inSlope: 1.074283
-          outSlope: 1.074283
+          value: 0.24038696
+          inSlope: -0.032179512
+          outSlope: -0.032179512
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.24437396
+          inWeight: 0
+          outWeight: 0.9380192
         - serializedVersion: 3
-          time: 0.75710696
-          value: 0.9676108
+          time: 0.7929651
+          value: 0.95799583
           inSlope: 0.72046036
           outSlope: 0.72046036
           tangentMode: 0
@@ -1070,8 +1061,8 @@ ParticleSystem:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0.13334768
-          outSlope: 0.13334768
+          inSlope: 0.2028845
+          outSlope: 0.2028845
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -4857,7 +4848,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

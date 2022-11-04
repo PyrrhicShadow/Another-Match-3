@@ -30,6 +30,10 @@ public class HintManager : MonoBehaviour, IPointerClickHandler {
         if (hintDelaySec <= 0 && currentHint != null) {
             DestroyHint(); 
         }
+
+        if (Input.GetKeyDown("h")) {
+            MarkHint(); 
+        }
     }
 
     public void OnPointerClick(PointerEventData pointerEventData) {

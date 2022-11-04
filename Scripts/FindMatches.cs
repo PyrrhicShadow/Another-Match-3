@@ -147,8 +147,10 @@ public class FindMatches : MonoBehaviour {
             // check if dot exists
             for (int j = y - 1; j <= y + 1; j++) {
                 if (i >= 0 && i < board.getWidth() && j >= 0 && j < board.getHeight()) {
-                    dots.Add(board.getDot(i, j)); 
-                    board.getDot(i, j).GetComponent<Dot>().setMatched(true); 
+                    if (board.getDot(i, j) != null) {
+                        dots.Add(board.getDot(i, j)); 
+                        board.getDot(i, j).GetComponent<Dot>().setMatched(true); 
+                    }
                 }
             }
         }
