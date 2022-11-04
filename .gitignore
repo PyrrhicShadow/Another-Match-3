@@ -1,13 +1,2 @@
 *.csproj
-/Logs/
-*.sln
-/.vs/
-/.vscode/
-.vsconfig
-/UserSettings/
-/ProjectSettings/
-/Packages/
-/Library/
-/obj/
 *.meta
-/Temp/
