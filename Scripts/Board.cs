@@ -38,6 +38,8 @@ public class Board : MonoBehaviour {
     private GameObject[,] allDots; 
     private FindMatches findMatches; 
     private ScoreManager scoreManager; 
+    private SoundManager soundManager; 
+
     private FloatingTextManager floatingTextManager; 
     private int streakValue = 1; 
     
@@ -70,6 +72,7 @@ public class Board : MonoBehaviour {
         allDots = new GameObject[width, height]; 
         findMatches = FindObjectOfType<FindMatches>(); 
         scoreManager = FindObjectOfType<ScoreManager>(); 
+        soundManager = FindObjectOfType<SoundManager>(); 
         floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
         breakableTiles = new BackgroundTile[width, height]; 
 
@@ -306,6 +309,10 @@ public class Board : MonoBehaviour {
                 }
             }
 
+            // does sound manager exist? 
+            if (soundManager != null) {
+                soundManager.PlayRandomDestroyNoise(); 
+            }
             // create a dot destroy particle then destroy the dot
             GameObject particle = Instantiate(destroyEffect, allDots[x, y].transform.position, Quaternion.identity);
             Destroy(particle, particleLifetime); 

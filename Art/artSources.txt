@@ -1,3 +1,5 @@
+
+/***** art *****/
 topaz - blue gemstone: https://unsplash.com/photos/agsdDgRW2Ps by Jacek Dylag
 emerald gemstone with jewelers loupe and tweezers: https://unsplash.com/photos/jYVvmAi4u8c by Sabrianna 
 a diamond placed in a sea of glass: https://unsplash.com/photos/ypk__5RJOBM by Bas van den Eijkhof
@@ -20,3 +22,6 @@ unnamed gray steel chain: https://unsplash.com/photos/42ui88Qrxhw by Markus Spis
 a real human heart inside a jar: https://unsplash.com/photos/OermHGSUzhI by carmilo jimenez 
 orange star decoration: https://unsplash.com/photos/8gLBzBob4U8 by Sebastian Fröhlich 
 "ghost" - geometric kalidoscope drawing: by Pyrrhic Silva (Jake)
+
+/***** sounds *****/ 
+Three Chain Links – Die Historic: https://youtu.be/ZyVq4HF8oRw, Creative Commons Attribution 3.0 - http://bit.ly/RFP_CClicense
