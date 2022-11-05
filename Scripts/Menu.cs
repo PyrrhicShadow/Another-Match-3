@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour {
         board = FindObjectOfType<Board>(); 
 
         // find the move indicator, a child object
-        moveIndicator = transform.GetChild(1).gameObject; 
+        moveIndicator = transform.GetChild(0).gameObject; 
         moveIndicatorImage = moveIndicator.GetComponent<Image>(); 
 
     }

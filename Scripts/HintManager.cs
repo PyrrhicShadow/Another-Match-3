@@ -32,12 +32,14 @@ public class HintManager : MonoBehaviour, IPointerClickHandler {
         }
 
         if (Input.GetKeyDown("h")) {
+            DestroyHint(); 
             MarkHint(); 
         }
     }
 
     public void OnPointerClick(PointerEventData pointerEventData) {
         if (pointerEventData.button == PointerEventData.InputButton.Left) {
+            DestroyHint(); 
             MarkHint(); 
         }
     }
