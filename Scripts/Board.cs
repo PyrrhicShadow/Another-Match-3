@@ -31,7 +31,7 @@ public class Board : MonoBehaviour {
     private int offset = 20; 
     [SerializeField]
     private int eyeRatio = 0; // must be between 0 and 100 
-    public static readonly int balance = 500; 
+    public static readonly int balance = 1000; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
     [SerializeField]
@@ -72,11 +72,14 @@ public class Board : MonoBehaviour {
         scoreManager = FindObjectOfType<ScoreManager>(); 
         floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
         breakableTiles = new BackgroundTile[width, height]; 
+
         SetUp(); 
     }
 
     /// <summary>Creates board, tiles, and dots on board </summary>
     private void SetUp() {
+
+        // set up board
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Vector2 tempPos = new Vector2(i, j); 

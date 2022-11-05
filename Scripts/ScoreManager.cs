@@ -8,11 +8,15 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int score; 
     private Text scoreText; 
+    private Board board; 
+    private Image scoreBar; 
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreText = this.GetComponent<Text>(); 
+        scoreText = this.transform.Find("Score text").GetComponent<Text>(); 
+        board = FindObjectOfType<Board>(); 
+        scoreBar = this.transform.Find("Score bar").GetComponent<Image>(); 
         score = 0; 
     }
 
@@ -24,7 +28,10 @@ public class ScoreManager : MonoBehaviour
 
     /// <summary>Increases score by given amount <paramref name="amt"/></summary>
     public void IncreaseScore(int amt) {
-        score += amt; 
+        if (board != null && scoreBar != null) {
+            score += amt; 
+            scoreBar.fillAmount = (float)score / (float)(Board.balance * 5); 
+        }
     }
 
     /// <summary>get score </summary>
