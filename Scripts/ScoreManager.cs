@@ -3,26 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class ScoreManager : MonoBehaviour
-{
+[System.Serializable]
+public class BlankGoal {
+    [SerializeField]
+    private int numNeeded; 
+    private int numberCollected; 
+    [SerializeField]
+    private Sprite goalSprite; 
+    [SerializeField]
+    private string matchTag; 
+
+    public void addCollected(int amt) {
+        numberCollected += amt; 
+    }
+
+    public int getNumberCollected() {
+        return numberCollected; 
+    }
+
+    public string getTag() {
+        return matchTag; 
+    }
+
+    public bool isNumNeeded() {
+        return numNeeded == numberCollected; 
+    }
+
+    public Sprite getSprite() {
+        return goalSprite; 
+    }
+}
+
+public class ScoreManager : MonoBehaviour {
     [SerializeField]
     private int score; 
+    [SerializeField]
     private Text scoreText; 
     private Board board; 
+    [SerializeField]
     private Image scoreBar; 
 
+    [SerializeField]
+    private BlankGoal[] levelGoals; 
+    [SerializeField]
+    private GameObject goalPrefab; 
+    [SerializeField]
+    private GameObject goalIntroParent; 
+    [SerializeField]
+    private GameObject goalGameParent; 
+
     // Start is called before the first frame update
-    void Start()
-    {
-        scoreText = this.transform.Find("Score text").GetComponent<Text>(); 
+    void Start() {
         board = FindObjectOfType<Board>(); 
-        scoreBar = this.transform.Find("Score bar").GetComponent<Image>(); 
         score = 0; 
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         scoreText.text = "Score: " + score; 
     }
 
@@ -31,6 +68,14 @@ public class ScoreManager : MonoBehaviour
         if (board != null && scoreBar != null) {
             score += amt; 
             scoreBar.fillAmount = (float)score / (float)(Board.balance * 5); 
+        }
+    }
+
+    private void SetupIntroGoals() {
+        for (int i = 0; i < levelGoals.Length; i++) {
+            // create a new goal panel at the goalIntroParent position 
+            GameObject goal = Instantiate(goalPrefab, goalIntroParent.transform); 
+            goal.transform.SetParent(goalIntroParent.transform); 
         }
     }
 

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems; 
 
-public class HintManager : MonoBehaviour, IPointerClickHandler {
+public class HintManager : MonoBehaviour {
 
     private Board board; 
     private FindMatches findMatches; 
@@ -37,11 +36,10 @@ public class HintManager : MonoBehaviour, IPointerClickHandler {
         }
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData) {
-        if (pointerEventData.button == PointerEventData.InputButton.Left) {
-            DestroyHint(); 
-            MarkHint(); 
-        }
+    public void HintButton() {
+        DestroyHint(); 
+        MarkHint(); 
+        
     }
 
     /// <summary>Create a hint from a chosen match</summary>
