@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class Menu : MonoBehaviour {
+public class HeaderController : MonoBehaviour {
 
     private Board board; 
     private GameObject moveIndicator; 
