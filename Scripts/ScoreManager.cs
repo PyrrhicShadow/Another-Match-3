@@ -7,18 +7,22 @@ using UnityEngine.UI;
 public class BlankGoal {
     [SerializeField]
     private int numNeeded; 
-    private int numberCollected; 
+    private int numCollected; 
     [SerializeField]
     private Sprite goalSprite; 
     [SerializeField]
     private string matchTag; 
 
     public void addCollected(int amt) {
-        numberCollected += amt; 
+        numCollected += amt; 
     }
 
-    public int getNumberCollected() {
-        return numberCollected; 
+    public int getNumCollected() {
+        return numCollected; 
+    }
+
+    public int getNumNeeded() {
+        return numNeeded; 
     }
 
     public string getTag() {
@@ -26,7 +30,7 @@ public class BlankGoal {
     }
 
     public bool isNumNeeded() {
-        return numNeeded == numberCollected; 
+        return numNeeded == numCollected; 
     }
 
     public Sprite getSprite() {
@@ -52,7 +56,7 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField]
     private GameObject goalPrefab; 
     [SerializeField]
-    private GameObject goalIntroParent; 
+    private GameObject goalStartParent; 
     [SerializeField]
     private GameObject goalGameParent; 
 
@@ -72,6 +76,7 @@ public class ScoreManager : MonoBehaviour {
 
         background.color = bgColors[0]; 
 
+        SetupIntroGoals(); 
     }
 
     // Update is called once per frame
@@ -94,8 +99,21 @@ public class ScoreManager : MonoBehaviour {
     private void SetupIntroGoals() {
         for (int i = 0; i < levelGoals.Length; i++) {
             // create a new goal panel at the goalIntroParent position 
-            GameObject goal = Instantiate(goalPrefab, goalIntroParent.transform); 
-            goal.transform.SetParent(goalIntroParent.transform); 
+            GameObject startGoal = Instantiate(goalPrefab, goalStartParent.transform); 
+            startGoal.transform.SetParent(goalStartParent.transform); 
+            
+            // create a new goal panel at the gaolGameParent position
+            GameObject gameGoal = Instantiate(goalPrefab, goalGameParent.transform); 
+            gameGoal.transform.SetParent(goalGameParent.transform); 
+            
+            // set the image and text of the goal 
+            GoalPanel startPanel = startGoal.GetComponent<GoalPanel>(); 
+            startPanel.setSprite(levelGoals[i].getSprite()); 
+            startPanel.setText("0/" + levelGoals[i].getNumNeeded()); 
+
+            GoalPanel gamePanel = gameGoal.GetComponent<GoalPanel>(); 
+            gamePanel.setSprite(levelGoals[i].getSprite()); 
+            gamePanel.setText("0/" + levelGoals[i].getNumNeeded()); 
         }
     }
 
