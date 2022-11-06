@@ -10,6 +10,8 @@ public class GoalPanel : MonoBehaviour {
     [SerializeField]
     private Sprite mySprite; 
     [SerializeField]
+    private Color myColor; 
+    [SerializeField]
     private Text myText; 
     [SerializeField]
     private string goalText; 
@@ -22,10 +24,16 @@ public class GoalPanel : MonoBehaviour {
     private void SetUp() {
         myImage.sprite = mySprite; 
         myText.text = goalText; 
+        myImage.color = myColor; 
     }
 
     public void setSprite(Sprite newSprite) {
         mySprite = newSprite; 
+    }
+
+    public void setSprite(Sprite newSprite, Color newColor) {
+        mySprite = newSprite; 
+        myColor = newColor; 
     }
 
     public void setText(string newText) {

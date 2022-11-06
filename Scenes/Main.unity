@@ -1030,16 +1030,23 @@ MonoBehaviour:
   scoreText: {fileID: 1978495054}
   scoreBar: {fileID: 73840174}
   background: {fileID: 526175266}
+  currentGoals: []
   levelGoals:
   - numNeeded: 5
+    numCollected: 0
     goalSprite: {fileID: 1453271462, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: amethyst
   - numNeeded: 5
-    goalSprite: {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    matchTag: pearl
-  - numNeeded: 5
-    goalSprite: {fileID: 400462826, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    matchTag: sapphire
+    numCollected: 0
+    goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: ruby
+  - numNeeded: 9
+    numCollected: 0
+    goalSprite: {fileID: 21300000, guid: 3b4355bc3aed0434794eb822b8987fc2, type: 3}
+    goalSpriteColor: {r: 0.36900002, g: 0, b: 0.011596705, a: 1}
+    matchTag: breakable
   goalPrefab: {fileID: 8600493826628222406, guid: 2c0c27e547aa3cb47821e0164a2a99c7, type: 3}
   goalStartParent: {fileID: 66256945}
   goalGameParent: {fileID: 255234573}

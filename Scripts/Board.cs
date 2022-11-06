@@ -125,6 +125,7 @@ public class Board : MonoBehaviour {
                 allDots[i, j] = dotObj; 
             }
         }
+        GenerateBlankTiles(); 
         GenerateBreakableTiles(); 
     }
 
@@ -142,18 +143,23 @@ public class Board : MonoBehaviour {
         }
     }
 
-    /// <summary>Turns on breakability for all tiles marked breakable</summary>
+    /// <summary>Generates a breakable tile at all positions marked breakable</summary>
     private void GenerateBreakableTiles() {
         // look at all tiles in layout
         for (int i = 0; i < boardLayout.Length; i++) {
             // if tile is breakable
             if (boardLayout[i].tile == TileType.breakable) {
-                // make that tile breakable 
-                BackgroundTile breakableTile = transform.Find("tile (" + boardLayout[i].x + ", " + boardLayout[i].y + ")").gameObject.GetComponent<BackgroundTile>(); 
-                breakableTile.setBreakable(true); 
-                breakableTiles[boardLayout[i].x, boardLayout[i].y] = breakableTile; 
+                // create breakable tile at that position 
+                Vector2 tempPos = new Vector2(boardLayout[i].x, boardLayout[i].y); 
+                GameObject tile = Instantiate(breakableTilePrefab, tempPos, Quaternion.identity);
+                breakableTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>(); 
+                tile.transform.parent = this.transform;  
             }
         }
+    }
+
+    private void GenerateBlankTiles() {
+        // generate blank tiles
     }
 
     /// <summary>Returns true if adding this dot in this position would generate a match</summary>

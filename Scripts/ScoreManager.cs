@@ -12,6 +12,8 @@ public class BlankGoal {
     [SerializeField]
     private Sprite goalSprite; 
     [SerializeField]
+    private Color goalSpriteColor; 
+    [SerializeField]
     private string matchTag; 
 
     public void addCollected(int amt) {
@@ -36,6 +38,10 @@ public class BlankGoal {
 
     public Sprite getSprite() {
         return goalSprite; 
+    }
+
+    public Color getSpriteColor() {
+        return goalSpriteColor;
     }
 }
 
@@ -116,11 +122,11 @@ public class ScoreManager : MonoBehaviour {
             
             // set the image and text of the goal 
             GoalPanel startPanel = startGoal.GetComponent<GoalPanel>(); 
-            startPanel.setSprite(levelGoals[i].getSprite()); 
+            startPanel.setSprite(levelGoals[i].getSprite(), levelGoals[i].getSpriteColor()); 
             startPanel.setText("0/" + levelGoals[i].getNumNeeded()); 
 
             GoalPanel gamePanel = gameGoal.GetComponent<GoalPanel>(); 
-            gamePanel.setSprite(levelGoals[i].getSprite()); 
+            gamePanel.setSprite(levelGoals[i].getSprite(), levelGoals[i].getSpriteColor()); 
             gamePanel.setText("0/" + levelGoals[i].getNumNeeded()); 
 
             // add this goal to list of current goals
