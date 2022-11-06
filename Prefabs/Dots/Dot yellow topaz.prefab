@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1291252015878588319}
   - component: {fileID: -3180378744075628541}
   - component: {fileID: -2201899686778017309}
+  - component: {fileID: -9033453791910454155}
   m_Layer: 6
   m_Name: Dot yellow topaz
   m_TagString: yellow topaz
@@ -72,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 1213303721
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -439320721, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,6 +104,7 @@ MonoBehaviour:
   prevX: 0
   prevY: 0
   matched: 0
+  type: gem
   swipeAngle: 0
   swipeResist: 0.5
   colBomb: 0
@@ -129,3 +131,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3346354
+--- !u!114 &-9033453791910454155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291252015878588318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76fa4b8ba02d92f48b1823704c18cdf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

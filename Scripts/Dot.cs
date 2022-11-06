@@ -6,7 +6,7 @@ public class Dot : MonoBehaviour {
 
     [Header("Board Variables")]
     [SerializeField]
-    private int x;
+    protected int x;
     [SerializeField]
     private int y; 
     private int targetX; 
@@ -17,23 +17,25 @@ public class Dot : MonoBehaviour {
     private int prevY; 
     [SerializeField]
     private bool matched = false; 
-    private int points = 20; 
+    protected int points = 20; 
+    [SerializeField]
+    protected string type; 
 
-    private Board board; 
-    private FindMatches findMatches; 
-    private HintManager hintManager; 
-    private GameObject otherDot; 
-    private Vector2 firstTouchPos; 
-    private Vector2 finalTouchPos;
-    private Vector2 tempPos; 
-    private SpriteRenderer mySprite; 
+    protected Board board; 
+    protected FindMatches findMatches; 
+    protected HintManager hintManager; 
+    protected GameObject otherDot; 
+    protected Vector2 firstTouchPos; 
+    protected Vector2 finalTouchPos;
+    protected Vector2 tempPos; 
+    protected SpriteRenderer mySprite; 
 
     [Header("Swipe Values")]
     [SerializeField]
-    private float swipeAngle = 0.0f; 
+    protected float swipeAngle = 0.0f; 
     [SerializeField]
-    private float swipeResist = 0.5f; 
-    private float moveSpeed = 0.4f; 
+    protected float swipeResist = 0.5f; 
+    protected float moveSpeed = 0.4f; 
 
     [Header("Powerups")]
     [SerializeField]
@@ -46,16 +48,16 @@ public class Dot : MonoBehaviour {
     private bool adjBomb; 
 
     [SerializeField]
-    private GameObject rowArrow; 
+    protected GameObject rowArrow; 
     [SerializeField]
-    private GameObject colArrow; 
+    protected GameObject colArrow; 
     [SerializeField]
-    private Sprite rainbowBomb; 
+    protected Sprite rainbowBomb; 
     [SerializeField]
-    private GameObject adjMarker; 
+    protected GameObject adjMarker; 
 
     // Start is called before the first frame update
-    void Start() {
+    protected void Start() {
         board = FindObjectOfType<Board>(); 
         findMatches = FindObjectOfType<FindMatches>(); 
         mySprite = GetComponent<SpriteRenderer>(); 
@@ -274,36 +276,51 @@ public class Dot : MonoBehaviour {
     /// <summary>turns the current dot back into a (random) normal dot</summary>
     public void unmakeBomb() {
         if (colBomb) {
+            unmakeColBomb(); 
             Debug.Log("Player returned a column bomb into a " + this.tag + " dot");
-            colBomb = false; 
-            GameObject arrow = this.transform.GetChild(0).gameObject;
-            Destroy(arrow);  
         }
         else if (rowBomb) {
+            unmakeRowBomb(); 
             Debug.Log("Player returned a row bomb into a " + this.tag + " dot");
-            rowBomb = false; 
-            GameObject arrow = this.transform.GetChild(0).gameObject;
-            Destroy(arrow);  
         }
         else if (adjBomb) {
+            unmakeAdjBomb(); 
             Debug.Log("Player returned an adjacent bomb into a " + this.tag + " dot");
-            adjBomb = false; 
-            GameObject marker = this.transform.GetChild(0).gameObject;
-            Destroy(marker);  
         }
         else if (colorBomb) {
-            // Debug.Log("This functionality is currently missing."); 
-            colorBomb = false; 
-            GameObject[] dots = board.getDots(); 
-            GameObject dotToUse = Instantiate(dots[Random.Range(0, dots.Length)], transform.position, Quaternion.identity);
-            this.gameObject.tag = dotToUse.tag; 
-            mySprite.sprite = dotToUse.GetComponent<SpriteRenderer>().sprite; 
-            Destroy(dotToUse);
+            unmakeColorBomb(); 
             Debug.Log("Player returned a color bomb into a " + this.tag + " dot");
         }
         else {
             Debug.Log("No bomb detected.");
         }
+    }
+
+    protected void unmakeColBomb() {
+        colBomb = false; 
+        GameObject arrow = this.transform.GetChild(0).gameObject;
+        Destroy(arrow);  
+    }
+
+    protected void unmakeRowBomb() {
+        rowBomb = false; 
+        GameObject arrow = this.transform.GetChild(0).gameObject;
+        Destroy(arrow);  
+    }
+
+    protected void unmakeAdjBomb() {
+        adjBomb = false; 
+        GameObject marker = this.transform.GetChild(0).gameObject;
+        Destroy(marker); 
+    }
+
+    protected void unmakeColorBomb() {
+        colorBomb = false; 
+        GameObject[] dots = board.getDots(); 
+        GameObject dotToUse = Instantiate(dots[Random.Range(0, dots.Length)], transform.position, Quaternion.identity);
+        this.gameObject.tag = dotToUse.tag; 
+        mySprite.sprite = dotToUse.GetComponent<SpriteRenderer>().sprite; 
+        Destroy(dotToUse);
     }
 
     /************** Public Getters and Setters **************/
@@ -336,6 +353,10 @@ public class Dot : MonoBehaviour {
     /// <summary>gets this Dot's Sprite</summary>
     public Sprite getSprite() {
         return mySprite.sprite; 
+    }
+
+    public string getType() {
+        return type; 
     }
 
     /// <summary>returns true if is matched, otherwise false</summary>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems; 
 
-public class NewGameButton : MonoBehaviour, IPointerClickHandler
-{
+public class NewGameButton : MonoBehaviour, IPointerClickHandler {
+
+    /*     Deprecated class     */
+
     private Board board; 
     // Start is called before the first frame update
     void Start()

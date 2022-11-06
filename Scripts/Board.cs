@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public enum GameState {
     wait, move 
@@ -47,6 +48,9 @@ public class Board : MonoBehaviour {
     [SerializeField]
     private Dot currentDot; 
     [SerializeField]
+    private Image moveIndicatorImage;  
+    private List<Color> moveColors; 
+    [SerializeField]
     private Tile[] boardLayout; 
     [SerializeField]
     private BackgroundTile[,] breakableTiles; 
@@ -68,13 +72,23 @@ public class Board : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+
+        // initialize arrays
         allTiles = new BackgroundTile[width, height]; 
         allDots = new GameObject[width, height]; 
+        breakableTiles = new BackgroundTile[width, height]; 
+
+        // peer objects
         findMatches = FindObjectOfType<FindMatches>(); 
         scoreManager = FindObjectOfType<ScoreManager>(); 
         soundManager = FindObjectOfType<SoundManager>(); 
         floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
-        breakableTiles = new BackgroundTile[width, height]; 
+
+        // move colors 
+        moveColors = new List<Color>(); 
+        moveColors.Add(new Color(0f, 0.872f, 0.1591406f, 1f)); // green
+        moveColors.Add(new Color(1f, 0.6806262f, 0f, 1f)); // orange
+        moveColors.Add(new Color(0.1933962f, 0.86737f, 1f, 1f)); // blue
 
         SetUp(); 
     }
@@ -115,6 +129,16 @@ public class Board : MonoBehaviour {
 
     void Update() {
         setEyeRatio(scoreManager.getScore() / (balance / 5)); 
+
+        if (currentState == GameState.move) {
+            moveIndicatorImage.color = moveColors[0]; 
+        }
+        else if(currentState == GameState.wait) {
+            moveIndicatorImage.color = moveColors[1]; 
+        }
+        else {
+            moveIndicatorImage.color = moveColors[3]; 
+        }
     }
 
     /// <summary>Turns on breakability for all tiles marked breakable</summary>
@@ -517,6 +541,10 @@ public class Board : MonoBehaviour {
     /// <summary>returns all dots </summary>
     public GameObject[] getDots() {
         return dots; 
+    }
+    /// <summary>returns all eyes (special dots) </summary>
+    public GameObject[] getEyes() {
+        return eyes; 
     }
 
     /// <summary>sets the given Dot's <paramref name="x"/>, <paramref name="y"/></summary>

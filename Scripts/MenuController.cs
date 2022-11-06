@@ -22,9 +22,9 @@ public class MenuController : MonoBehaviour {
         }
     }
 
-    public void endGame() {
-        if (endAnim != null) {
-            endAnim.SetBool("end", true); 
-        }
-    }
+    // public void endGame() {
+    //     if (endAnim != null) {
+    //         endAnim.SetBool("end", true); 
+    //     }
+    // }
 }
