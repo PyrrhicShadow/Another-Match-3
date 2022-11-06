@@ -115,13 +115,14 @@ public class Board : MonoBehaviour {
                 }
                 maxIterations = 0; 
 
-                GameObject dot = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
-                dot.GetComponent<Dot>().setX(i); 
-                dot.GetComponent<Dot>().setY(j); 
-                dot.GetComponent<Dot>().updatePrevXY(); 
-                dot.transform.parent = this.transform; 
+                GameObject dotObj = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
+                Dot dot = dotObj.GetComponent<Dot>(); 
+                dot.setX(i); 
+                dot.setY(j); 
+                dot.updatePrevXY(); 
+                dotObj.transform.parent = this.transform; 
                 //dot.name = "dot (" + i + ", " + j + ")";
-                allDots[i, j] = dot; 
+                allDots[i, j] = dotObj; 
             }
         }
         GenerateBreakableTiles(); 

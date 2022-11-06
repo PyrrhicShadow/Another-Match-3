@@ -11,9 +11,4 @@ public class Gem : Dot
         this.type = "gem"; 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

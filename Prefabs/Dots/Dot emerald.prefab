@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4492141300796167644}
   - component: {fileID: 4492141300796167635}
-  - component: {fileID: -9051223303286334480}
   - component: {fileID: 3921161833375503189}
   - component: {fileID: -6496653523911353933}
   m_Layer: 6
@@ -87,34 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-9051223303286334480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4492141300796167634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89448327fcc408f4085cf2efc87e9fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  prevX: 0
-  prevY: 0
-  matched: 0
-  type: gem
-  swipeAngle: 0
-  swipeResist: 0.5
-  colBomb: 0
-  rowBomb: 0
-  colorBomb: 0
-  adjBomb: 0
-  rowArrow: {fileID: 6986979339159441810, guid: e0df1d95ec2f1de45b4022efb5e58af0, type: 3}
-  colArrow: {fileID: 8705363216116834596, guid: 9828061302435044f920e312cf574567, type: 3}
-  rainbowBomb: {fileID: 21300000, guid: 93c367f5ec6afec4696afc53b43d4dc9, type: 3}
-  adjMarker: {fileID: 9139826328255587612, guid: 404e19a1c5815b644a7485bdcf69d57c, type: 3}
 --- !u!58 &3921161833375503189
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -143,3 +114,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fa4b8ba02d92f48b1823704c18cdf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  prevX: 0
+  prevY: 0
+  matched: 0
+  type: 
+  swipeAngle: 0
+  swipeResist: 0.5
+  colBomb: 0
+  rowBomb: 0
+  colorBomb: 0
+  adjBomb: 0
+  rowArrow: {fileID: 6986979339159441810, guid: e0df1d95ec2f1de45b4022efb5e58af0, type: 3}
+  colArrow: {fileID: 8705363216116834596, guid: 9828061302435044f920e312cf574567, type: 3}
+  rainbowBomb: {fileID: 21300000, guid: 93c367f5ec6afec4696afc53b43d4dc9, type: 3}
+  adjMarker: {fileID: 9139826328255587612, guid: 404e19a1c5815b644a7485bdcf69d57c, type: 3}

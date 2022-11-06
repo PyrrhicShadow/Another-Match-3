@@ -71,7 +71,7 @@ public class Dot : MonoBehaviour {
     }
 
     // This is for testing and debug only; and a bit of a cheat code for players who find it.
-    private void OnMouseOver() {
+    protected void OnMouseOver() {
         if (board.currentState == GameState.move){
             if (!this.colBomb && !this.rowBomb && !this.colorBomb && !this.adjBomb) {
                 if (Input.GetKeyDown("up") || Input.GetKeyDown("down")) {
@@ -101,7 +101,7 @@ public class Dot : MonoBehaviour {
     }
 
     /// <summary>Update is called once per frame</summary>
-    void Update() {
+    protected void Update() {
         targetX = x; 
         targetY = y; 
         if (Mathf.Abs(targetX - transform.position.x) > .1) {
@@ -166,7 +166,7 @@ public class Dot : MonoBehaviour {
     }
 
     /// <summary>sets the mouse-down position</summary>
-    private void OnMouseDown() {
+    protected void OnMouseDown() {
         // destroy the hint 
         if (hintManager != null) {
             hintManager.DestroyHint(); 
@@ -178,7 +178,7 @@ public class Dot : MonoBehaviour {
     }
 
     /// <summary>sets the mouse-up position</summary>
-    private void OnMouseUp() {
+    protected void OnMouseUp() {
         if (board.currentState == GameState.move) {
             finalTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
             CalculateAngle(); 
@@ -413,5 +413,20 @@ public class Dot : MonoBehaviour {
     /// <summary>set the point value for this dot</summary> 
     public void setPoints(int amt) {
         points = amt; 
+    }
+
+    public void setRowBomb(bool val) {
+        rowBomb = val; 
+    }
+    
+    public void setColBomb(bool val) {
+        colBomb = val; 
+    }
+
+    public void setAdjBomb(bool val) {
+        adjBomb = val;
+    }
+    public void setColorBomb(bool val) {
+        colorBomb = val; 
     }
 }
