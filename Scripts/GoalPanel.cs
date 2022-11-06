@@ -30,5 +30,6 @@ public class GoalPanel : MonoBehaviour {
 
     public void setText(string newText) {
         goalText = newText; 
+        myText.text = goalText; 
     }
 }

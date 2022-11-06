@@ -334,6 +334,13 @@ public class Board : MonoBehaviour {
                 }
             }
 
+            if (scoreManager != null) {
+                // add the broken dot to the score 
+                scoreManager.IncreaseScore(dot.getPoints() * streakValue); 
+                scoreManager.compareGoal(allDots[x, y].tag); 
+                scoreManager.UpdateGoals(); 
+            }
+
             // does sound manager exist? 
             if (soundManager != null) {
                 soundManager.PlayRandomDestroyNoise(); 
@@ -342,8 +349,6 @@ public class Board : MonoBehaviour {
             GameObject particle = Instantiate(destroyEffect, allDots[x, y].transform.position, Quaternion.identity);
             Destroy(particle, particleLifetime); 
             Destroy(allDots[x, y]); 
-            // add the broken dot to the score 
-            scoreManager.IncreaseScore(dot.getPoints() * streakValue); 
             allDots[x, y] = null; 
         }
     }
