@@ -45,31 +45,52 @@ public class BlankGoal {
     }
 }
 
+public enum GameType {
+    moves, time
+}
+
+[System.Serializable]
+public class EndGameReqs {
+    public GameType gameTye; 
+    [SerializeField] private int counter; 
+
+    public int getCounter() {
+        return counter; 
+    }
+
+    public void setCouter(int amt) {
+        counter = amt; 
+    }
+}
 public class ScoreManager : MonoBehaviour {
-    [SerializeField]
-    private int score; 
-    private int lastScore; 
-    [SerializeField]
-    private Text scoreText; 
+    
     private Board board; 
-    private MenuController menuController; 
-    [SerializeField]
-    private Image scoreBar; 
+    private MenuController menuController;
+
+    [Header("Score Manager")]
+    [SerializeField] private int score; 
+    private int lastScore; 
+    [SerializeField] private Text scoreText;  
+    [SerializeField] private Image scoreBar; 
+
+    [Header("Background Manager")]
     [SerializeField]
     private Image background; 
     private List<Color> bgColors; 
     private int bgTier; 
-    [SerializeField]
-    private List<GoalPanel> currentGoals; 
+    [SerializeField] private List<GoalPanel> currentGoals; 
 
-    [SerializeField]
-    private BlankGoal[] levelGoals; 
-    [SerializeField]
-    private GameObject goalPrefab; 
-    [SerializeField]
-    private GameObject goalStartParent; 
-    [SerializeField]
-    private GameObject goalGameParent; 
+    [Header("Goal Manager")]
+    [SerializeField] private BlankGoal[] levelGoals; 
+    [SerializeField] private GameObject goalPrefab; 
+    [SerializeField] private GameObject goalStartParent; 
+    [SerializeField] private GameObject goalGameParent; 
+
+    [Header("Endgame Manager")]
+    [SerializeField] private EndGameReqs reqs; 
+    [SerializeField] private Text reqText; 
+    [SerializeField] private Image reqBar; 
+    [SerializeField] private Text counter; 
 
     // Start is called before the first frame update
     void Start() {
@@ -96,7 +117,7 @@ public class ScoreManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (score != lastScore) {
-            scoreText.text = "Score: " + score; 
+            scoreText.text = "LV: " + score; 
             ChangeBackgroundColor(); 
             lastScore = score; 
         }
