@@ -18,6 +18,7 @@ public class Dot : MonoBehaviour {
     protected Board board; 
     protected FindMatches findMatches; 
     protected HintManager hintManager; 
+    protected ScoreManager scoreManager; 
     protected GameObject otherDot; 
     protected Vector2 firstTouchPos; 
     protected Vector2 finalTouchPos;
@@ -46,6 +47,7 @@ public class Dot : MonoBehaviour {
         findMatches = FindObjectOfType<FindMatches>(); 
         mySprite = GetComponent<SpriteRenderer>(); 
         hintManager = FindObjectOfType<HintManager>(); 
+        scoreManager = FindObjectOfType<ScoreManager>(); 
 
         colBomb = false; 
         rowBomb = false; 
@@ -143,7 +145,15 @@ public class Dot : MonoBehaviour {
                 board.setCurrentDot(null); 
                 board.currentState = GameState.move; 
             } 
-            else {
+            else { 
+                if (scoreManager != null) {
+                    if (scoreManager.getGameType() == GameType.moves) {
+                        scoreManager.DecreaseCounter(); 
+                    } 
+                    else if (scoreManager.getGameType() == GameType.time) {
+
+                    }
+                }
                 board.DestroyMatches(); 
             }
         }

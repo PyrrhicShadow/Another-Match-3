@@ -51,7 +51,7 @@ public enum GameType {
 
 [System.Serializable]
 public class EndGameReqs {
-    public GameType gameTye; 
+    [SerializeField] private GameType gameType; 
     [SerializeField] private int counter; 
 
     public int getCounter() {
@@ -60,6 +60,10 @@ public class EndGameReqs {
 
     public void setCouter(int amt) {
         counter = amt; 
+    }
+
+    public GameType getGameType() {
+        return gameType; 
     }
 }
 public class ScoreManager : MonoBehaviour {
@@ -88,9 +92,12 @@ public class ScoreManager : MonoBehaviour {
 
     [Header("Endgame Manager")]
     [SerializeField] private EndGameReqs reqs; 
-    [SerializeField] private Text reqText; 
+    [SerializeField] private GameObject reqMoveText;
+    [SerializeField] private GameObject reqTimeText;  
     [SerializeField] private Image reqBar; 
-    [SerializeField] private Text counter; 
+    [SerializeField] private Text counterText; 
+    [SerializeField] private int counter; 
+    [SerializeField] private float timer; 
 
     // Start is called before the first frame update
     void Start() {
@@ -111,7 +118,8 @@ public class ScoreManager : MonoBehaviour {
         background.color = bgColors[0]; 
         bgTier = 0; 
 
-        SetupGoals(); 
+        SetUpGoals(); 
+        SetUpReqs(); 
     }
 
     // Update is called once per frame
@@ -120,6 +128,13 @@ public class ScoreManager : MonoBehaviour {
             scoreText.text = "LV: " + score; 
             ChangeBackgroundColor(); 
             lastScore = score; 
+        }
+        if (reqs.getGameType() == GameType.time) {
+            timer -= Time.deltaTime; 
+            if (timer <= 0) {
+                DecreaseCounter(); 
+                timer = 1; 
+            }
         }
     }
 
@@ -131,7 +146,7 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-    private void SetupGoals() {
+    private void SetUpGoals() {
         for (int i = 0; i < levelGoals.Length; i++) {
             // create a new goal panel at the goalIntroParent position 
             GameObject startGoal = Instantiate(goalPrefab, goalStartParent.transform); 
@@ -179,6 +194,36 @@ public class ScoreManager : MonoBehaviour {
                 levelGoals[i].addCollected(1); 
             }
         }
+    }
+
+    private void SetUpReqs() {
+        counter = reqs.getCounter(); 
+        if (reqs.getGameType() == GameType.moves) {
+            reqMoveText.SetActive(true); 
+            reqTimeText.SetActive(false); 
+        }
+        else if (reqs.getGameType() == GameType.time) {
+            reqMoveText.SetActive(false); 
+            reqTimeText.SetActive(true); 
+            timer = 1; 
+        }
+        counterText.text = counter.ToString(); 
+    }
+
+    public void DecreaseCounter() {
+        if (counter > 0) {
+            counter--;
+            counterText.text = counter.ToString();  
+        }
+        else {
+            Debug.Log("Game over + jumpscare or something");
+            menuController.endGame(); 
+        }
+
+    }
+
+    public GameType getGameType() {
+        return reqs.getGameType(); 
     }
 
     /// <summary>Checks for score and changes background color </summary>
