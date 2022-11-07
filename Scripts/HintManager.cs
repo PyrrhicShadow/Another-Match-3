@@ -6,13 +6,10 @@ public class HintManager : MonoBehaviour {
 
     private Board board; 
     private FindMatches findMatches; 
-    [SerializeField]
-    private float hintDelay; 
+    [SerializeField] private float hintDelay; 
     private float hintDelaySec; 
-    [SerializeField]
-    private GameObject hintParticle; 
-    [SerializeField]
-    private GameObject currentHint; 
+    [SerializeField] private GameObject hintParticle; 
+    [SerializeField] private GameObject currentHint; 
     
     // Start is called before the first frame update
     void Start()

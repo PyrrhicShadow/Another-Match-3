@@ -6,8 +6,7 @@ using System.Linq;
 public class FindMatches : MonoBehaviour {
 
     private Board board; 
-    [SerializeField]
-    private List<GameObject> currentMatches; 
+    [SerializeField] private List<GameObject> currentMatches; 
 
     // Start is called before the first frame update
     void Start() {

@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class BackgroundTile : MonoBehaviour
 {
-    [SerializeField]
-    private int hp = 1; 
-    [SerializeField]
-    private SpriteRenderer sprite; 
+    [SerializeField] private int hp = 1; 
+    [SerializeField] private SpriteRenderer sprite; 
     private ScoreManager scoreManager; 
 
     void Start() {

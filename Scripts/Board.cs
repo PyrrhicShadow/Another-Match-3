@@ -24,19 +24,16 @@ public class Board : MonoBehaviour {
 
     [Header("Board properites")]
     public GameState currentState = GameState.move; 
-    [SerializeField] 
-    private int width = 7; 
+    [SerializeField] private int width = 7; 
     [SerializeField] 
     private int height = 10;  
-    [SerializeField]
-    private int offset = 20; 
+    [SerializeField] private int offset = 20; 
     [SerializeField]
     private int eyeRatio = 0; // must be between 0 and 100 
     public static readonly int balance = 1000; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
-    [SerializeField]
-    private GameObject[,] allDots; 
+    [SerializeField] private GameObject[,] allDots; 
     private FindMatches findMatches; 
     private ScoreManager scoreManager; 
     private SoundManager soundManager; 
@@ -45,30 +42,22 @@ public class Board : MonoBehaviour {
     private int streakValue = 1; 
     
     [Header("Board components")]
-    [SerializeField]
-    private Dot currentDot; 
-    [SerializeField]
-    private Image moveIndicatorImage;  
+    [SerializeField] private Dot currentDot; 
+    [SerializeField] private Image moveIndicatorImage;  
     private List<Color> moveColors; 
-    [SerializeField]
-    private Tile[] boardLayout; 
+    [SerializeField] private Tile[] boardLayout; 
     [SerializeField]
     private BackgroundTile[,] breakableTiles; 
-    [SerializeField]
-    private GameObject tilePrefab; 
-    [SerializeField]
-    private GameObject breakableTilePrefab; 
+    [SerializeField] private GameObject tilePrefab; 
+    [SerializeField] private GameObject breakableTilePrefab; 
     [SerializeField]
     private GameObject destroyEffect; 
-    [SerializeField]
-    private float particleLifetime = 0.5f; 
+    [SerializeField] private float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 
 
     [Header("Dot types")]
-    [SerializeField]
-    private GameObject[] dots; 
-    [SerializeField]
-    private GameObject[] eyes; 
+    [SerializeField] private GameObject[] dots; 
+    [SerializeField] private GameObject[] eyes; 
 
     // Start is called before the first frame update
     void Start() {

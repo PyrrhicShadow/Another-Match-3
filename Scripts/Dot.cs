@@ -5,21 +5,15 @@ using UnityEngine;
 public class Dot : MonoBehaviour {
 
     [Header("Board Variables")]
-    [SerializeField]
-    protected int x;
-    [SerializeField]
-    private int y; 
+    [SerializeField] protected int x;
+    [SerializeField] private int y; 
     private int targetX; 
     private int targetY; 
-    [SerializeField]
-    private int prevX; 
-    [SerializeField]
-    private int prevY; 
-    [SerializeField]
-    private bool matched = false; 
+    [SerializeField] private int prevX; 
+    [SerializeField] private int prevY; 
+    [SerializeField] private bool matched = false; 
     protected int points = 20; 
-    [SerializeField]
-    protected string type; 
+    [SerializeField] protected string type; 
 
     protected Board board; 
     protected FindMatches findMatches; 
@@ -31,30 +25,20 @@ public class Dot : MonoBehaviour {
     protected SpriteRenderer mySprite; 
 
     [Header("Swipe Values")]
-    [SerializeField]
-    protected float swipeAngle = 0.0f; 
-    [SerializeField]
-    protected float swipeResist = 0.5f; 
+    [SerializeField] protected float swipeAngle = 0.0f; 
+    [SerializeField] protected float swipeResist = 0.5f; 
     protected float moveSpeed = 0.4f; 
 
     [Header("Powerups")]
-    [SerializeField]
-    private bool colBomb; 
-    [SerializeField]
-    private bool rowBomb; 
-    [SerializeField]
-    private bool colorBomb; 
-    [SerializeField]
-    private bool adjBomb; 
+    [SerializeField] private bool colBomb; 
+    [SerializeField] private bool rowBomb; 
+    [SerializeField] private bool colorBomb; 
+    [SerializeField] private bool adjBomb; 
 
-    [SerializeField]
-    protected GameObject rowArrow; 
-    [SerializeField]
-    protected GameObject colArrow; 
-    [SerializeField]
-    protected Sprite rainbowBomb; 
-    [SerializeField]
-    protected GameObject adjMarker; 
+    [SerializeField] protected GameObject rowArrow; 
+    [SerializeField] protected GameObject colArrow; 
+    [SerializeField] protected Sprite rainbowBomb; 
+    [SerializeField] protected GameObject adjMarker; 
 
     // Start is called before the first frame update
     protected void Start() {

@@ -5,16 +5,11 @@ using UnityEngine.UI;
 
 public class GoalPanel : MonoBehaviour {
     
-    [SerializeField]
-    private Image myImage; 
-    [SerializeField]
-    private Sprite mySprite; 
-    [SerializeField]
-    private Color myColor; 
-    [SerializeField]
-    private Text myText; 
-    [SerializeField]
-    private string goalText; 
+    [SerializeField] private Image myImage; 
+    [SerializeField] private Sprite mySprite; 
+    [SerializeField] private Color myColor; 
+    [SerializeField] private Text myText; 
+    [SerializeField] private string goalText; 
 
     // Start is called before the first frame update
     void Start() { 

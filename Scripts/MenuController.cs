@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour {
     
-    [SerializeField]
-    private Animator startAnim;
-    [SerializeField]
-    private Animator endAnim; 
+    [SerializeField] private Animator startAnim;
+    [SerializeField] private Animator endAnim; 
     private Board board;  
 
     void Start() {
