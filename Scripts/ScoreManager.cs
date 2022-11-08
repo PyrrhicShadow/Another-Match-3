@@ -140,7 +140,7 @@ public class ScoreManager : MonoBehaviour {
     public void IncreaseScore(int amt) {
         if (board != null && scoreBar != null) {
             score += amt; 
-            scoreBar.fillAmount = (float)score / (float)(Board.balance * 5); 
+            scoreBar.fillAmount = (float)score / (float)(board.balance * 5); 
             UpdateScore(); 
             ChangeBackgroundColor(); 
         }
@@ -208,6 +208,8 @@ public class ScoreManager : MonoBehaviour {
             timer = 1; 
         }
         counterText.text = counter.ToString(); 
+        winPanel.SetActive(false); 
+        losePanel.SetActive(false); 
     }
 
     public void DecreaseCounter() {
@@ -253,19 +255,19 @@ public class ScoreManager : MonoBehaviour {
 
     /// <summary>Checks for score and changes background color </summary>
     private void ChangeBackgroundColor() {
-        if (score > Board.balance * 5 && bgTier < 5) {
+        if (score > board.balance * 5 && bgTier < 5) {
             ChangeBackgroundColor(5); 
         }
-        else if (score > Board.balance * 4 && bgTier < 4) {
+        else if (score > board.balance * 4 && bgTier < 4) {
             ChangeBackgroundColor(4); 
         }
-        else if (score > Board.balance * 3 && bgTier < 3) {
+        else if (score > board.balance * 3 && bgTier < 3) {
             ChangeBackgroundColor(3); 
         }
-        else if (score > Board.balance * 2 && bgTier < 2) {
+        else if (score > board.balance * 2 && bgTier < 2) {
             ChangeBackgroundColor(2); 
         }
-        else if (score > Board.balance && bgTier < 1) {
+        else if (score > board.balance && bgTier < 1) {
             ChangeBackgroundColor(1); 
         }
     }

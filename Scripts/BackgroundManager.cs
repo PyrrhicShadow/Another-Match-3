@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BackgroundManager : MonoBehaviour
 {
+    /*****    Deprecated class     *****/
     private Board board; 
     private ScoreManager scoreManager; 
     private List<Color> bgColors; 
@@ -45,23 +46,23 @@ public class BackgroundManager : MonoBehaviour
     /// <summary>Checks for score and changes background color </summary>
     private void ChangeBackgroundColor() {
         int currentScore = scoreManager.getScore(); 
-        if (currentScore > Board.balance * 5) {
+        if (currentScore > board.balance * 5) {
             background.color = bgColors[5]; 
             Debug.Log("Background increased to 5"); 
         }
-        else if (currentScore > Board.balance * 4) {
+        else if (currentScore > board.balance * 4) {
             background.color = bgColors[4]; 
             Debug.Log("Background increased to 4"); 
         }
-        else if (currentScore > Board.balance * 3) {
+        else if (currentScore > board.balance * 3) {
             background.color = bgColors[3]; 
             Debug.Log("Background increased to 3"); 
         }
-        else if (currentScore > Board.balance * 2) {
+        else if (currentScore > board.balance * 2) {
             background.color = bgColors[2]; 
             Debug.Log("Background increased to 2"); 
         }
-        else if (currentScore > Board.balance) {
+        else if (currentScore > board.balance) {
             background.color = bgColors[1]; 
             Debug.Log("Background increased to 1"); 
         }

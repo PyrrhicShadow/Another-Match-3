@@ -22,15 +22,15 @@ public class Tile {
 
 public class Board : MonoBehaviour {
 
+    [SerializeField] public World world; 
+
     [Header("Board properites")]
     public GameState currentState = GameState.move; 
     [SerializeField] private int width = 7; 
-    [SerializeField] 
-    private int height = 10;  
+    [SerializeField] private int height = 10;  
     [SerializeField] private int offset = 20; 
-    [SerializeField]
-    private int eyeRatio = 0; // must be between 0 and 100 
-    public static readonly int balance = 500; // controls the pace at which the game moves
+    [SerializeField] private int eyeRatio = 0; // must be between 0 and 100 
+    public readonly int balance = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] private GameObject[,] allDots; 
@@ -46,12 +46,10 @@ public class Board : MonoBehaviour {
     [SerializeField] private Image moveIndicatorImage;  
     private List<Color> moveColors; 
     [SerializeField] private Tile[] boardLayout; 
-    [SerializeField]
-    private BackgroundTile[,] breakableTiles; 
+    [SerializeField] private BackgroundTile[,] breakableTiles; 
     [SerializeField] private GameObject tilePrefab; 
     [SerializeField] private GameObject breakableTilePrefab; 
-    [SerializeField]
-    private GameObject destroyEffect; 
+    [SerializeField] private GameObject destroyEffect; 
     [SerializeField] private float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 
 

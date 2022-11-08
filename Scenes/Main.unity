@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de182e018a906547a4c092315994fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 11400000, guid: f9ac45b11fe12bb4495685b3ae1990cd, type: 2}
   currentState: 1
   width: 7
   height: 11
@@ -882,7 +883,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startAnim: {fileID: 1247389149}
-  winAnim: {fileID: 1154062134}
   endAnim: {fileID: 0}
 --- !u!1 &227620236
 GameObject:
@@ -1562,11 +1562,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141456116}
   m_CullTransparentMesh: 1
---- !u!95 &1154062134 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 219532738685492343, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
-  m_PrefabInstance: {fileID: 219532737665780545}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1247389149 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 219532738644602524, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
@@ -1835,6 +1830,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 211335029}
+    - target: {fileID: 219532737585917863, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 219532737601715695, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 219532737617359030, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
       propertyPath: m_Name
       value: New Game Panel
@@ -1931,6 +1934,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 211335029}
+    - target: {fileID: 219532738086746570, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 219532738431304974, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

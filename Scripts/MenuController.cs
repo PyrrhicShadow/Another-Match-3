@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour {
     
-    [SerializeField] private Animator startAnim;
-    [SerializeField] private Animator winAnim; 
-    [SerializeField] private Animator endAnim; 
+    [SerializeField] protected Animator startAnim;
+    [SerializeField] protected Animator endAnim; 
     private Board board;  
 
-    void Start() {
+    protected void Start() {
         board = FindObjectOfType<Board>(); 
     }
 
@@ -29,8 +28,8 @@ public class MenuController : MonoBehaviour {
 
     /// <summary>called to generate new game menus</summar>
     public void newGame() {
-        if (winAnim != null) {
-            winAnim.SetBool("end", false); 
+        if (endAnim != null && startAnim != null) {
+            endAnim.SetBool("end", false); 
             startAnim.SetBool("show", false); 
         }
     }
@@ -43,15 +42,8 @@ public class MenuController : MonoBehaviour {
      * else use win screen
      */ 
     public void winGame() {
-        if (winAnim != null && endAnim != null) {
-            int rand = Random.Range(0, 100); 
-            winAnim.SetBool("end", false); 
-            if (rand < 5) {
-                winAnim.SetBool("end", true); 
-            }
-            else {
-                endAnim.SetBool("end", true); 
-            }
+        if (endAnim != null) { 
+            endAnim.SetBool("end", true); 
         }
     }
 
