@@ -5,16 +5,11 @@ using UnityEngine.UI;
 
 [System.Serializable]
 public class BlankGoal {
-    [SerializeField]
-    private int numNeeded; 
-    [SerializeField]
-    private int numCollected; 
-    [SerializeField]
-    private Sprite goalSprite; 
-    [SerializeField]
-    private Color goalSpriteColor; 
-    [SerializeField]
-    private string matchTag; 
+    [SerializeField] private int numNeeded; 
+    [SerializeField] private int numCollected; 
+    [SerializeField] private Sprite goalSprite; 
+    [SerializeField] private Color goalSpriteColor; 
+    [SerializeField] private string matchTag; 
 
     public void addCollected(int amt) {
         numCollected += amt; 
@@ -74,6 +69,7 @@ public class ScoreManager : MonoBehaviour {
     [Header("Score Manager")]
     [SerializeField] private int score; 
     private int lastScore; 
+    [SerializeField] private int scoreGoal; 
     [SerializeField] private Text scoreText;  
     [SerializeField] private Image scoreBar; 
 
@@ -140,7 +136,7 @@ public class ScoreManager : MonoBehaviour {
     public void IncreaseScore(int amt) {
         if (board != null && scoreBar != null) {
             score += amt; 
-            scoreBar.fillAmount = (float)score / (float)(board.balance * 5); 
+            scoreBar.fillAmount = (float)score / (float)(board.balance * scoreGoal); 
             UpdateScore(); 
             ChangeBackgroundColor(); 
         }
@@ -255,19 +251,19 @@ public class ScoreManager : MonoBehaviour {
 
     /// <summary>Checks for score and changes background color </summary>
     private void ChangeBackgroundColor() {
-        if (score > board.balance * 5 && bgTier < 5) {
+        if (score > board.balance * scoreGoal && bgTier < 5) {
             ChangeBackgroundColor(5); 
         }
-        else if (score > board.balance * 4 && bgTier < 4) {
+        else if (score > board.balance * scoreGoal / .8 && bgTier < 4) {
             ChangeBackgroundColor(4); 
         }
-        else if (score > board.balance * 3 && bgTier < 3) {
+        else if (score > board.balance * scoreGoal / .6 && bgTier < 3) {
             ChangeBackgroundColor(3); 
         }
-        else if (score > board.balance * 2 && bgTier < 2) {
+        else if (score > board.balance * scoreGoal / .4 && bgTier < 2) {
             ChangeBackgroundColor(2); 
         }
-        else if (score > board.balance && bgTier < 1) {
+        else if (score > board.balance * scoreGoal / .2 && bgTier < 1) {
             ChangeBackgroundColor(1); 
         }
     }

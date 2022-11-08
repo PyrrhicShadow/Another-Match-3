@@ -22,7 +22,9 @@ public class Tile {
 
 public class Board : MonoBehaviour {
 
+    [Header("World")]
     [SerializeField] public World world; 
+    [SerializeField] private int lvl; 
 
     [Header("Board properites")]
     public GameState currentState = GameState.move; 
@@ -119,8 +121,6 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
-        setEyeRatio(scoreManager.getScore() / (balance / 5)); 
-
         if (currentState == GameState.move) {
             moveIndicatorImage.color = moveColors[0]; 
         }
@@ -572,7 +572,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void setMoveState() {
-        currentState = GameState.move; 
+    public int getLvl() {
+        return lvl; 
     }
 }

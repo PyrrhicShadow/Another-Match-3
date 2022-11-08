@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 11400000, guid: f9ac45b11fe12bb4495685b3ae1990cd, type: 2}
+  lvl: 5
   currentState: 1
   width: 7
   height: 11
@@ -823,6 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  scoreGoal: 5
   scoreText: {fileID: 1978495054}
   scoreBar: {fileID: 1326566420}
   background: {fileID: 526175266}

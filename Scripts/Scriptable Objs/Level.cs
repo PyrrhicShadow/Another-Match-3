@@ -13,8 +13,11 @@ public class Level : ScriptableObject {
     public Tile[] boardLayout; 
     public GameObject[] dots; 
     public GameObject[] eyes; 
+    public int eyeRatio; 
     // public Animator endAnim; 
+    public Color backgroundColor; 
 
     [Header("Score")]
     public int balance; 
+    public int scoreGoal; 
 }
