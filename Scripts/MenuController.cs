@@ -43,7 +43,11 @@ public class MenuController : MonoBehaviour {
      * else this is a normal level, use win screen
      */ 
     public void winGame() {
+        StartCoroutine(GameEndCo()); 
+    }
 
+    private IEnumerator GameEndCo() {
+        yield return new WaitForSeconds(1f); 
         if (board.getLvl() == (board.world.levels.Length - 1) && winAnim != null) {
             winAnim.SetBool("end", true); 
         }
@@ -60,7 +64,7 @@ public class MenuController : MonoBehaviour {
 
     public void retry() {
         if (endAnim != null) {
-            endAnim.SetBool("lose", false); 
+            endAnim.SetBool("end", false); 
         }
 
         StartCoroutine(GameStartCo()); 

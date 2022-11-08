@@ -456,7 +456,9 @@ public class Board : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(refillDelay); 
-        currentState = GameState.move; 
+        if (currentState == GameState.wait) {
+            currentState = GameState.move; 
+        }
         streakValue = 1; 
     }
 

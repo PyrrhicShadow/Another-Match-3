@@ -836,17 +836,14 @@ MonoBehaviour:
   background: {fileID: 526175266}
   levelGoals:
   - numNeeded: 6
-    numCollected: 0
     goalSprite: {fileID: 1453271462, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: amethyst
   - numNeeded: 6
-    numCollected: 0
     goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: ruby
   - numNeeded: 6
-    numCollected: 0
     goalSprite: {fileID: 21300000, guid: 3b4355bc3aed0434794eb822b8987fc2, type: 3}
     goalSpriteColor: {r: 0.36900002, g: 0, b: 0.011596705, a: 1}
     matchTag: breakable

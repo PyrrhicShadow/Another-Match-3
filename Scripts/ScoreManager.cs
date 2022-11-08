@@ -6,13 +6,17 @@ using UnityEngine.UI;
 [System.Serializable]
 public class BlankGoal {
     [SerializeField] private int numNeeded; 
-    [SerializeField] private int numCollected; 
+    private int numCollected;  
     [SerializeField] private Sprite goalSprite; 
     [SerializeField] private Color goalSpriteColor; 
     [SerializeField] private string matchTag; 
 
     public void addCollected(int amt) {
         numCollected += amt; 
+    }
+
+    public void clearCollected() {
+        numCollected = 0; 
     }
 
     public int getNumCollected() {
@@ -124,6 +128,9 @@ public class ScoreManager : MonoBehaviour {
             background.color = myLvl.backgroundColor; 
             // goals 
             levelGoals = myLvl.levelGoals; 
+            foreach (BlankGoal lg in levelGoals) {
+                lg.clearCollected(); 
+            }
             // endgame 
             reqs = myLvl.reqs; 
         }
@@ -189,7 +196,7 @@ public class ScoreManager : MonoBehaviour {
 
         if (goalsCompleted >= levelGoals.Length) {
             Debug.Log("All goals completed"); 
-            if (menuController != null && bgTier >= 5) {
+            if (menuController != null && score >= scoreGoal * board.balance) {
                 WinGame(); 
             }
         }

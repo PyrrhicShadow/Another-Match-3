@@ -30,6 +30,22 @@ MonoBehaviour:
   - {fileID: 4845659277170574517, guid: 51a0deeb0268ac94c8d8144a5c7ee769, type: 3}
   - {fileID: 9120233892561351460, guid: ae13c846e2d5bf340b1bb22e1168688d, type: 3}
   eyeRatio: 20
-  backgroundColor: {r: 0.2588235, g: 0.2196079, b: 0.282353, a: 1}
   balance: 700
   scoreGoal: 3
+  backgroundColor: {r: 0.2588235, g: 0.2196079, b: 0.282353, a: 1}
+  levelGoals:
+  - numNeeded: 6
+    goalSprite: {fileID: 400462826, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: sapphire
+  - numNeeded: 6
+    goalSprite: {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: pearl
+  - numNeeded: 6
+    goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: ruby
+  reqs:
+    gameType: 1
+    counter: 100
