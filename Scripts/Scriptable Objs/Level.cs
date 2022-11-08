@@ -26,5 +26,4 @@ public class Level : ScriptableObject {
 
     [Header("Endgame")] 
     public EndGameReqs reqs; 
-    public int counter; 
 }

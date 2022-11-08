@@ -354,6 +354,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79114983}
   m_CullTransparentMesh: 1
+--- !u!95 &88335591 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 219532737585917862, guid: 42945f0c08f81044eaf60611160eeaa9, type: 3}
+  m_PrefabInstance: {fileID: 219532737665780545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &90444281
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +751,7 @@ MonoBehaviour:
   height: 11
   offset: 20
   eyeRatio: 0
+  balance: 500
   currentDot: {fileID: 0}
   moveIndicatorImage: {fileID: 79114985}
   boardLayout:
@@ -885,7 +891,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startAnim: {fileID: 1247389149}
-  endAnim: {fileID: 0}
+  endAnim: {fileID: 88335591}
+  winAnim: {fileID: 0}
 --- !u!1 &227620236
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,7 +126,6 @@ public class ScoreManager : MonoBehaviour {
             levelGoals = myLvl.levelGoals; 
             // endgame 
             reqs = myLvl.reqs; 
-            counter = myLvl.counter; 
         }
 
         SetUpGoals(); 
