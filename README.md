@@ -14,4 +14,4 @@ Warning: Do not play if you are easily frightened or at 3AM while your housemate
 
 All art used in this game are either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections 
 
-All art credit can be found under PyrrhicShadow/Match-3-Taft/tree/main/Art/artSources.txt 
+All art credit can be found in [artSources.txt](https://github.com/PyrrhicShadow/Match-3-Taft/tree/main/Art/artSources.txt) 
