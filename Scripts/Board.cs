@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI; 
 
 public enum GameState {
-    wait, move 
+    wait, move, win, lose, pause
 }
 
 public enum TileType {
@@ -30,7 +30,7 @@ public class Board : MonoBehaviour {
     [SerializeField] private int offset = 20; 
     [SerializeField]
     private int eyeRatio = 0; // must be between 0 and 100 
-    public static readonly int balance = 1000; // controls the pace at which the game moves
+    public static readonly int balance = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] private GameObject[,] allDots; 
@@ -80,6 +80,8 @@ public class Board : MonoBehaviour {
         moveColors.Add(new Color(0.1933962f, 0.86737f, 1f, 1f)); // blue
 
         SetUp(); 
+
+        currentState = GameState.pause; 
     }
 
     /// <summary>Creates board, tiles, and dots on board </summary>
@@ -128,7 +130,7 @@ public class Board : MonoBehaviour {
             moveIndicatorImage.color = moveColors[1]; 
         }
         else {
-            moveIndicatorImage.color = moveColors[3]; 
+            moveIndicatorImage.color = moveColors[2]; 
         }
     }
 
@@ -570,5 +572,9 @@ public class Board : MonoBehaviour {
         else {
             return false; 
         }
+    }
+
+    public void setMoveState() {
+        currentState = GameState.move; 
     }
 }

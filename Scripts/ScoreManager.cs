@@ -77,7 +77,7 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] private Text scoreText;  
     [SerializeField] private Image scoreBar; 
 
-    [Header("Background Manager")]
+    [Header ("Background Manager")]
     [SerializeField]
     private Image background; 
     private List<Color> bgColors; 
@@ -94,6 +94,9 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] private EndGameReqs reqs; 
     [SerializeField] private GameObject reqMoveText;
     [SerializeField] private GameObject reqTimeText;  
+    [SerializeField] private GameObject winPanel; 
+    [SerializeField] private Text winScore; 
+    [SerializeField]private GameObject losePanel; 
     [SerializeField] private Image reqBar; 
     [SerializeField] private Text counterText; 
     [SerializeField] private int counter; 
@@ -124,11 +127,6 @@ public class ScoreManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (score != lastScore) {
-            scoreText.text = "LV: " + score; 
-            ChangeBackgroundColor(); 
-            lastScore = score; 
-        }
         if (reqs.getGameType() == GameType.time && counter > 0) {
             timer -= Time.deltaTime; 
             if (timer <= 0) {
@@ -142,7 +140,9 @@ public class ScoreManager : MonoBehaviour {
     public void IncreaseScore(int amt) {
         if (board != null && scoreBar != null) {
             score += amt; 
-            scoreBar.fillAmount = (float)(score / (Board.balance * 5)); 
+            scoreBar.fillAmount = (float)score / (float)(Board.balance * 5); 
+            UpdateScore(); 
+            ChangeBackgroundColor(); 
         }
     }
 
@@ -183,7 +183,7 @@ public class ScoreManager : MonoBehaviour {
         if (goalsCompleted >= levelGoals.Length) {
             Debug.Log("All goals completed"); 
             if (menuController != null && bgTier >= 5) {
-                menuController.endGame(); 
+                WinGame(); 
             }
         }
     }
@@ -212,52 +212,66 @@ public class ScoreManager : MonoBehaviour {
 
     public void DecreaseCounter() {
 
-        counter--;
-        counterText.text = counter.ToString();  
+        if (board.currentState != GameState.pause){
+            counter--;
+            counterText.text = counter.ToString();
+        }
 
         if (reqBar != null) {
-            reqBar.fillAmount = (float)(counter / reqs.getCounter()); 
+            reqBar.fillAmount = (float)counter / (float)reqs.getCounter(); 
         }
 
         if (counter <= 0) {
-            Debug.Log("Game over + jumpscare or something");
-            counter = 0; 
-            counterText.text = counter.ToString(); 
-            menuController.endGame(); 
+            LoseGame(); 
         }
+    }
 
+    public void WinGame() {
+        board.currentState = GameState.win; 
+        winScore.text = score.ToString(); 
+        menuController.winGame(); 
+    }
+
+    public void LoseGame() {
+        board.currentState = GameState.lose; 
+        counter = 0; 
+        counterText.text = counter.ToString(); 
+        menuController.loseGame(); 
     }
 
     public GameType getGameType() {
         return reqs.getGameType(); 
     }
 
+    private void UpdateScore() {
+        scoreText.text = "LV: " + score; 
+    }
+
     /// <summary>Checks for score and changes background color </summary>
     private void ChangeBackgroundColor() {
         if (score > Board.balance * 5 && bgTier < 5) {
-            background.color = bgColors[5]; 
-            bgTier = 5; 
-            Debug.Log("Background increased to 5"); 
+            ChangeBackgroundColor(5); 
         }
         else if (score > Board.balance * 4 && bgTier < 4) {
-            background.color = bgColors[4]; 
-            bgTier = 4; 
-            Debug.Log("Background increased to 4"); 
+            ChangeBackgroundColor(4); 
         }
         else if (score > Board.balance * 3 && bgTier < 3) {
-            background.color = bgColors[3]; 
-            bgTier = 3; 
-            Debug.Log("Background increased to 3"); 
+            ChangeBackgroundColor(3); 
         }
         else if (score > Board.balance * 2 && bgTier < 2) {
-            background.color = bgColors[2]; 
-            bgTier = 2; 
-            Debug.Log("Background increased to 2"); 
+            ChangeBackgroundColor(2); 
         }
         else if (score > Board.balance && bgTier < 1) {
-            background.color = bgColors[1]; 
-            bgTier = 1; 
-            Debug.Log("Background increased to 1"); 
+            ChangeBackgroundColor(1); 
+        }
+    }
+
+    /// <summary>Changes the background color to match the current tier</summary>
+    private void ChangeBackgroundColor(int tier) {
+        if (tier > 0 && tier < (bgColors.Count) && bgTier != tier) {
+            background.color = bgColors[tier]; 
+            bgTier = tier; 
+            Debug.Log("Background tier increased to " + tier); 
         }
     }
 

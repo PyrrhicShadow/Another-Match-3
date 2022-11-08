@@ -5,7 +5,8 @@ using UnityEngine;
 public class MenuController : MonoBehaviour {
     
     [SerializeField] private Animator startAnim;
-    [SerializeField] private Animator endAnim; 
+    [SerializeField] private Animator winAnim; 
+    [SerializeField] private Animator loseAnim; 
     private Board board;  
 
     void Start() {
@@ -16,23 +17,43 @@ public class MenuController : MonoBehaviour {
     public void buttonOK() {
         if (startAnim != null) {
             startAnim.SetBool("show", true); 
-            board.currentState = GameState.move; 
         }
+
+        StartCoroutine(GameStartCo()); 
+    }
+
+    private IEnumerator GameStartCo() {
+        yield return new WaitForSeconds(1f); 
+        board.currentState = GameState.move; 
     }
 
     /// <summary>called to generate new game menus</summar>
     public void newGame() {
-        if (endAnim != null) {
-            endAnim.SetBool("end", false); 
+        if (winAnim != null) {
+            winAnim.SetBool("end", false); 
             startAnim.SetBool("show", false); 
         }
     }
 
     /// <summary>called when game ends</summary>
-    public void endGame() {
-        if (endAnim != null) {
-            endAnim.SetBool("end", true); 
-            board.currentState = GameState.wait; 
+    public void winGame() {
+        if (winAnim != null) {
+            winAnim.SetBool("end", false); 
+            winAnim.SetBool("end", true); 
         }
+    }
+
+    public void loseGame() {
+        if (loseAnim != null) {
+            loseAnim.SetBool("lose", true); 
+        }
+    }
+
+    public void retry() {
+        if (loseAnim != null) {
+            loseAnim.SetBool("lose", false); 
+        }
+
+        StartCoroutine(GameStartCo()); 
     }
 }
