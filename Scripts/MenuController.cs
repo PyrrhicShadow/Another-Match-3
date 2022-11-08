@@ -50,14 +50,14 @@ public class MenuController : MonoBehaviour {
                 winAnim.SetBool("end", true); 
             }
             else {
-                endAnim.SetBool("lose", true); 
+                endAnim.SetBool("end", true); 
             }
         }
     }
 
     public void loseGame() {
         if (endAnim != null) {
-            endAnim.SetBool("lose", true); 
+            endAnim.SetBool("end", true); 
         }
     }
 

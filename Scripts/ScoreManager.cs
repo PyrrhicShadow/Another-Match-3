@@ -159,7 +159,7 @@ public class ScoreManager : MonoBehaviour {
             // set the image and text of the goal 
             GoalPanel startPanel = startGoal.GetComponent<GoalPanel>(); 
             startPanel.setSprite(levelGoals[i].getSprite(), levelGoals[i].getSpriteColor()); 
-            startPanel.setText("0/" + levelGoals[i].getNumNeeded()); 
+            startPanel.setText(levelGoals[i].getNumNeeded().ToString()); 
 
             GoalPanel gamePanel = gameGoal.GetComponent<GoalPanel>(); 
             gamePanel.setSprite(levelGoals[i].getSprite(), levelGoals[i].getSpriteColor()); 
