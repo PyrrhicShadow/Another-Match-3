@@ -61,6 +61,25 @@ MonoBehaviour:
   - {fileID: 6470933108635381622, guid: 782549bba36d44942abfe9c63bfcc5ae, type: 3}
   - {fileID: 6662353013565671177, guid: d080d2bd3affc2f44bbc74234f86dcb5, type: 3}
   eyeRatio: 80
-  backgroundColor: {r: 0.368, g: 0, b: 0.011596, a: 1}
   balance: 1000
   scoreGoal: 5
+  backgroundColor: {r: 0.368, g: 0, b: 0.011596, a: 1}
+  levelGoals:
+  - numNeeded: 6
+    numCollected: 16
+    goalSprite: {fileID: 1453271462, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: amethyst
+  - numNeeded: 6
+    numCollected: 20
+    goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: ruby
+  - numNeeded: 6
+    numCollected: 7
+    goalSprite: {fileID: 21300000, guid: 3b4355bc3aed0434794eb822b8987fc2, type: 3}
+    goalSpriteColor: {r: 0.11129405, g: 0.23472266, b: 0.38679248, a: 0.5019608}
+    matchTag: breakable
+  reqs:
+    gameType: 0
+    counter: 100
