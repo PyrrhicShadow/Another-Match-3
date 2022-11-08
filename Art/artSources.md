@@ -12,6 +12,7 @@
 * diamonds on dark surface: https://www.pexels.com/photo/diamonds-on-dark-surface-5442447/ by The Glorious Studio
 * unnamed red gemstone necklace and earring set: https://unsplash.com/photos/EhPih0l5bjw by Victoria Priessnitz
 * unnamed pearl earing: https://www.pexels.com/photo/close-up-photo-of-a-pearl-earring-9428779/ by cottonbro
+* blue emerald cut tanzanite gemstone: https://unsplash.com/photos/Talnaz9Bug0 by Sabrianna
 
 ### Irises 
 
@@ -19,7 +20,6 @@
 * unnamed brown iris: https://unsplash.com/photos/JC61bV2B4zA by Dalea Jerielle
 * blue eye: https://unsplash.com/photos/Z-5i0RVukdU by Egor Vikhrev
 * unnamed brown iris: https://www.pexels.com/photo/close-up-photo-of-right-person-eye-1435823/ by Engin Akyurt
-* blue emerald cut tanzanite gemstone: https://unsplash.com/photos/Talnaz9Bug0 by Sabrianna
 * unnamed redish iris: https://www.pexels.com/photo/close-up-photo-of-an-eye-2729528/ by Paula Neumeyer 
 * unnamed light blue iris: https://www.pexels.com/photo/close-up-photo-of-right-person-eye-1435823/ by Наталья Кленова
 * Iris of Scotty: photo taken by Scotty with express permission to appear in this game.
