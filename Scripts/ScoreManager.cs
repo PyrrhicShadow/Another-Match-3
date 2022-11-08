@@ -129,7 +129,7 @@ public class ScoreManager : MonoBehaviour {
             ChangeBackgroundColor(); 
             lastScore = score; 
         }
-        if (reqs.getGameType() == GameType.time) {
+        if (reqs.getGameType() == GameType.time && counter > 0) {
             timer -= Time.deltaTime; 
             if (timer <= 0) {
                 DecreaseCounter(); 
@@ -142,7 +142,7 @@ public class ScoreManager : MonoBehaviour {
     public void IncreaseScore(int amt) {
         if (board != null && scoreBar != null) {
             score += amt; 
-            scoreBar.fillAmount = (float)score / (float)(Board.balance * 5); 
+            scoreBar.fillAmount = (float)(score / (Board.balance * 5)); 
         }
     }
 
@@ -211,12 +211,18 @@ public class ScoreManager : MonoBehaviour {
     }
 
     public void DecreaseCounter() {
-        if (counter > 0) {
-            counter--;
-            counterText.text = counter.ToString();  
+
+        counter--;
+        counterText.text = counter.ToString();  
+
+        if (reqBar != null) {
+            reqBar.fillAmount = (float)(counter / reqs.getCounter()); 
         }
-        else {
+
+        if (counter <= 0) {
             Debug.Log("Game over + jumpscare or something");
+            counter = 0; 
+            counterText.text = counter.ToString(); 
             menuController.endGame(); 
         }
 
