@@ -6,7 +6,7 @@ public class MenuController : MonoBehaviour {
     
     [SerializeField] private Animator startAnim;
     [SerializeField] private Animator winAnim; 
-    [SerializeField] private Animator loseAnim; 
+    [SerializeField] private Animator endAnim; 
     private Board board;  
 
     void Start() {
@@ -36,22 +36,34 @@ public class MenuController : MonoBehaviour {
     }
 
     /// <summary>called when game ends</summary>
+    /** 
+     * Game manager handles level selection 
+     * If board.lvl == gameManager.lvls.Length 
+     * then use end win screen 
+     * else use win screen
+     */ 
     public void winGame() {
-        if (winAnim != null) {
+        if (winAnim != null && endAnim != null) {
+            int rand = Random.Range(0, 100); 
             winAnim.SetBool("end", false); 
-            winAnim.SetBool("end", true); 
+            if (rand < 5) {
+                winAnim.SetBool("end", true); 
+            }
+            else {
+                endAnim.SetBool("lose", true); 
+            }
         }
     }
 
     public void loseGame() {
-        if (loseAnim != null) {
-            loseAnim.SetBool("lose", true); 
+        if (endAnim != null) {
+            endAnim.SetBool("lose", true); 
         }
     }
 
     public void retry() {
-        if (loseAnim != null) {
-            loseAnim.SetBool("lose", false); 
+        if (endAnim != null) {
+            endAnim.SetBool("lose", false); 
         }
 
         StartCoroutine(GameStartCo()); 

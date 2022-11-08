@@ -82,10 +82,10 @@ public class ScoreManager : MonoBehaviour {
     private Image background; 
     private List<Color> bgColors; 
     private int bgTier; 
-    [SerializeField] private List<GoalPanel> currentGoals; 
 
     [Header("Goal Manager")]
     [SerializeField] private BlankGoal[] levelGoals; 
+    private List<GoalPanel> currentGoals; 
     [SerializeField] private GameObject goalPrefab; 
     [SerializeField] private GameObject goalStartParent; 
     [SerializeField] private GameObject goalGameParent; 
@@ -99,8 +99,8 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField]private GameObject losePanel; 
     [SerializeField] private Image reqBar; 
     [SerializeField] private Text counterText; 
-    [SerializeField] private int counter; 
-    [SerializeField] private float timer; 
+    private int counter; 
+    private float timer; 
 
     // Start is called before the first frame update
     void Start() {
@@ -228,12 +228,16 @@ public class ScoreManager : MonoBehaviour {
 
     public void WinGame() {
         board.currentState = GameState.win; 
+        losePanel.SetActive(false);
+        winPanel.SetActive(true); 
         winScore.text = score.ToString(); 
         menuController.winGame(); 
     }
 
     public void LoseGame() {
         board.currentState = GameState.lose; 
+        losePanel.SetActive(true);
+        winPanel.SetActive(false); 
         counter = 0; 
         counterText.text = counter.ToString(); 
         menuController.loseGame(); 

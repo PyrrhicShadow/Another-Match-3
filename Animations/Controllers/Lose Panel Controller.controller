@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: lose
+    m_ConditionEvent: end
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -279803295526354509}
@@ -110,7 +110,7 @@ AnimatorController:
   m_Name: Lose Panel Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: lose
+  - m_Name: end
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -166,7 +166,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: lose
+    m_ConditionEvent: end
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 9164528608682099529}
