@@ -114,8 +114,20 @@ public class ScoreManager : MonoBehaviour {
         bgColors.Add(new Color(0.3137255f, 0.1294118f, 0.1764706f, 1f)); // pale-red
         bgColors.Add(new Color(0.369f, 0f, 0.0115967f, 1f)); // blood-red
 
-        background.color = bgColors[0]; 
-        bgTier = 0; 
+        // background.color = bgColors[0]; 
+        // bgTier = 0; 
+
+        Level myLvl = board.world.levels[board.getLvl()]; 
+        if (myLvl != null) {
+            // score
+            scoreGoal = myLvl.scoreGoal; 
+            background.color = myLvl.backgroundColor; 
+            // goals 
+            levelGoals = myLvl.levelGoals; 
+            // endgame 
+            reqs = myLvl.reqs; 
+            counter = myLvl.counter; 
+        }
 
         SetUpGoals(); 
         SetUpReqs(); 
@@ -138,7 +150,7 @@ public class ScoreManager : MonoBehaviour {
             score += amt; 
             scoreBar.fillAmount = (float)score / (float)(board.balance * scoreGoal); 
             UpdateScore(); 
-            ChangeBackgroundColor(); 
+            // ChangeBackgroundColor(); 
         }
     }
 

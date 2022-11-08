@@ -14,10 +14,17 @@ public class Level : ScriptableObject {
     public GameObject[] dots; 
     public GameObject[] eyes; 
     public int eyeRatio; 
+    public int balance; 
     // public Animator endAnim; 
-    public Color backgroundColor; 
 
     [Header("Score")]
-    public int balance; 
     public int scoreGoal; 
+    public Color backgroundColor; 
+
+    [Header("Goals")]
+    public BlankGoal[] levelGoals; 
+
+    [Header("Endgame")] 
+    public EndGameReqs reqs; 
+    public int counter; 
 }

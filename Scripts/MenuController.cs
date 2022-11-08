@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour {
     
     [SerializeField] protected Animator startAnim;
     [SerializeField] protected Animator endAnim; 
+    [SerializeField] protected Animator winAnim; 
     private Board board;  
 
     protected void Start() {
@@ -37,12 +38,16 @@ public class MenuController : MonoBehaviour {
     /// <summary>called when game ends</summary>
     /** 
      * Game manager handles level selection 
-     * If board.lvl == gameManager.lvls.Length 
-     * then use end win screen 
-     * else use win screen
+     * If board.lvl == gameManager.lvls.Length - 1
+     * then this is the last level, use end win screen 
+     * else this is a normal level, use win screen
      */ 
     public void winGame() {
-        if (endAnim != null) { 
+
+        if (board.getLvl() == (board.world.levels.Length - 1) && winAnim != null) {
+            winAnim.SetBool("end", true); 
+        }
+        else if (endAnim != null) { 
             endAnim.SetBool("end", true); 
         }
     }

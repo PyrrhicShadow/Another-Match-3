@@ -32,7 +32,7 @@ public class Board : MonoBehaviour {
     [SerializeField] private int height = 10;  
     [SerializeField] private int offset = 20; 
     [SerializeField] private int eyeRatio = 0; // must be between 0 and 100 
-    public readonly int balance = 500; // controls the pace at which the game moves
+    public int balance = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] private GameObject[,] allDots; 
@@ -58,6 +58,22 @@ public class Board : MonoBehaviour {
     [Header("Dot types")]
     [SerializeField] private GameObject[] dots; 
     [SerializeField] private GameObject[] eyes; 
+
+    // Awake. It's probably before start, right? 
+    private void Awake() {
+        if (world != null) {
+            if (world.levels[lvl] != null) {
+                Level myLvl = world.levels[lvl]; 
+                width = myLvl.width; 
+                height = myLvl.height; 
+                boardLayout = myLvl.boardLayout; 
+                dots = myLvl.dots; 
+                eyes = myLvl.eyes; 
+                eyeRatio = myLvl.eyeRatio; 
+                balance = myLvl.balance; 
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start() {
