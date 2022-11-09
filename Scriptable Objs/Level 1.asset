@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07335c7a8fb2a144e9692503627cd249, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  width: 6
+  width: 7
   height: 8
   boardLayout: []
   dots:
@@ -45,5 +45,5 @@ MonoBehaviour:
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: diamond
   reqs:
-    gameType: 0
+    gameType: 1
     counter: 100

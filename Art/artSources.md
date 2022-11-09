@@ -32,6 +32,8 @@
 * hands coated in deep red color palette: https://www.pinterest.com/pin/hands-coated-in-deep-red-color-palette--761389880738973031/ by Color Schemes Ideas 
 * horror theme color palette: https://www.color-hex.com/color-palette/48418 by seminard
 
+### UI Elements 
+* free ui asset pack: https://opengameart.org/content/free-ui-asset-pack-1 by [CamTatz on Twitter](https://twitter.com/CamTatz)
 
 ### Other
 

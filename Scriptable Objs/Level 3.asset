@@ -32,6 +32,10 @@ MonoBehaviour:
   - {fileID: 9120233892561351460, guid: ae13c846e2d5bf340b1bb22e1168688d, type: 3}
   - {fileID: 6470933108635381622, guid: 782549bba36d44942abfe9c63bfcc5ae, type: 3}
   eyeRatio: 30
-  backgroundColor: {r: 0.2705882, g: 0.2, b: 0.2588235, a: 1}
   balance: 800
   scoreGoal: 4
+  backgroundColor: {r: 0.2705882, g: 0.2, b: 0.2588235, a: 1}
+  levelGoals: []
+  reqs:
+    gameType: 1
+    counter: 100

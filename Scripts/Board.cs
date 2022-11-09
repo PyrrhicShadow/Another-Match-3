@@ -27,7 +27,7 @@ public class Board : MonoBehaviour {
     [SerializeField] private int lvl; 
 
     [Header("Board properites")]
-    public GameState currentState = GameState.move; 
+    public GameState currentState = GameState.pause; 
     [SerializeField] private int width = 7; 
     [SerializeField] private int height = 10;  
     [SerializeField] private int offset = 20; 
@@ -590,7 +590,12 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public int getLvl() {
-        return lvl; 
+    public Level getLvl() {
+        if (lvl >= 0 && lvl < world.levels.Length) {
+            return world.levels[lvl]; 
+        }
+        else {
+            return null; 
+        }
     }
 }

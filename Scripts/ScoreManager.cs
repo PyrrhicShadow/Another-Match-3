@@ -121,7 +121,7 @@ public class ScoreManager : MonoBehaviour {
         // background.color = bgColors[0]; 
         // bgTier = 0; 
 
-        Level myLvl = board.world.levels[board.getLvl()]; 
+        Level myLvl = board.getLvl(); 
         if (myLvl != null) {
             // score
             scoreGoal = myLvl.scoreGoal; 

@@ -48,9 +48,11 @@ public class MenuController : MonoBehaviour {
 
     private IEnumerator GameEndCo() {
         yield return new WaitForSeconds(1f); 
-        if (board.getLvl() == (board.world.levels.Length - 1) && winAnim != null) {
+        // if this is the last level, play winAnim
+        if (board.getLvl() == (board.world.levels[board.world.levels.Length - 1]) && winAnim != null) {
             winAnim.SetBool("end", true); 
         }
+        // else, play normal end anim
         else if (endAnim != null) { 
             endAnim.SetBool("end", true); 
         }
