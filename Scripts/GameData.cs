@@ -10,6 +10,7 @@ public class SaveData {
     [SerializeField] private bool[] actives; 
     [SerializeField] private int[] highScores; 
     [SerializeField] private int[] stars; 
+    [SerializeField] private bool summon; 
 
     public void setActive(int i, bool status) {
         actives[i] = status; 
@@ -34,6 +35,14 @@ public class SaveData {
     public int getHighScore(int i) {
         return highScores[i];
     }
+
+    public void Summoned() {
+        summon = true; 
+    }
+
+    public bool hasSummoned() {
+        return summon; 
+    }
 }
 
 public class GameData : MonoBehaviour {
@@ -50,10 +59,12 @@ public class GameData : MonoBehaviour {
         else {
             Destroy(this.gameObject); 
         }
+        
+        Load(); 
     }
 
     private void Start() {
-        Load(); 
+
     }
 
     public void Save() {
