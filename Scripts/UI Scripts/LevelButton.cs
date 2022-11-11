@@ -6,10 +6,8 @@ using UnityEngine.UI;
 public class LevelButton : MonoBehaviour {
 
     [Header("Active Stuff")]
-    [SerializeField] bool active; 
-    [SerializeField] Sprite activeSprite; 
-    [SerializeField] Sprite lockedSprite; 
-    [SerializeField] Image lockStatusImage; 
+    [SerializeField] bool active;  
+    [SerializeField] GameObject lockStatus; 
     private Button myButton; 
 
     [SerializeField] Image[] stars; 
@@ -39,13 +37,13 @@ public class LevelButton : MonoBehaviour {
 
     private void DecideSprite() {
         if (active) {
-            lockStatusImage.sprite = activeSprite; 
-            levelText.color = Color.white; 
+            lockStatus.SetActive(false); 
+            levelText.gameObject.SetActive(true); 
             myButton.enabled = true; 
         }
         else {
-            lockStatusImage.sprite = lockedSprite; 
-            levelText.color = Color.gray; 
+            lockStatus.SetActive(true);  
+            levelText.gameObject.SetActive(false);
             myButton.enabled = false; 
         }
     }
