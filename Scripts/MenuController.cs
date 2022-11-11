@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class MenuController : MonoBehaviour {
-    
+
+    private Board board; 
+    [SerializeField] string sceneToLoad; 
+
+    [Header("Animators")]
     [SerializeField] protected Animator startAnim;
     [SerializeField] protected Animator endAnim; 
-    [SerializeField] protected Animator winAnim; 
-    private Board board;  
+    [SerializeField] protected Animator winAnim;  
 
     protected void Start() {
         board = FindObjectOfType<Board>(); 
@@ -28,11 +32,8 @@ public class MenuController : MonoBehaviour {
     }
 
     /// <summary>called to generate new game menus</summar>
-    public void newGame() {
-        if (endAnim != null && startAnim != null) {
-            endAnim.SetBool("end", false); 
-            startAnim.SetBool("show", false); 
-        }
+    public void toSplash() {
+        SceneManager.LoadScene(sceneToLoad); 
     }
 
     /// <summary>called when game ends</summary>
@@ -50,17 +51,21 @@ public class MenuController : MonoBehaviour {
         yield return new WaitForSeconds(1f); 
         // if this is the last level, play winAnim
         if (board.getLvl() == (board.world.levels[board.world.levels.Length - 1]) && winAnim != null) {
+            board.soundManager.backgroundMusicOn(false); 
             winAnim.SetBool("end", true); 
+            board.soundManager.PlayJumpNoise(); 
         }
         // else, play normal end anim
         else if (endAnim != null) { 
             endAnim.SetBool("end", true); 
+            board.soundManager.PlayWinNoise(); 
         }
     }
 
     public void loseGame() {
         if (endAnim != null) {
             endAnim.SetBool("end", true); 
+            board.soundManager.PlayLoseNoise(); 
         }
     }
 

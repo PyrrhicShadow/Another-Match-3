@@ -44,10 +44,10 @@ public class Dot : MonoBehaviour {
     // Start is called before the first frame update
     protected void Start() {
         board = FindObjectOfType<Board>(); 
-        findMatches = FindObjectOfType<FindMatches>(); 
+        findMatches = board.findMatches; 
         mySprite = GetComponent<SpriteRenderer>(); 
         hintManager = FindObjectOfType<HintManager>(); 
-        scoreManager = FindObjectOfType<ScoreManager>(); 
+        scoreManager = board.scoreManager; 
 
         colBomb = false; 
         rowBomb = false; 

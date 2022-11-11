@@ -23,7 +23,7 @@ public class Tile {
 public class Board : MonoBehaviour {
 
     [Header("World")]
-    [SerializeField] public World world; 
+    [SerializeField] internal World world; 
     [SerializeField] private int lvl; 
 
     [Header("Board properites")]
@@ -36,9 +36,9 @@ public class Board : MonoBehaviour {
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] private GameObject[,] allDots; 
-    private FindMatches findMatches; 
-    private ScoreManager scoreManager; 
-    private SoundManager soundManager; 
+    internal FindMatches findMatches; 
+    internal ScoreManager scoreManager; 
+    internal SoundManager soundManager; 
 
     private FloatingTextManager floatingTextManager; 
     private int streakValue = 1; 
@@ -61,6 +61,7 @@ public class Board : MonoBehaviour {
 
     // Awake. It's probably before start, right? 
     private void Awake() {
+        lvl = PlayerPrefs.GetInt("CurrentLevel", 0); 
         if (world != null) {
             if (world.levels[lvl] != null) {
                 Level myLvl = world.levels[lvl]; 
@@ -354,7 +355,7 @@ public class Board : MonoBehaviour {
 
             // does sound manager exist? 
             if (soundManager != null) {
-                soundManager.PlayRandomDestroyNoise(); 
+                soundManager.PlayDestroyNoise(); 
             }
             // create a dot destroy particle then destroy the dot
             GameObject particle = Instantiate(destroyEffect, allDots[x, y].transform.position, Quaternion.identity);

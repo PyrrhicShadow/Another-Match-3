@@ -4,13 +4,37 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
-    public AudioSource[] destroyNoise; 
+    [SerializeField] private AudioSource destroyNoise; 
+    [SerializeField] private AudioSource winNoise; 
+    [SerializeField] private AudioSource loseNoise; 
+    [SerializeField] private AudioSource jumpNoise; 
+    [SerializeField] private AudioSource backgroundMusic; 
+    // private bool backgroundMusicOn = true; 
 
-    public void PlayRandomDestroyNoise() {
-        // Choose a random number 
-        int noiseToPlay = Random.Range(0, destroyNoise.Length); 
-        // play that clip
-        destroyNoise[noiseToPlay].Play(); 
+
+    public void PlayDestroyNoise() {
+        destroyNoise.Play(); 
+    }
+    
+    public void PlayWinNoise() {
+        winNoise.Play(); 
+    }
+
+    public void PlayLoseNoise() {
+        loseNoise.Play(); 
+    }
+
+    public void PlayJumpNoise() {
+        jumpNoise.Play(); 
+    }
+
+    public void backgroundMusicOn(bool on) {
+        if (on) {
+            backgroundMusic.Pause(); 
+        }
+        else {
+            backgroundMusic.UnPause(); 
+        }
     }
 
 }

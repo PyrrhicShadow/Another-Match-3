@@ -84,6 +84,8 @@ public class ScoreManager : MonoBehaviour {
     private int bgTier; 
 
     [Header("Goal Manager")]
+    [SerializeField] private int level; 
+    [SerializeField] private Text levelText; 
     [SerializeField] private BlankGoal[] levelGoals; 
     private List<GoalPanel> currentGoals; 
     [SerializeField] private GameObject goalPrefab; 
@@ -106,6 +108,7 @@ public class ScoreManager : MonoBehaviour {
     void Start() {
         board = FindObjectOfType<Board>(); 
         menuController = FindObjectOfType<MenuController>(); 
+        level = PlayerPrefs.GetInt("CurrentLevel", 0) + 1;  
         currentGoals = new List<GoalPanel>(); 
         score = 0; 
 
@@ -161,6 +164,8 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void SetUpGoals() {
+        levelText.text = "Level: " + level; 
+
         for (int i = 0; i < levelGoals.Length; i++) {
             // create a new goal panel at the goalIntroParent position 
             GameObject startGoal = Instantiate(goalPrefab, goalStartParent.transform); 
@@ -264,7 +269,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void UpdateScore() {
-        scoreText.text = "LV: " + score; 
+        scoreText.text = "Score: " + score; 
     }
 
     /// <summary>Checks for score and changes background color </summary>
