@@ -1,3 +1,13 @@
 *.csproj
 hey.ogg*
 oh.ogg*
+/.vs/
+/.vscode/
+.vsconfig
+*.sln
+/Temp/
+/UserSettings/
+/Logs/
+/Library/
+/obj/
+/Packages/
