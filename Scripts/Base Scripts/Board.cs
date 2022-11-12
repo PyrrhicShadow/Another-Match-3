@@ -70,8 +70,11 @@ public class Board : MonoBehaviour {
                 boardLayout = myLvl.boardLayout; 
                 dots = myLvl.dots; 
                 eyes = myLvl.eyes; 
-                eyeRatio = myLvl.eyeRatio; 
                 balance = myLvl.balance; 
+                bool summoned = false; // change after implimenting loading from save data
+                if (summoned) {
+                    eyeRatio = myLvl.eyeRatio; 
+                }
             }
         }
     }
@@ -92,9 +95,9 @@ public class Board : MonoBehaviour {
 
         // move colors 
         moveColors = new List<Color>(); 
-        moveColors.Add(new Color(0f, 0.872f, 0.1591406f, 1f)); // green
-        moveColors.Add(new Color(1f, 0.6806262f, 0f, 1f)); // orange
-        moveColors.Add(new Color(0.1933962f, 0.86737f, 1f, 1f)); // blue
+        moveColors.Add(new Color(0f, 0.872f, 0.1591406f, 1f)); // move, green
+        moveColors.Add(new Color(1f, 0.6806262f, 0f, 1f)); // wait, orange
+        moveColors.Add(new Color(0.1933962f, 0.86737f, 1f, 1f)); // none, blue
 
         SetUp(); 
 

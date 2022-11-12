@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour {
 
     private Board board; 
+    private GameData gameData; 
     [SerializeField] string sceneToLoad; 
+    private int lvl; 
 
     [Header("Animators")]
     [SerializeField] protected Animator startAnim;
@@ -15,6 +17,8 @@ public class MenuController : MonoBehaviour {
 
     protected void Start() {
         board = FindObjectOfType<Board>(); 
+        gameData = FindObjectOfType<GameData>(); 
+        lvl = PlayerPrefs.GetInt("CurrentLevel", 0); 
     }
 
     /// <summary>button to start the current game</summar>
@@ -32,7 +36,26 @@ public class MenuController : MonoBehaviour {
     }
 
     /// <summary>called to generate new game menus</summar>
-    public void toSplash() {
+    public void toSplashWin() {
+        if (gameData != null) {
+            SaveData thisLevel = gameData.saveData; 
+            thisLevel.setActive(lvl + 1, true); 
+            if (board.scoreManager.getScore() > thisLevel.getHighScore(lvl)) {
+                thisLevel.setHighScore(lvl, board.scoreManager.getScore()); 
+            }
+
+            gameData.Save(); 
+        }
+        SceneManager.LoadScene(sceneToLoad); 
+    }
+
+    public void toSplashLose() {
+        if (gameData != null) {
+            SaveData thisLevel = gameData.saveData; 
+            if (board.scoreManager.getScore() > thisLevel.getHighScore(lvl)) {
+                thisLevel.setHighScore(lvl, board.scoreManager.getScore()); 
+            }
+        }
         SceneManager.LoadScene(sceneToLoad); 
     }
 
@@ -73,6 +96,9 @@ public class MenuController : MonoBehaviour {
         if (endAnim != null) {
             endAnim.SetBool("end", false); 
         }
+
+        board.scoreManager.clearScore(); 
+        board.scoreManager.clearLevelGoals(); 
 
         StartCoroutine(GameStartCo()); 
     }

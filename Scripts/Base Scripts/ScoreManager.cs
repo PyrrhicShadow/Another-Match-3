@@ -71,11 +71,11 @@ public class ScoreManager : MonoBehaviour {
     private MenuController menuController;
 
     [Header("Score Manager")]
-    [SerializeField] private int score; 
+    [SerializeField] int score; 
     private int lastScore; 
-    [SerializeField] private int scoreGoal; 
-    [SerializeField] private Text scoreText;  
-    [SerializeField] private Image scoreBar; 
+    [SerializeField] int scoreGoal; 
+    [SerializeField] Text scoreText;  
+    [SerializeField] Image scoreBar; 
 
     [Header ("Background Manager")]
     [SerializeField]
@@ -84,23 +84,23 @@ public class ScoreManager : MonoBehaviour {
     private int bgTier; 
 
     [Header("Goal Manager")]
-    [SerializeField] private int level; 
-    [SerializeField] private Text levelText; 
-    [SerializeField] private BlankGoal[] levelGoals; 
+    [SerializeField] int level; 
+    [SerializeField] Text levelText; 
+    [SerializeField] BlankGoal[] levelGoals; 
     private List<GoalPanel> currentGoals; 
-    [SerializeField] private GameObject goalPrefab; 
-    [SerializeField] private GameObject goalStartParent; 
-    [SerializeField] private GameObject goalGameParent; 
+    [SerializeField] GameObject goalPrefab; 
+    [SerializeField] GameObject goalStartParent; 
+    [SerializeField] GameObject goalGameParent; 
 
     [Header("Endgame Manager")]
-    [SerializeField] private EndGameReqs reqs; 
-    [SerializeField] private GameObject reqMoveText;
-    [SerializeField] private GameObject reqTimeText;  
-    [SerializeField] private GameObject winPanel; 
-    [SerializeField] private Text winScore; 
-    [SerializeField]private GameObject losePanel; 
-    [SerializeField] private Image reqBar; 
-    [SerializeField] private Text counterText; 
+    [SerializeField] EndGameReqs reqs; 
+    [SerializeField] GameObject reqMoveText;
+    [SerializeField] GameObject reqTimeText;  
+    [SerializeField] GameObject winPanel; 
+    [SerializeField] Text winScore; 
+    [SerializeField] GameObject losePanel; 
+    [SerializeField] Image reqBar; 
+    [SerializeField] Text counterText; 
     private int counter; 
     private float timer; 
 
@@ -131,9 +131,7 @@ public class ScoreManager : MonoBehaviour {
             background.color = myLvl.backgroundColor; 
             // goals 
             levelGoals = myLvl.levelGoals; 
-            foreach (BlankGoal lg in levelGoals) {
-                lg.clearCollected(); 
-            }
+            this.clearLevelGoals();
             // endgame 
             reqs = myLvl.reqs; 
         }
@@ -308,5 +306,11 @@ public class ScoreManager : MonoBehaviour {
     /// <summary>clear score </summary>
     public void clearScore() {
         score = 0; 
+    }
+
+    public void clearLevelGoals() {
+        foreach (BlankGoal goal in levelGoals) {
+            goal.clearCollected();
+        }
     }
 }

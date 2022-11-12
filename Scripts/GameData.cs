@@ -43,6 +43,15 @@ public class SaveData {
     public bool hasSummoned() {
         return summon; 
     }
+
+    public int Count() {
+        if (stars.Length == highScores.Length && stars.Length == actives.Length) {
+            return stars.Length; 
+        }
+        else {
+            return -1; 
+        }
+    }
 }
 
 public class GameData : MonoBehaviour {
@@ -59,12 +68,11 @@ public class GameData : MonoBehaviour {
         else {
             Destroy(this.gameObject); 
         }
-        
+
         Load(); 
     }
 
     private void Start() {
-
     }
 
     public void Save() {
@@ -110,5 +118,16 @@ public class GameData : MonoBehaviour {
     void Update()
     {
         
+    }
+
+    public void ClearSave() {
+        for (int i = 0; i < saveData.Count(); i++) {
+            saveData.setActive(i, false); 
+            saveData.setStar(i, 0); 
+            saveData.setHighScore(i, 0); 
+        }
+        saveData.setActive(0, true); 
+        Save(); 
+        Debug.Log("Save cleared"); 
     }
 }
