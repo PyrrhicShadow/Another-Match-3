@@ -1,0 +1,117 @@
+/** div class clear for sections with images **/
+.clear {
+    clear: both; 
+}
+
+/** div class spacer to separate sections ending in ul, ol **/
+#projects .spacer {
+    line-height: 0.7em; 
+}
+
+body {
+    font-family: Segoe UI, Tahoma, Verdana, sans-serif;
+    margin: 20px; 
+    background-color: #F1F9FF;
+}
+
+header {
+    margin-bottom: 20px; 
+    padding: 20px; 
+    border-bottom: 2px dotted rgb(0, 174, 255)
+}
+header h1 {
+    font-size: 2em; 
+    padding-bottom: 10px; 
+}
+
+header nav ul li {
+    display: inline; 
+    padding: 5px; 
+}
+
+header nav ul {
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+
+footer {
+    margin-top: 20px; 
+    margin-bottom: 40px; 
+    padding: 20px; 
+    border-top: 2px dotted rgb(0, 174, 255)
+}
+
+footer nav ul li {
+    display: inline; 
+    padding: 5px; 
+}
+
+footer nav ul {
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+
+/** Links **/
+a {
+    color: rgb(255, 81, 0)
+}
+
+a:hover {
+    color: #00AEEF;
+}
+
+
+/** Makes sure all ways of doing bold, italics, underline, etc. look the same regardless of browser **/ 
+strong, b {
+    font-weight: bold; 
+}
+
+em, i {
+    font-style: italic; 
+}
+
+u {
+    text-decoration: underline; 
+}
+
+small {
+    font-size: 0.7em; 
+}
+
+/** consistant body text formatting **/
+.project {
+    margin-bottom: 20px; 
+    padding-bottom: 20px; 
+    border-bottom: 2px dotted rgb(0, 174, 255);
+}
+.project img, #aboutme img {
+    width: 250px; 
+    float: left; 
+    margin-right: 10px; 
+    margin-bottom: 10px;
+}
+
+.project h2, #aboutme h2 {
+    font-size: 1.5em; 
+    margin-bottom: 10px; 
+} 
+
+.project h3, #aboutme h3 {
+    font-size: 1.2em; 
+    margin-bottom: 10px; 
+}
+
+#projects, #aboutme {
+    margin: 0 auto; 
+    width: 90%; 
+    max-width: 800px;
+    line-height: 1.5em; 
+}
+
+p {
+    margin-bottom: 10px; 
+} 
+
+ul, ol {
+    margin-left: 25px; 
+}
