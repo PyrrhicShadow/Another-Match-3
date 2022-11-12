@@ -77,7 +77,7 @@ public class LevelButton : MonoBehaviour {
     }
 
     public void ConfirmPanel() {
-        confirmPanel.SetActive(true); 
         confirmPanel.GetComponent<ConfirmPanel>().setLvl(lvl); 
+        confirmPanel.SetActive(true); 
     }
 }

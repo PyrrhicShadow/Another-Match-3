@@ -18,9 +18,10 @@ public class ConfirmPanel : MonoBehaviour {
     [SerializeField] Text highScoreText; 
 
     // Start is called before the first frame update
-    void Start() {
-        Cancel(); 
+    private void Start() {
         gameData = FindObjectOfType<GameData>(); 
+        LoadData(); 
+        Cancel(); 
     }
 
     void OnEnable() {
