@@ -6095,6 +6095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c208283f1268c541adec326f779e353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 11400000, guid: f9ac45b11fe12bb4495685b3ae1990cd, type: 2}
   saveData:
     actives: 
     highScores: 

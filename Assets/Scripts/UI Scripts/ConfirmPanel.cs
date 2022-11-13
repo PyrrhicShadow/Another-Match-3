@@ -25,6 +25,7 @@ public class ConfirmPanel : MonoBehaviour {
     }
 
     void OnEnable() {
+        gameData = FindObjectOfType<GameData>(); 
         LoadData(); 
         UpdateHighScore(); 
         ActivateStars(); 
@@ -45,13 +46,20 @@ public class ConfirmPanel : MonoBehaviour {
 
     private void LoadData() {
         if (gameData != null) {
-            Debug.Log("Level: " + lvl); 
-            SaveData thisLevel = gameData.saveData; 
-            stars = thisLevel.getStar(lvl - 1); 
-            highScore = thisLevel.getHighScore(lvl - 1); 
+            if (lvl <= gameData.saveData.Count()){
+                Debug.Log("Level: " + lvl); 
+                SaveData thisLevel = gameData.saveData; 
+                stars = thisLevel.getStar(lvl - 1); 
+                highScore = thisLevel.getHighScore(lvl - 1); 
+            }
+            else {
+                Debug.Log("Level not found");
+                stars = 0; 
+                highScore = 0; 
+            }
         }
         else {
-            Debug.Log("Didn't locate gameData object"); 
+            Debug.Log("GameData not found"); 
         }
     }
 

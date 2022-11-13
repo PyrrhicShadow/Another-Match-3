@@ -44,6 +44,13 @@ public class SaveData {
         return summon; 
     }
 
+    public void NewSave(int lvls) {
+        actives = new bool[lvls]; 
+        stars = new int[lvls];
+        highScores = new int[lvls]; 
+        actives[0] = true; 
+    }
+
     public int Count() {
         if (stars.Length == highScores.Length && stars.Length == actives.Length) {
             return stars.Length; 
@@ -52,11 +59,13 @@ public class SaveData {
             return -1; 
         }
     }
+
 }
 
 public class GameData : MonoBehaviour {
 
     public static GameData gameData; 
+    [SerializeField] internal World world; 
     public SaveData saveData; 
     // Start is called before the first frame update
     void Awake()
@@ -108,6 +117,11 @@ public class GameData : MonoBehaviour {
             file.Close(); 
             Debug.Log("Save loaded from file"); 
         }
+        else { 
+            Debug.Log("No saves found: fresh save created"); 
+            ClearSave(); 
+            Load(); 
+        }
     }
 
     private void OnDisable() {
@@ -121,12 +135,7 @@ public class GameData : MonoBehaviour {
     }
 
     public void ClearSave() {
-        for (int i = 0; i < saveData.Count(); i++) {
-            saveData.setActive(i, false); 
-            saveData.setStar(i, 0); 
-            saveData.setHighScore(i, 0); 
-        }
-        saveData.setActive(0, true); 
+        saveData.NewSave(world.levels.Length); 
         Save(); 
         Debug.Log("Save cleared"); 
     }

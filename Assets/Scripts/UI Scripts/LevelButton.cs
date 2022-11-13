@@ -40,6 +40,9 @@ public class LevelButton : MonoBehaviour {
             else {
                 active = false; 
             }
+        } 
+        if (lvl == 1) {
+            active = true; 
         }
     }
 
