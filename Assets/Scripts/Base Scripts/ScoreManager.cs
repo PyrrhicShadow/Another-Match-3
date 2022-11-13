@@ -8,7 +8,7 @@ public class BlankGoal {
     [SerializeField] private int numNeeded; 
     private int numCollected;  
     [SerializeField] private Sprite goalSprite; 
-    [SerializeField] private Color goalSpriteColor; 
+    [SerializeField] private Color goalSpriteColor = Color.white; 
     [SerializeField] private string matchTag; 
 
     public void addCollected(int amt) {

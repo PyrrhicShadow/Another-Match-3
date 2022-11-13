@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07335c7a8fb2a144e9692503627cd249, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  width: 7
-  height: 11
+  width: 11
+  height: 7
   boardLayout: []
   dots:
   - {fileID: 8614924838474643066, guid: 5228ddf112f676946a3116a178d737c2, type: 3}
@@ -37,7 +37,19 @@ MonoBehaviour:
   balance: 900
   scoreGoal: 4
   backgroundColor: {r: 0.3137255, g: 0.1294118, b: 0.1764706, a: 1}
-  levelGoals: []
+  levelGoals:
+  - numNeeded: 0
+    goalSprite: {fileID: -337174777, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: tourmaline
+  - numNeeded: 0
+    goalSprite: {fileID: 1611978529, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: diamond
+  - numNeeded: 0
+    goalSprite: {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: pearl
   reqs:
     gameType: 0
     counter: 100

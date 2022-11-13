@@ -97,6 +97,13 @@ public class MenuController : MonoBehaviour {
             endAnim.SetBool("end", false); 
         }
 
+        if (gameData != null) {
+            SaveData thisLevel = gameData.saveData; 
+            if (board.scoreManager.getScore() > thisLevel.getHighScore(lvl)) {
+                thisLevel.setHighScore(lvl, board.scoreManager.getScore()); 
+            }
+        }
+        
         board.scoreManager.clearScore(); 
         board.scoreManager.clearLevelGoals(); 
 
