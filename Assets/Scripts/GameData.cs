@@ -115,6 +115,23 @@ public class GameData : MonoBehaviour {
             saveData = formatter.Deserialize(file) as SaveData; 
 
             file.Close(); 
+
+            // if saveData is corrupted or from an old version of the game, shoot an error
+            if (saveData.Count() != world.levels.Length) {
+                // For now, write old file under a new name 
+
+                FileStream fileBkp = File.Open(Application.persistentDataPath + "/playerbkp.dat", FileMode.Create);
+                SaveData bkpData = new SaveData(); 
+                bkpData = saveData; 
+                formatter.Serialize(fileBkp, bkpData); 
+                fileBkp.Close(); 
+
+                // Load fresh save
+                Debug.Log("Save corrupted or from wrong version: fresh save created");
+                ClearSave(); 
+                Load(); 
+            }
+
             Debug.Log("Save loaded from file"); 
         }
         else { 
