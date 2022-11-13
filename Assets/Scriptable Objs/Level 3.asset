@@ -46,7 +46,7 @@ MonoBehaviour:
     matchTag: sapphire
   - numNeeded: 6
     goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 0, g: 0, b: 0, a: 0}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: ruby
   reqs:
     gameType: 1
