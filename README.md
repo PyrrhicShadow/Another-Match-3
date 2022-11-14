@@ -6,7 +6,7 @@ Warning: Do not play if you are easily frightened or at 3AM while your housemate
 
 [Try it now!](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Web%20Build/anothermatch3.html) 
 
-Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/PC%20Build/)
+Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds)
 
 ## Features
 
