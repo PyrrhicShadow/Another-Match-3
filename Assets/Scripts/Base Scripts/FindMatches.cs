@@ -10,7 +10,7 @@ public class FindMatches : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        board = FindObjectOfType<Board>(); 
+        board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         currentMatches = new List<GameObject>(); 
     }
 

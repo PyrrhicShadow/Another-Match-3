@@ -43,10 +43,10 @@ public class Dot : MonoBehaviour {
 
     // Start is called before the first frame update
     protected void Start() {
-        board = FindObjectOfType<Board>(); 
+        board = GameObject.FindWithTag("board").GetComponent<Board>();
         findMatches = board.findMatches; 
         mySprite = GetComponent<SpriteRenderer>(); 
-        hintManager = FindObjectOfType<HintManager>(); 
+        hintManager = GameObject.FindWithTag("board").GetComponent<HintManager>(); 
         scoreManager = board.scoreManager; 
 
         colBomb = false; 

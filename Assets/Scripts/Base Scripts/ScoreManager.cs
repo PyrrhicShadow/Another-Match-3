@@ -98,7 +98,10 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] GameObject reqTimeText;  
     [SerializeField] GameObject winPanel; 
     [SerializeField] Text winScore; 
+    [SerializeField] Text winEndScore; 
+    [SerializeField] GameObject[] winStars; 
     [SerializeField] GameObject losePanel; 
+    [SerializeField] Text loseScore; 
     [SerializeField] Image reqBar; 
     [SerializeField] Text counterText; 
     private int counter; 
@@ -106,8 +109,8 @@ public class ScoreManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        board = FindObjectOfType<Board>(); 
-        menuController = FindObjectOfType<MenuController>(); 
+        board = GameObject.FindWithTag("board").GetComponent<Board>(); 
+        menuController = board.gameObject.GetComponent<MenuController>(); 
         level = PlayerPrefs.GetInt("CurrentLevel", 0) + 1;  
         currentGoals = new List<GoalPanel>(); 
         score = 0; 
@@ -198,8 +201,8 @@ public class ScoreManager : MonoBehaviour {
         }
 
         if (goalsCompleted >= levelGoals.Length) {
-            Debug.Log("All goals completed"); 
             if (menuController != null && score >= scoreGoal * board.balance) {
+                Debug.Log("You win!"); 
                 WinGame(); 
             }
         }
@@ -224,6 +227,9 @@ public class ScoreManager : MonoBehaviour {
             reqTimeText.SetActive(true); 
             timer = 1; 
         }
+        else {
+
+        }
         counterText.text = counter.ToString(); 
         winPanel.SetActive(false); 
         losePanel.SetActive(false); 
@@ -241,6 +247,7 @@ public class ScoreManager : MonoBehaviour {
         }
 
         if (counter <= 0) {
+            Debug.Log("You lose :("); 
             LoseGame(); 
         }
     }
@@ -249,7 +256,8 @@ public class ScoreManager : MonoBehaviour {
         board.currentState = GameState.win; 
         losePanel.SetActive(false);
         winPanel.SetActive(true); 
-        winScore.text = score.ToString(); 
+        winScore.text = score.ToString();
+        winEndScore.text = score.ToString(); 
         menuController.winGame(); 
     }
 
@@ -259,6 +267,7 @@ public class ScoreManager : MonoBehaviour {
         winPanel.SetActive(false); 
         counter = 0; 
         counterText.text = counter.ToString(); 
+        loseScore.text = score.ToString(); 
         menuController.loseGame(); 
     }
 

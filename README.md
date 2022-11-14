@@ -4,9 +4,9 @@ A simple match-3 game created using Mister Taft Creates tutorial on [YouTube](ht
 
 Warning: Do not play if you are easily frightened or at 3AM while your housemates are sleeping.
 
-[Try it now!](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/anothermatch3.html) 
+[Try it now!](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Web%20Build/anothermatch3.html) 
 
-Disclaimer: Only works on Firefox and Chrome. Does not work on Opera.
+Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/PC%20Build/)
 
 ## Features
 

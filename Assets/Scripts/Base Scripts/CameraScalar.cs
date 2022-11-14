@@ -7,7 +7,7 @@ public class CameraScalar : MonoBehaviour {
     private float cameraOffset = -10; 
     [SerializeField] float aspectRaio = 1.25f;
     private float padding = 3f; 
-    [SerializeField] float xOffset = 1f; 
+    [SerializeField] float xOffset = -1f; 
     [SerializeField] float yOffset = 0f; 
 
     // Start is called before the first frame update

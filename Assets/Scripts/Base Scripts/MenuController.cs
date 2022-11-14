@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField] protected Animator winAnim;  
 
     protected void Start() {
-        board = FindObjectOfType<Board>(); 
+        board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         gameData = FindObjectOfType<GameData>(); 
         lvl = PlayerPrefs.GetInt("CurrentLevel", 0); 
     }
