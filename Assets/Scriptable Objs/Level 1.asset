@@ -48,5 +48,5 @@ MonoBehaviour:
     gameType: 1
     counter: 100
   flavorText:
-  - when I did
-  - I lost hope
+  - when I did, I lost hope
+  - lamented for a long time

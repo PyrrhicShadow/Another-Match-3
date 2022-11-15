@@ -39,8 +39,7 @@ public class Board : MonoBehaviour {
     internal FindMatches findMatches; 
     internal ScoreManager scoreManager; 
     internal SoundManager soundManager; 
-
-    private FloatingTextManager floatingTextManager; 
+    internal FloatingTextManager floatingTextManager; 
     private int streakValue = 1; 
     
     [Header("Board components")]
@@ -247,244 +246,14 @@ public class Board : MonoBehaviour {
         }
 
         return 0; 
-        /* int col = 0; 
-        int row = 0; 
-        List<GameObject> currentMatches = findMatches.getCurrentMatches(); 
-        Dot first = currentMatches[0].GetComponent<Dot>(); 
-        if (first != null) {
-            foreach (GameObject currentDot in currentMatches) {
-                Dot dot = currentDot.GetComponent<Dot>(); 
-                if (dot.getY() == first.getY()){
-                    row++; 
-                }
-                if(dot.getX() == first.getX()) {
-                    col++; 
-                }
-            }
-        }
-        Debug.Log("col: " + col + " | row: " + row); 
-        return (col == 5 || row == 5); // returns true if there are 5 in a row or column */ 
     }
 
-    private void makeBomb() {
-        int matches = findMatches.getCurrentMatches().FindAll(x => x.tag == currentDot.tag).Count; 
-
-        if (matches > 3) {
-            // type of match
-            int typeOfBomb = colRowMatch(); 
-            if (typeOfBomb == 1) {
-                // color bomb 
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isColorBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeColorBomb(); 
-                            Debug.Log("Color bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isColorBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeColorBomb(); 
-                                Debug.Log("Color bomb generatd");
-                            }
-                        }
-                    }
-                }
-
-            }
-            else if (typeOfBomb == 2) {
-                // adjacent bomb
-                // is current dot matched? 
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isAdjBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeAdjBomb(); 
-                            Debug.Log("Adjacent bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isAdjBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeAdjBomb(); 
-                                Debug.Log("Adjacent bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-            else if (typeOfBomb == 3) {
-                // row or col bomb
-                int colRow = Random.Range(0, 100); 
-            if (colRow < 50) {
-                // Make a row bomb
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isRowBomb() && !currentDot.isColBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeRowBomb(); 
-                            Debug.Log("Row bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeRowBomb(); 
-                                Debug.Log("Row bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                // Make a col bomb 
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isRowBomb() && !currentDot.isColBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeColBomb(); 
-                            Debug.Log("Column bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeColBomb(); 
-                                Debug.Log("Column bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-            }
-        }
-
-        /* if (matches == 4 || matches == 7) {
-            // make a col/row bomb
-            int typeOfBomb = Random.Range(0, 100); 
-            if (typeOfBomb < 50) {
-                // Make a row bomb
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isRowBomb() && !currentDot.isColBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeRowBomb(); 
-                            Debug.Log("Row bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeRowBomb(); 
-                                Debug.Log("Row bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                // Make a col bomb 
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isRowBomb() && !currentDot.isColBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeColBomb(); 
-                            Debug.Log("Column bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeColBomb(); 
-                                Debug.Log("Column bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (matches == 5 || matches == 7) {
-            // make a adj/color bomb 
-            if (this.colRowMatch()) {
-                // make a color bomb
-                // is current dot matched? 
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isColorBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeColorBomb(); 
-                            Debug.Log("Color bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isColorBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeColorBomb(); 
-                                Debug.Log("Color bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                // make an adjacent bomb
-                // is current dot matched? 
-                if (currentDot != null) {
-                    if (currentDot.isMatched()) {
-                        if (!currentDot.isAdjBomb()){
-                            currentDot.setMatched(false); 
-                            currentDot.makeAdjBomb(); 
-                            Debug.Log("Adjacent bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (currentDot.getOtherDot() != null) {
-                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isAdjBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeAdjBomb(); 
-                                Debug.Log("Adjacent bomb generatd");
-                            }
-                        }
-                    }
-                } 
-            }
-        } */
-
-    }
+ 
 
     /// <summary>Checks findMatches for bomb-making, adds score, breaks breakable tiles, then destroys matched dot</summary>
     private void DestroyMatchesAt(int x, int y) {
         Dot dot = allDots[x, y].GetComponent<Dot>(); 
         if (dot.isMatched()) {
-            // How many elements are in the matched pieces list from findMatches? 
-            if (findMatches.getCurrentMatches().Count > 3) {
-                findMatches.makeBomb(); 
-                floatingTextManager.Show("Awesome!", 20, Color.white, new Vector3(dot.transform.position.x, dot.transform.position.y, 0f), Vector3.up * 40f, 1f); 
-            }
 
             // checks if a tile needs to be broken, then breaks it
             if (breakableTiles[x, y] != null) {
@@ -515,6 +284,11 @@ public class Board : MonoBehaviour {
 
     /// <summary>Loops through the entire board and destroys matches</summary>
     public void DestroyMatches() {
+        // How many elements are in the matched pieces list from findMatches? 
+        if (findMatches.getCurrentMatches().Count > 3) {
+            findMatches.makeBomb(); 
+        }
+        findMatches.getCurrentMatches().Clear();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (allDots[i, j] != null) {
@@ -522,7 +296,6 @@ public class Board : MonoBehaviour {
                 }
             }
         }
-        findMatches.getCurrentMatches().Clear();
         StartCoroutine(DecreaseRowCo()); 
     }
 

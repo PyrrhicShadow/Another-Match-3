@@ -7,10 +7,12 @@ public class FindMatches : MonoBehaviour {
 
     private Board board; 
     [SerializeField] private List<GameObject> currentMatches; 
+    private FloatingTextManager floatingTextManager; 
 
     // Start is called before the first frame update
     void Start() {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
+        floatingTextManager = board.floatingTextManager; 
         currentMatches = new List<GameObject>(); 
     }
 
@@ -20,6 +22,8 @@ public class FindMatches : MonoBehaviour {
 
     private IEnumerator FindAllMatchesCo() {
         yield return new WaitForSeconds(0.2f); 
+        //yield return null; 
+
         for (int i = 0; i < board.getWidth(); i++) {
             for (int j = 0; j < board.getHeight(); j++) {
                 GameObject currentDot = board.getDot(i, j); 
@@ -201,7 +205,7 @@ public class FindMatches : MonoBehaviour {
 
     /// <summary>When bomb is needed, make a bomb here.</summary>
     public void makeBomb() {
-        int matches = getCurrentMatches().Count; 
+        int matches = getCurrentMatches().FindAll(x => x.tag == board.getCurrentDot().tag).Count; 
         if (matches == 4 || matches == 7) {
             // make a col/row bomb
             int typeOfBomb = Random.Range(0, 100); 
@@ -212,6 +216,7 @@ public class FindMatches : MonoBehaviour {
                         if (!board.getCurrentDot().isRowBomb() && !board.getCurrentDot().isColBomb()){
                             board.getCurrentDot().setMatched(false); 
                             board.getCurrentDot().makeRowBomb(); 
+                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                             Debug.Log("Row bomb generatd");
                         }
                     }
@@ -222,6 +227,7 @@ public class FindMatches : MonoBehaviour {
                             if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
                                 otherDot.setMatched(false); 
                                 otherDot.makeRowBomb(); 
+                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                                 Debug.Log("Row bomb generatd");
                             }
                         }
@@ -235,6 +241,7 @@ public class FindMatches : MonoBehaviour {
                         if (!board.getCurrentDot().isRowBomb() && !board.getCurrentDot().isColBomb()){
                             board.getCurrentDot().setMatched(false); 
                             board.getCurrentDot().makeColBomb(); 
+                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                             Debug.Log("Column bomb generatd");
                         }
                     }
@@ -245,6 +252,7 @@ public class FindMatches : MonoBehaviour {
                             if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
                                 otherDot.setMatched(false); 
                                 otherDot.makeColBomb(); 
+                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                                 Debug.Log("Column bomb generatd");
                             }
                         }
@@ -262,6 +270,7 @@ public class FindMatches : MonoBehaviour {
                         if (!board.getCurrentDot().isColorBomb()){
                             board.getCurrentDot().setMatched(false); 
                             board.getCurrentDot().makeColorBomb(); 
+                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                             Debug.Log("Color bomb generatd");
                         }
                     }
@@ -272,6 +281,7 @@ public class FindMatches : MonoBehaviour {
                             if (!otherDot.isColorBomb()){
                                 otherDot.setMatched(false); 
                                 otherDot.makeColorBomb(); 
+                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                                 Debug.Log("Color bomb generatd");
                             }
                         }
@@ -286,6 +296,7 @@ public class FindMatches : MonoBehaviour {
                         if (!board.getCurrentDot().isAdjBomb()){
                             board.getCurrentDot().setMatched(false); 
                             board.getCurrentDot().makeAdjBomb(); 
+                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                             Debug.Log("Adjacent bomb generatd");
                         }
                     }
@@ -296,6 +307,7 @@ public class FindMatches : MonoBehaviour {
                             if (!otherDot.isAdjBomb()){
                                 otherDot.setMatched(false); 
                                 otherDot.makeAdjBomb(); 
+                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
                                 Debug.Log("Adjacent bomb generatd");
                             }
                         }
@@ -304,59 +316,6 @@ public class FindMatches : MonoBehaviour {
             }
         }
 
-    }
-    
-    public void CheckBombs(int matches) { 
-        if (board.getCurrentDot() != null) {
-            // Is the dot they moved matched? 
-            if (board.getCurrentDot().isMatched()) {
-                // make it unmatched so it can become a bomb 
-                board.getCurrentDot().setMatched(false); 
-                // decide what kind of bomb to make 
-                this.makeBomb(board.getCurrentDot(), matches); 
-            }
-            else if (board.getCurrentDot().getOtherDot() != null){
-                Dot otherDot = board.getCurrentDot().getOtherDot().GetComponent<Dot>(); 
-                // is the other dot matched? 
-                if (otherDot.isMatched()) {
-                    // make it unmatched so it can become a bomb 
-                    otherDot.setMatched(false); 
-                    // decide what kind of bomb to make 
-                    this.makeBomb(otherDot, matches); 
-                }
-            }
-        }
-    }
-
-    /* 
-    // first, check if the two dots being moved are rainbows 
-            if (board.getCurrentDot().tag == "rainbow" && otherDot.gameObject.tag == "rainbow") {
-                for (int i = 0; i < board.getWidth(); i++) {
-                    for (int j = 0; j < board.getHeight(); j++) {
-                        board.getDot(i, j).GetComponent<Dot>().setMatched(true); 
-                    }
-                }
-                Debug.Log("Double rainbow! Board cleared."); 
-            }
-            */
-
-    /// <summary>Make a bomb at dot <paramref name="dot"/> of type appropriate for <paramref name="matches"/> matches</summary>
-    private void makeBomb(Dot dot, int matches) {
-        if (matches == 4) {
-            int typeOfBomb = Random.Range(0, 100); 
-            if (typeOfBomb < 50) {
-                // Make a row bomb
-                dot.makeRowBomb(); 
-            }
-            else {
-                // Make a col bomb
-                dot.makeColBomb(); 
-            }
-        }
-        else if (matches == 5) {
-            // Make a color bomb
-            dot.makeColorBomb(); 
-        }
     }
 
     private bool ChekcForMatches() {

@@ -20,8 +20,8 @@ public class Dot : MonoBehaviour {
     protected HintManager hintManager; 
     protected ScoreManager scoreManager; 
     protected GameObject otherDot; 
-    protected Vector2 firstTouchPos; 
-    protected Vector2 finalTouchPos;
+    protected Vector2 firstTouchPos = Vector2.zero; 
+    protected Vector2 finalTouchPos = Vector2.zero;
     protected Vector2 tempPos; 
     protected SpriteRenderer mySprite; 
 
@@ -96,8 +96,8 @@ public class Dot : MonoBehaviour {
             transform.position = Vector2.Lerp(transform.position, tempPos, moveSpeed); 
             if (board.getDot(x, y) != this.gameObject) {
                 board.setDot(x, y, this.gameObject); 
+                findMatches.FindAllMatches(); 
             }
-            findMatches.FindAllMatches(); 
         }
         else {
             // Directly set the position
@@ -110,8 +110,8 @@ public class Dot : MonoBehaviour {
             transform.position = Vector2.Lerp(transform.position, tempPos, moveSpeed);  
             if (board.getDot(x, y) != this.gameObject) {
                 board.setDot(x, y, this.gameObject); 
+                findMatches.FindAllMatches(); 
             }
-            findMatches.FindAllMatches(); 
         }
         else {
             // Directly set the position
