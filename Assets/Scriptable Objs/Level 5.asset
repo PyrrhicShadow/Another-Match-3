@@ -80,3 +80,6 @@ MonoBehaviour:
   reqs:
     gameType: 0
     counter: 100
+  flavorText:
+  - when he did
+  - he smiled

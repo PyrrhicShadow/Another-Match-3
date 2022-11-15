@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07335c7a8fb2a144e9692503627cd249, type: 3}
-  m_Name: Level 1
+  m_Name: Level 12
   m_EditorClassIdentifier: 
   width: 6
   height: 7
@@ -27,26 +27,26 @@ MonoBehaviour:
   - {fileID: 9065688668680039769, guid: a16ea9546f5812e46bc41b84d95e67ca, type: 3}
   - {fileID: 3721171702966750543, guid: 693ae164b6d87234e89eb6f9449b4d67, type: 3}
   - {fileID: 4845659277170574517, guid: 51a0deeb0268ac94c8d8144a5c7ee769, type: 3}
-  eyeRatio: 10
-  balance: 600
-  scoreGoal: 3
-  backgroundColor: {r: 0.2470588, g: 0.2431373, b: 0.3137255, a: 1}
+  eyeRatio: 1
+  balance: 500
+  scoreGoal: 2
+  backgroundColor: {r: 0.235493, g: 0.2646766, b: 0.3396226, a: 1}
   levelGoals:
   - numNeeded: 6
-    goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSprite: {fileID: 1453271462, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-    matchTag: ruby
-  - numNeeded: 6
-    goalSprite: {fileID: -55886626, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 1}
-    matchTag: emerald
+    matchTag: amethyst
   - numNeeded: 6
     goalSprite: {fileID: 1611978529, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: diamond
+  - numNeeded: 6
+    goalSprite: {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+    matchTag: pearl
   reqs:
-    gameType: 1
+    gameType: 0
     counter: 100
   flavorText:
-  - when I did
-  - I lost hope
+  - he saw its beauty, nihilistic and calm
+  - it called to him unapologetically

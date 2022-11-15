@@ -12,14 +12,17 @@ public class ConfirmPanel : MonoBehaviour {
     [SerializeField] int lvl; 
     private int stars; 
     private int highScore; 
+    [SerializeField] World world; 
 
     [Header("UI stuff")]
     [SerializeField] Image[] starImages; 
     [SerializeField] Text highScoreText; 
+    [SerializeField] Text flavorText; 
 
     // Start is called before the first frame update
     private void Start() {
         gameData = FindObjectOfType<GameData>(); 
+
         LoadData(); 
         Cancel(); 
     }
@@ -29,6 +32,7 @@ public class ConfirmPanel : MonoBehaviour {
         LoadData(); 
         UpdateHighScore(); 
         ActivateStars(); 
+        LoadFlavorText(); 
     }
 
     private void ActivateStars() {
@@ -42,6 +46,18 @@ public class ConfirmPanel : MonoBehaviour {
 
     private void UpdateHighScore() {
         highScoreText.text = highScore.ToString();
+    }
+
+    private void LoadFlavorText() {
+        if (world != null) {
+            //flavorText.text = world.levels[lvl - 1].flavorText; 
+            string tempFlavor = ""; 
+            for (int i = 0; i < world.levels[lvl - 1].flavorText.Length - 1; i++) {
+                tempFlavor = tempFlavor + world.levels[lvl - 1].flavorText[i] + "\n"; 
+            }
+            tempFlavor = tempFlavor + world.levels[lvl - 1].flavorText[world.levels[lvl - 1].flavorText.Length - 1];
+            flavorText.text = tempFlavor;  
+        }
     }
 
     private void LoadData() {

@@ -172,7 +172,7 @@ public class ScoreManager : MonoBehaviour {
             GameObject startGoal = Instantiate(goalPrefab, goalStartParent.transform); 
             startGoal.transform.SetParent(goalStartParent.transform); 
             
-            // create a new goal panel at the gaolGameParent position
+            // create a new goal panel at the goalGameParent position
             GameObject gameGoal = Instantiate(goalPrefab, goalGameParent.transform); 
             gameGoal.transform.SetParent(goalGameParent.transform); 
             

@@ -240,31 +240,39 @@ public class Dot : MonoBehaviour {
 
     /// <summary>turns the current dot into a column bomb</summary>
     public void makeColBomb() {
-        colBomb = true; 
-        GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity); 
-        arrow.transform.parent = this.transform; 
+        if (!colorBomb && !adjBomb && !rowBomb) {
+            colBomb = true; 
+            GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity); 
+            arrow.transform.parent = this.transform; 
+        }
     }
 
     /// <summary>turns the current dot into a row bomb</summary>
     public void makeRowBomb() {
-        rowBomb = true; 
-        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity); 
-        arrow.transform.parent = this.transform; 
+        if (!colorBomb && !adjBomb && !colBomb) {
+            rowBomb = true; 
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity); 
+            arrow.transform.parent = this.transform; 
+            }
     }
 
     /// <summary>turns the current dot into a rainbow bomb</summary>
     public void makeColorBomb() {
-        colorBomb = true; 
-        this.gameObject.tag = "rainbow"; 
-        mySprite.sprite = rainbowBomb; 
-        mySprite.color = new Color(1f, 1f, 1f, 1f); 
+        if (!adjBomb && !rowBomb && !colBomb) {
+            colorBomb = true; 
+            this.gameObject.tag = "rainbow"; 
+            mySprite.sprite = rainbowBomb; 
+            mySprite.color = new Color(1f, 1f, 1f, 1f); 
+        }
     }
 
     // <summary>turns the current dot into an adjacent bomb</summary>
     public void makeAdjBomb() {
-        adjBomb = true; 
-        GameObject marker = Instantiate(adjMarker, transform.position, Quaternion.identity); 
-        marker.transform.parent = this.transform;
+        if (!colorBomb && !colBomb && !rowBomb) {
+            adjBomb = true; 
+            GameObject marker = Instantiate(adjMarker, transform.position, Quaternion.identity); 
+            marker.transform.parent = this.transform;
+        }
     }
 
     /// <summary>turns the current dot back into a (random) normal dot</summary>

@@ -49,3 +49,5 @@ MonoBehaviour:
   reqs:
     gameType: 0
     counter: 100
+  flavorText:
+  - lamented for a long time

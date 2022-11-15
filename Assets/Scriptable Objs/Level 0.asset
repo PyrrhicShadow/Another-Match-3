@@ -47,3 +47,6 @@ MonoBehaviour:
   reqs:
     gameType: 0
     counter: 100
+  flavorText:
+  - everyone in their own time
+  - stares down the void

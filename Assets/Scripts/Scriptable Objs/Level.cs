@@ -26,4 +26,7 @@ public class Level : ScriptableObject {
 
     [Header("Endgame")] 
     public EndGameReqs reqs; 
+
+    [Header("Story")]
+    public string[] flavorText; 
 }

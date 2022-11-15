@@ -14,6 +14,26 @@ Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main
 * Sounds! (sorta) 
 * Beautiful royalty-free art
 
+## Controls 
+
+* mouse or touch to navigate 
+* "h" key or hint button for hint 
+* a number of secret "debug" codes 
+
+<details>
+    <summary><i>Click to view</i>
+
+* "s" to shuffle the board
+* bomb commands (turns the piece the mouse is hovering over into said bomb)
+** "c" for color bomb
+** "a" for adjacent bomb
+** right or left arrow key for row bomb
+** up or down arrow key for col bomb 
+** right-click to unmake bomb 
+
+    </summary>
+</details>
+
 ## Credits 
 
 All art used in this game are either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections 

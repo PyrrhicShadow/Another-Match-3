@@ -150,6 +150,10 @@ public class Board : MonoBehaviour {
         else {
             moveIndicatorImage.color = moveColors[2]; 
         }
+
+        if (Input.GetKeyDown("s")) {
+            ShuffleBoard();
+        }
     }
 
     /// <summary>Generates a breakable tile at all positions marked breakable</summary>
@@ -263,7 +267,7 @@ public class Board : MonoBehaviour {
     }
 
     private void makeBomb() {
-        int matches = findMatches.getCurrentMatches().Count; 
+        int matches = findMatches.getCurrentMatches().FindAll(x => x.tag == currentDot.tag).Count; 
 
         if (matches > 3) {
             // type of match
@@ -584,13 +588,13 @@ public class Board : MonoBehaviour {
 
     /// <summary>If there are still matches on the board, destroy them</summary>
     private IEnumerator FillBoardCo() {
-        yield return new WaitForSeconds(refillDelay); 
         RefillBoard(); 
+        yield return new WaitForSeconds(refillDelay); 
 
         while(MatchesOnBoard()) {
             streakValue ++; 
             DestroyMatches(); 
-            yield return new WaitForSeconds(2 * refillDelay); 
+            yield return new WaitForSeconds(refillDelay); 
         }
         findMatches.getCurrentMatches().Clear(); 
         currentDot = null; 
