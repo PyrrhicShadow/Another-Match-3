@@ -246,7 +246,7 @@ public class Board : MonoBehaviour {
         if (currentDot != null) {
             findMatches.makeBomb(); 
         }
-        
+
         findMatches.getCurrentMatches().Clear();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -260,7 +260,6 @@ public class Board : MonoBehaviour {
 
     /// <summary>Makes dots fall when the dot under them is null</summary>
     private IEnumerator DecreaseRowCo() {
-        yield return new WaitForSeconds(refillDelay * 0.5f); 
         int nullCount = 0; 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
