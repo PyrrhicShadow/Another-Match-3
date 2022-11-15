@@ -21,17 +21,18 @@ Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main
 * a number of secret "debug" codes 
 
 <details>
-    <summary><i>Click to view</i>
+    <summary><i>Click to view</i></summary>
+
+These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!
 
 * "s" to shuffle the board
 * bomb commands (turns the piece the mouse is hovering over into said bomb)
-** "c" for color bomb
-** "a" for adjacent bomb
-** right or left arrow key for row bomb
-** up or down arrow key for col bomb 
-** right-click to unmake bomb 
+    ** "c" for color bomb
+    ** "a" for adjacent bomb
+    ** right or left arrow key for row bomb
+    ** up or down arrow key for col bomb 
+    ** right-click to unmake bomb 
 
-    </summary>
 </details>
 
 ## Credits 
