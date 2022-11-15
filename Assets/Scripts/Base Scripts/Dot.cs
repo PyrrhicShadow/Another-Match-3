@@ -96,8 +96,8 @@ public class Dot : MonoBehaviour {
             transform.position = Vector2.Lerp(transform.position, tempPos, moveSpeed); 
             if (board.getDot(x, y) != this.gameObject) {
                 board.setDot(x, y, this.gameObject); 
-                findMatches.FindAllMatches(); 
             }
+            findMatches.FindAllMatches(); 
         }
         else {
             // Directly set the position
@@ -110,8 +110,8 @@ public class Dot : MonoBehaviour {
             transform.position = Vector2.Lerp(transform.position, tempPos, moveSpeed);  
             if (board.getDot(x, y) != this.gameObject) {
                 board.setDot(x, y, this.gameObject); 
-                findMatches.FindAllMatches(); 
             }
+            findMatches.FindAllMatches(); 
         }
         else {
             // Directly set the position

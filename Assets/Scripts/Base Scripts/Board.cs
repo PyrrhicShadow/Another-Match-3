@@ -41,7 +41,7 @@ public class Board : MonoBehaviour {
     internal SoundManager soundManager; 
     internal FloatingTextManager floatingTextManager; 
     private int streakValue = 1; 
-    
+
     [Header("Board components")]
     [SerializeField] private Dot currentDot; 
     [SerializeField] private Image moveIndicatorImage;  
@@ -207,49 +207,6 @@ public class Board : MonoBehaviour {
         return false; 
     }
 
-    /// <summary>returns true if there are 5 in a row or column, else false (like a T-shape or L-shape match)</summary>
-    private int colRowMatch() {
-        // Make a copy of currentMatches 
-        List<GameObject> matchCopy = new List<GameObject>(findMatches.getCurrentMatches()); 
-
-        // Cycle through all of matchCopy and decide if a bomb needs to be made 
-        for (int i = 0; i < matchCopy.Count; i++) {
-            // get this dot 
-            Dot thisDot = matchCopy[i].GetComponent<Dot>(); 
-            int col = thisDot.getX();
-            int row = thisDot.getY(); 
-            int colMatch = 0; 
-            int rowMatch = 0; 
-            // cycle through rest of the dots 
-            for (int j = 0; j < matchCopy.Count; j++) {
-                // store other dot 
-                Dot nextDot = matchCopy[j].GetComponent<Dot>(); 
-                if (nextDot != thisDot) {
-                    if (nextDot.getX() == col && thisDot.CompareTag(nextDot.tag)) {
-                        colMatch++; 
-                    }
-                    if (nextDot.getY() == row && thisDot.CompareTag(nextDot.tag)) {
-                        rowMatch++; 
-                    }
-                }
-            } 
-
-            if (colMatch == 4 || rowMatch == 4) {
-                return 1; // color bomb
-            }
-            if (colMatch == 2 && rowMatch == 2) {
-                return 2; // adjacent bomb
-            }
-            if (colMatch == 3 || rowMatch == 3) {
-                return 3; // col or row bomb
-            }
-        }
-
-        return 0; 
-    }
-
- 
-
     /// <summary>Checks findMatches for bomb-making, adds score, breaks breakable tiles, then destroys matched dot</summary>
     private void DestroyMatchesAt(int x, int y) {
         Dot dot = allDots[x, y].GetComponent<Dot>(); 
@@ -277,17 +234,19 @@ public class Board : MonoBehaviour {
             // create a dot destroy particle then destroy the dot
             GameObject particle = Instantiate(destroyEffect, allDots[x, y].transform.position, Quaternion.identity);
             Destroy(particle, particleLifetime); 
-            Destroy(allDots[x, y]); 
+            if (allDots[x, y] != null) {
+                Destroy(allDots[x, y]); 
+            }
             allDots[x, y] = null; 
         }
     }
 
     /// <summary>Loops through the entire board and destroys matches</summary>
     public void DestroyMatches() {
-        // How many elements are in the matched pieces list from findMatches? 
-        if (findMatches.getCurrentMatches().Count > 3) {
+        if (currentDot != null) {
             findMatches.makeBomb(); 
         }
+        
         findMatches.getCurrentMatches().Clear();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -301,6 +260,7 @@ public class Board : MonoBehaviour {
 
     /// <summary>Makes dots fall when the dot under them is null</summary>
     private IEnumerator DecreaseRowCo() {
+        yield return new WaitForSeconds(refillDelay * 0.5f); 
         int nullCount = 0; 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -314,7 +274,7 @@ public class Board : MonoBehaviour {
             }
             nullCount = 0; 
         }
-        yield return new WaitForSeconds(refillDelay * 0.5f); 
+        yield return new WaitForSeconds(refillDelay); 
 
         StartCoroutine(FillBoardCo()); 
     }
@@ -362,7 +322,7 @@ public class Board : MonoBehaviour {
     /// <summary>If there are still matches on the board, destroy them</summary>
     private IEnumerator FillBoardCo() {
         RefillBoard(); 
-        yield return new WaitForSeconds(refillDelay); 
+        yield return new WaitForSeconds(refillDelay * 0.5f); 
 
         while(MatchesOnBoard()) {
             streakValue ++; 

@@ -8,12 +8,25 @@ public class FindMatches : MonoBehaviour {
     private Board board; 
     [SerializeField] private List<GameObject> currentMatches; 
     private FloatingTextManager floatingTextManager; 
+    private string[] bombText; 
 
     // Start is called before the first frame update
     void Start() {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         floatingTextManager = board.floatingTextManager; 
         currentMatches = new List<GameObject>(); 
+
+        bombText = new string[10];
+        bombText[0] = "Awesome"; 
+        bombText[1] = "Amazing"; 
+        bombText[2] = "Great"; 
+        bombText[3] = "Fantastic"; 
+        bombText[4] = "Stellar"; 
+        bombText[5] = "Brilliant"; 
+        bombText[6] = "Spectacular"; 
+        bombText[7] = "Epic"; 
+        bombText[8] = "Pog"; 
+        bombText[9] = "Cool"; 
     }
 
     public void FindAllMatches() { 
@@ -128,6 +141,9 @@ public class FindMatches : MonoBehaviour {
                 if (dot.isRowBomb()) {
                     dots.Union(getRowDots(i)); 
                 }
+                if (dot.isAdjBomb()) {
+                    dots.Union(getAdjDots(col, i)); 
+                }
                 dots.Add(board.getDot(col, i));  
                 dot.setMatched(true);  
             }
@@ -144,6 +160,9 @@ public class FindMatches : MonoBehaviour {
                 if (dot.isColBomb()) {
                     dots.Union(getColDots(i)); 
                 }
+                if (dot.isAdjBomb()) {
+                    dots.Union(getAdjDots(i, row)); 
+                }
                 dots.Add(board.getDot(i, row)); 
                 dot.setMatched(true);  
             }
@@ -159,8 +178,15 @@ public class FindMatches : MonoBehaviour {
             for (int j = y - 1; j <= y + 1; j++) {
                 if (i >= 0 && i < board.getWidth() && j >= 0 && j < board.getHeight()) {
                     if (board.getDot(i, j) != null) {
+                        Dot dot = board.getDot(i, j).GetComponent<Dot>(); 
+                        if (dot.isColBomb() && !dot.isMatched()) {
+                            dots.Union(getColDots(i)); 
+                        }
+                        if (dot.isRowBomb() && !dot.isMatched()) {
+                            dots.Union(getRowDots(j)); 
+                        }
                         dots.Add(board.getDot(i, j)); 
-                        board.getDot(i, j).GetComponent<Dot>().setMatched(true); 
+                        dot.setMatched(true); 
                     }
                 }
             }
@@ -184,138 +210,183 @@ public class FindMatches : MonoBehaviour {
 
 
     /// <summary>returns true if there are 5 in a row or column, else false (like a T-shape or L-shape match)</summary>
-    private bool colRowMatch() {
-        int col = 0; 
-        int row = 0; 
-        Dot first = currentMatches[0].GetComponent<Dot>(); 
-        if (first != null) {
-            foreach (GameObject currentDot in currentMatches) {
-                Dot dot = currentDot.GetComponent<Dot>(); 
-                if (dot.getY() == first.getY()){
-                    row++; 
-                }
-                if(dot.getX() == first.getX()) {
-                    col++; 
-                }
+    private int colRowMatch() {
+        // Make a copy of currentMatches 
+        List<GameObject> matchCopy = new List<GameObject>(); 
+        Dot currentDot = board.getCurrentDot(); 
+        // Make sure the copy contains the correct matches (current vs other Dot)
+        if (currentDot.getOtherDot() != null) {
+            List<GameObject> thisMatches = new List<GameObject>(getCurrentMatches().FindAll(x => x.tag == currentDot.tag));
+            List<GameObject> otherMatches = new List<GameObject>(getCurrentMatches().FindAll(x => x.tag == currentDot.getOtherDot().GetComponent<Dot>().tag));
+            if (thisMatches.Count > otherMatches.Count) {
+                Debug.Log("Matches for currentDot"); 
+                matchCopy = thisMatches; 
+            }
+            else if (otherMatches.Count > thisMatches.Count) {
+                Debug.Log("Matches for otherDot"); 
+                matchCopy = otherMatches; 
             }
         }
-        Debug.Log("col: " + col + " | row: " + row); 
-        return (col == 5 || row == 5); // returns true if there are 5 in a row or column 
+        else {
+            Debug.Log("otherDot not found"); 
+            matchCopy = new List<GameObject>(getCurrentMatches().FindAll(x => x.tag == currentDot.tag)); 
+        }
+
+        // Cycle through all of matchCopy and decide if a bomb needs to be made 
+        for (int i = 0; i < matchCopy.Count; i++) {
+            // get this dot 
+            Dot thisDot = matchCopy[i].GetComponent<Dot>(); 
+            int col = thisDot.getX();
+            int row = thisDot.getY(); 
+            int colMatch = 0; 
+            int rowMatch = 0; 
+            // cycle through rest of the dots 
+            for (int j = 0; j < matchCopy.Count; j++) {
+                // store other dot 
+                Dot nextDot = matchCopy[j].GetComponent<Dot>(); 
+                if (nextDot != thisDot) {
+                    if (nextDot.getX() == col && thisDot.CompareTag(nextDot.tag)) {
+                        colMatch++; 
+                    }
+                    if (nextDot.getY() == row && thisDot.CompareTag(nextDot.tag)) {
+                        rowMatch++; 
+                    }
+                }
+            } 
+
+            if (colMatch == 4 || rowMatch == 4) {
+                return 1; // color bomb
+            }
+            if (colMatch == 2 && rowMatch == 2) {
+                return 2; // adjacent bomb
+            }
+            if (colMatch == 3 || rowMatch == 3) {
+                return 3; // col or row bomb
+            }
+        }
+
+        return 0; 
     }
 
     /// <summary>When bomb is needed, make a bomb here.</summary>
     public void makeBomb() {
-        int matches = getCurrentMatches().FindAll(x => x.tag == board.getCurrentDot().tag).Count; 
-        if (matches == 4 || matches == 7) {
-            // make a col/row bomb
-            int typeOfBomb = Random.Range(0, 100); 
-            if (typeOfBomb < 50) {
-                // Make a row bomb
-                if (board.getCurrentDot() != null) {
-                    if (board.getCurrentDot().isMatched()) {
-                        if (!board.getCurrentDot().isRowBomb() && !board.getCurrentDot().isColBomb()){
-                            board.getCurrentDot().setMatched(false); 
-                            board.getCurrentDot().makeRowBomb(); 
-                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
-                            Debug.Log("Row bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (board.getCurrentDot().getOtherDot() != null) {
-                        Dot otherDot = board.getCurrentDot().getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeRowBomb(); 
-                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
-                                Debug.Log("Row bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                // Make a col bomb 
-                if (board.getCurrentDot() != null) {
-                    if (board.getCurrentDot().isMatched()) {
-                        if (!board.getCurrentDot().isRowBomb() && !board.getCurrentDot().isColBomb()){
-                            board.getCurrentDot().setMatched(false); 
-                            board.getCurrentDot().makeColBomb(); 
-                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
-                            Debug.Log("Column bomb generatd");
-                        }
-                    }
-                    // then, is other dot matched?
-                    else if (board.getCurrentDot().getOtherDot() != null) {
-                        Dot otherDot = board.getCurrentDot().getOtherDot().GetComponent<Dot>(); 
-                        if (otherDot.isMatched()) {
-                            if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
-                                otherDot.setMatched(false); 
-                                otherDot.makeColBomb(); 
-                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
-                                Debug.Log("Column bomb generatd");
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (matches == 5 || matches == 7) {
-            // make a adj/color bomb 
-            if (this.colRowMatch()) {
-                // make a color bomb
-                // is current dot matched? 
-                if (board.getCurrentDot() != null) {
-                    if (board.getCurrentDot().isMatched()) {
-                        if (!board.getCurrentDot().isColorBomb()){
-                            board.getCurrentDot().setMatched(false); 
-                            board.getCurrentDot().makeColorBomb(); 
-                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
+        Dot currentDot = board.getCurrentDot(); 
+        int matches = getCurrentMatches().Count; 
+
+        if (matches > 3) {
+            // type of match
+            int typeOfBomb = colRowMatch(); 
+            if (typeOfBomb == 1) {
+                // color bomb 
+                if (currentDot != null) {
+                    if (currentDot.isMatched()) {
+                        if (!currentDot.isColorBomb()){
+                            currentDot.setMatched(false); 
+                            currentDot.makeColorBomb(); 
+                            floatingTextMessage(); 
                             Debug.Log("Color bomb generatd");
                         }
                     }
                     // then, is other dot matched?
-                    else if (board.getCurrentDot().getOtherDot() != null) {
-                        Dot otherDot = board.getCurrentDot().getOtherDot().GetComponent<Dot>(); 
+                    else if (currentDot.getOtherDot() != null) {
+                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
                         if (otherDot.isMatched()) {
                             if (!otherDot.isColorBomb()){
                                 otherDot.setMatched(false); 
                                 otherDot.makeColorBomb(); 
-                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
+                                floatingTextMessage(); 
                                 Debug.Log("Color bomb generatd");
                             }
                         }
                     }
                 }
             }
-            else {
-                // make an adjacent bomb
+            else if (typeOfBomb == 2) {
+                // adjacent bomb
                 // is current dot matched? 
-                if (board.getCurrentDot() != null) {
-                    if (board.getCurrentDot().isMatched()) {
-                        if (!board.getCurrentDot().isAdjBomb()){
-                            board.getCurrentDot().setMatched(false); 
-                            board.getCurrentDot().makeAdjBomb(); 
-                            floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
+                if (currentDot != null) {
+                    if (currentDot.isMatched()) {
+                        if (!currentDot.isAdjBomb()){
+                            currentDot.setMatched(false); 
+                            currentDot.makeAdjBomb(); 
+                            floatingTextMessage(); 
                             Debug.Log("Adjacent bomb generatd");
                         }
                     }
                     // then, is other dot matched?
-                    else if (board.getCurrentDot().getOtherDot() != null) {
-                        Dot otherDot = board.getCurrentDot().getOtherDot().GetComponent<Dot>(); 
+                    else if (currentDot.getOtherDot() != null) {
+                        Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
                         if (otherDot.isMatched()) {
                             if (!otherDot.isAdjBomb()){
                                 otherDot.setMatched(false); 
                                 otherDot.makeAdjBomb(); 
-                                floatingTextManager.Show("Awesome!", 25, Color.white, new Vector3(otherDot.gameObject.transform.position.x, otherDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f); 
+                                floatingTextMessage(); 
                                 Debug.Log("Adjacent bomb generatd");
                             }
                         }
                     }
-                } 
+                }
+            }
+            else if (typeOfBomb == 3) {
+                // row or col bomb
+                int colRow = Random.Range(0, 100); 
+                if (colRow < 50) {
+                    // Make a row bomb
+                    if (currentDot != null) {
+                        if (currentDot.isMatched()) {
+                            if (!currentDot.isRowBomb() && !currentDot.isColBomb()){
+                                currentDot.setMatched(false); 
+                                currentDot.makeRowBomb(); 
+                                floatingTextMessage(); 
+                                Debug.Log("Row bomb generatd");
+                            }
+                        }
+                        // then, is other dot matched?
+                        else if (currentDot.getOtherDot() != null) {
+                            Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
+                            if (otherDot.isMatched()) {
+                                if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
+                                    otherDot.setMatched(false); 
+                                    otherDot.makeRowBomb(); 
+                                    floatingTextMessage(); 
+                                    Debug.Log("Row bomb generatd");
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    // Make a col bomb 
+                    if (currentDot != null) {
+                        if (currentDot.isMatched()) {
+                            if (!currentDot.isRowBomb() && !currentDot.isColBomb()){
+                                currentDot.setMatched(false); 
+                                currentDot.makeColBomb(); 
+                                floatingTextMessage(); 
+                                Debug.Log("Column bomb generatd");
+                            }
+                        }
+                        // then, is other dot matched?
+                        else if (currentDot.getOtherDot() != null) {
+                            Dot otherDot = currentDot.getOtherDot().GetComponent<Dot>(); 
+                            if (otherDot.isMatched()) {
+                                if (!otherDot.isRowBomb() && !otherDot.isColBomb()){
+                                    otherDot.setMatched(false); 
+                                    otherDot.makeColBomb(); 
+                                    floatingTextMessage(); 
+                                    Debug.Log("Column bomb generatd");
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
 
+    private void floatingTextMessage() {
+        int message = Random.Range(0, bombText.Length); 
+        floatingTextManager.Show(bombText[message] + "!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f);
     }
 
     private bool ChekcForMatches() {
