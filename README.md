@@ -27,11 +27,11 @@ These are technically debugging tools but I left them in here as cheat-codes/eas
 
 * "s" to shuffle the board
 * bomb commands (turns the piece the mouse is hovering over into said bomb)
-** "c" for color bomb
-** "a" for adjacent bomb
-** right or left arrow key for row bomb
-** up or down arrow key for col bomb 
-** right-click to unmake bomb 
+    * "c" for color bomb
+    * "a" for adjacent bomb
+    * right or left arrow key for row bomb
+    * up or down arrow key for col bomb 
+    * right-click to unmake bomb 
 
 </details>
 
