@@ -39,4 +39,4 @@ These are technically debugging tools but I left them in here as cheat-codes/eas
 
 All art used in this game are either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections 
 
-All art credit can be found in the file [artSources.md](https://pyrrhicshadow.github.io/Another-Match-3/Assets/Art/artSources.md) 
+All art credit can be found in the file [artSources.md](https://pyrrhicshadow.github.io/Another-Match-3/Assets/Art/artSources) 
