@@ -52,6 +52,7 @@ public class Board : MonoBehaviour {
     [SerializeField] private GameObject tilePrefab; 
     [SerializeField] private GameObject breakableTilePrefab; 
     [SerializeField] private GameObject lockedTilePrefab; 
+    [SerializeField] private GameObject blockingtilePrefab; 
     [SerializeField] private GameObject destroyEffect; 
     [SerializeField] private float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 

@@ -38,15 +38,15 @@ MonoBehaviour:
   scoreGoal: 4
   backgroundColor: {r: 0.3137255, g: 0.1294118, b: 0.1764706, a: 1}
   levelGoals:
-  - numNeeded: 0
+  - numNeeded: 6
     goalSprite: {fileID: -337174777, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: tourmaline
-  - numNeeded: 0
+  - numNeeded: 6
     goalSprite: {fileID: 1611978529, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: diamond
-  - numNeeded: 0
+  - numNeeded: 6
     goalSprite: {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: pearl

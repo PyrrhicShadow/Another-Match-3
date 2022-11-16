@@ -11,6 +11,7 @@ public class MenuController : MonoBehaviour {
     private int lvl; 
 
     [Header("Animators")]
+    [SerializeField] private GameObject menu; 
     [SerializeField] protected Animator startAnim;
     [SerializeField] protected Animator endAnim; 
     [SerializeField] protected Animator winAnim;  
@@ -19,7 +20,10 @@ public class MenuController : MonoBehaviour {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         gameData = FindObjectOfType<GameData>(); 
         lvl = PlayerPrefs.GetInt("CurrentLevel", 0); 
-    }
+        if (menu != null) {
+            menu.SetActive(true); 
+        }
+    } 
 
     /// <summary>button to start the current game</summar>
     public void buttonOK() {

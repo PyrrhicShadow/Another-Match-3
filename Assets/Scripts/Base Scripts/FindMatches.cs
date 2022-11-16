@@ -34,7 +34,6 @@ public class FindMatches : MonoBehaviour {
     }
 
     private IEnumerator FindAllMatchesCo() {
-        //yield return new WaitForSeconds(0.2f); 
         
         for (int i = 0; i < board.getWidth(); i++) {
             for (int j = 0; j < board.getHeight(); j++) {
@@ -73,7 +72,7 @@ public class FindMatches : MonoBehaviour {
                 }
             }
         }
-        yield return null; 
+        yield return new WaitForEndOfFrame(); 
     }
 
     // Adds match-3 to currentMatches
