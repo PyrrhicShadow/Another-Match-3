@@ -34,9 +34,8 @@ public class FindMatches : MonoBehaviour {
     }
 
     private IEnumerator FindAllMatchesCo() {
-        yield return new WaitForSeconds(0.2f); 
-        //yield return null; 
-
+        //yield return new WaitForSeconds(0.2f); 
+        
         for (int i = 0; i < board.getWidth(); i++) {
             for (int j = 0; j < board.getHeight(); j++) {
                 GameObject currentDot = board.getDot(i, j); 
@@ -74,6 +73,7 @@ public class FindMatches : MonoBehaviour {
                 }
             }
         }
+        yield return null; 
     }
 
     // Adds row matches to currentMatches

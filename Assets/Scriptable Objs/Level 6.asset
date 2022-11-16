@@ -48,4 +48,5 @@ MonoBehaviour:
     gameType: 0
     counter: 100
   flavorText:
-  - it called to him unapologetically
+  - it called to him
+  - unapologetically
