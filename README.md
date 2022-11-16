@@ -1,6 +1,6 @@
-# Match-3-Taft
+# Another Match 3
 
-A simple match-3 game created using Mister Taft Creates tutorial on [YouTube](https://youtube.com/playlist?list=PL4vbr3u7UKWrxEz75MqmTDd899cYAvQ_B).
+A simple match-3 game by Pyrrhic Silva created using Mister Taft Creates's tutorial series on [YouTube](https://youtube.com/playlist?list=PL4vbr3u7UKWrxEz75MqmTDd899cYAvQ_B).
 
 Warning: Do not play if you are easily frightened or at 3AM while your housemates are sleeping.
 
