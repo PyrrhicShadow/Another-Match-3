@@ -8,16 +8,14 @@ public enum GameState {
 }
 
 public enum TileType {
-    breakable, blank, normal 
+    breakable, blank, locked, blocking, normal 
 }
 
 [System.Serializable]
 public class Tile { 
     public int x; 
     public int y; 
-    public TileType tile; 
-
-
+    public TileType tile;
 }
 
 public class Board : MonoBehaviour {
@@ -48,6 +46,8 @@ public class Board : MonoBehaviour {
     private List<Color> moveColors; 
     [SerializeField] private Tile[] boardLayout; 
     [SerializeField] private BackgroundTile[,] breakableTiles; 
+    [SerializeField] private bool[,] blankSpaces; 
+    [SerializeField] private bool[,] blockingTiles; 
     [SerializeField] private GameObject tilePrefab; 
     [SerializeField] private GameObject breakableTilePrefab; 
     [SerializeField] private GameObject destroyEffect; 
@@ -85,6 +85,8 @@ public class Board : MonoBehaviour {
         allTiles = new BackgroundTile[width, height]; 
         allDots = new GameObject[width, height]; 
         breakableTiles = new BackgroundTile[width, height]; 
+        blankSpaces = new bool[width, height]; 
+        blockingTiles = new bool[width, height]; 
 
         // peer objects
         findMatches = gameObject.GetComponent<FindMatches>(); 
@@ -106,36 +108,42 @@ public class Board : MonoBehaviour {
     /// <summary>Creates board, tiles, and dots on board </summary>
     private void SetUp() {
 
+        // put blank tiles in place
+        GenerateBlankTiles(); 
+
         // set up board
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                Vector2 tempPos = new Vector2(i, j); 
-                // create a backgroundTile
-                GameObject backgroundTile = Instantiate(tilePrefab, tempPos, Quaternion.identity); 
-                backgroundTile.transform.parent = this.transform; 
-                backgroundTile.name = "tile (" + i + ", " + j + ")"; 
+                if (!blankSpaces[i, j] && !blockingTiles[i, j]) {
+                    Vector2 tempPos = new Vector2(i, j); 
+                    // create a backgroundTile
+                    GameObject backgroundTile = Instantiate(tilePrefab, tempPos, Quaternion.identity); 
+                    backgroundTile.transform.parent = this.transform; 
+                    backgroundTile.name = "tile (" + i + ", " + j + ")"; 
 
-                // create a dot, pick a random type, check for matches, and add it to the array 
-                tempPos = new Vector2(i, j + offset); 
-                int dotToUse = Random.Range(0, dots.Length);
-                int maxIterations = 0; 
-                while(MatchesAt(i, j, dots[dotToUse]) && maxIterations < 100) {
-                    dotToUse = Random.Range(0, dots.Length);
-                    maxIterations++; 
-                }
-                maxIterations = 0; 
+                    // create a dot, pick a random type, check for matches, and add it to the array 
+                    tempPos = new Vector2(i, j + offset); 
+                    int dotToUse = Random.Range(0, dots.Length);
+                    int maxIterations = 0; 
+                    while(MatchesAt(i, j, dots[dotToUse]) && maxIterations < 100) {
+                        dotToUse = Random.Range(0, dots.Length);
+                        maxIterations++; 
+                    }
+                    maxIterations = 0; 
 
-                GameObject dotObj = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
-                Dot dot = dotObj.GetComponent<Dot>(); 
-                dot.setX(i); 
-                dot.setY(j); 
-                dot.updatePrevXY(); 
-                dotObj.transform.parent = this.transform; 
-                //dot.name = "dot (" + i + ", " + j + ")";
-                allDots[i, j] = dotObj; 
+                    GameObject dotObj = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
+                    Dot dot = dotObj.GetComponent<Dot>(); 
+                    dot.setX(i); 
+                    dot.setY(j); 
+                    dot.updatePrevXY(); 
+                    dotObj.transform.parent = this.transform; 
+                    //dot.name = "dot (" + i + ", " + j + ")";
+                    allDots[i, j] = dotObj;
+                } 
             }
         }
-        GenerateBlankTiles(); 
+
+        // place breakable background tiles
         GenerateBreakableTiles(); 
     }
 
@@ -151,7 +159,7 @@ public class Board : MonoBehaviour {
         }
 
         if (Input.GetKeyDown("s")) {
-            ShuffleBoard();
+            StartCoroutine(ShuffleBoardCo());
         }
     }
 
@@ -172,6 +180,11 @@ public class Board : MonoBehaviour {
 
     private void GenerateBlankTiles() {
         // generate blank tiles
+        for (int i = 0; i < boardLayout.Length; i++) {
+            if (boardLayout[i].tile == TileType.blank) {
+                blankSpaces[boardLayout[i].x, boardLayout[i].y] = true; 
+            }
+        }
     }
 
     /// <summary>Returns true if adding this dot in this position would generate a match</summary>
@@ -333,7 +346,7 @@ public class Board : MonoBehaviour {
 
         if (isDeadLocked()) {
             Debug.Log("Deadlocked!"); 
-            ShuffleBoard(); 
+            StartCoroutine(ShuffleBoardCo()); 
         }
 
         yield return new WaitForSeconds(refillDelay); 
@@ -344,10 +357,12 @@ public class Board : MonoBehaviour {
     }
 
     public void SwitchPieces(int x, int y, Vector2 dir) {
-        // take first piece and save it in holder 
+        // take other piece and save it in holder 
         GameObject holder = allDots[x + (int)dir.x, y + (int)dir.y] as GameObject; 
-        allDots[x + (int)dir.x, y + (int)dir.y] = allDots[x, y];
-        allDots[x, y] = holder; 
+        if (holder.GetComponent<Dot>() != null) {
+            allDots[x + (int)dir.x, y + (int)dir.y] = allDots[x, y];
+            allDots[x, y] = holder; 
+        }
     }
 
     private bool isDeadLocked() {
@@ -370,7 +385,8 @@ public class Board : MonoBehaviour {
     }
 
     /// <summary>Records every piece on the board, randomly suffles them, and then, if deadlocked, calls ShuffleBoard() again.</summary>
-    public void ShuffleBoard() {
+    private IEnumerator ShuffleBoardCo() {
+        yield return new WaitForSeconds(refillDelay); 
         // Create a list of dots on the board 
         List<GameObject> newBoard = new List<GameObject>(); 
 
@@ -383,31 +399,35 @@ public class Board : MonoBehaviour {
             }
         }
 
+        yield return new WaitForSeconds(refillDelay); 
+
         //for ever spot on the board . . . 
         for (int k = 0; k < width; k++) {
             for (int l = 0; l < height; l++) {
-                // pick random number (dot)
-                int dotToUse = Random.Range(0, newBoard.Count); 
-                // Make sure using this dot here doesn't create a match 
-                int maxIterations = 0; 
-                while(MatchesAt(k, l, newBoard[dotToUse]) && maxIterations < 100) {
-                    dotToUse = Random.Range(0, newBoard.Count);
-                    maxIterations++; 
+                if (!blankSpaces[k, l] && !blockingTiles[k, l]) {
+                    // pick random number (dot)
+                    int dotToUse = Random.Range(0, newBoard.Count); 
+                    // Make sure using this dot here doesn't create a match 
+                    int maxIterations = 0; 
+                    while(MatchesAt(k, l, newBoard[dotToUse]) && maxIterations < 100) {
+                        dotToUse = Random.Range(0, newBoard.Count);
+                        maxIterations++; 
+                    }
+                    maxIterations = 0; 
+                    // assign new x and y for dot
+                    newBoard[dotToUse].GetComponent<Dot>().setX(k); 
+                    newBoard[dotToUse].GetComponent<Dot>().setY(l); 
+                    // put new dot on its place on the board
+                    allDots[k, l] = newBoard[dotToUse]; 
+                    // remove dot from pool of unassigned dots
+                    newBoard.Remove(newBoard[dotToUse]); 
                 }
-                maxIterations = 0; 
-                // assign new x and y for dot
-                newBoard[dotToUse].GetComponent<Dot>().setX(k); 
-                newBoard[dotToUse].GetComponent<Dot>().setY(l); 
-                // put new dot on its place on the board
-                allDots[k, l] = newBoard[dotToUse]; 
-                // remove dot from pool of unassigned dots
-                newBoard.Remove(newBoard[dotToUse]); 
             }
         }
 
         // check for deadlock 
         if (isDeadLocked()) {
-            ShuffleBoard(); 
+            StartCoroutine(ShuffleBoardCo()); 
         }
     }
 
