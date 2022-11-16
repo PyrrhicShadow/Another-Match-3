@@ -76,32 +76,6 @@ public class FindMatches : MonoBehaviour {
         yield return null; 
     }
 
-    // Adds row matches to currentMatches
-    private void addRowMatches(Dot dot1, Dot dot2, Dot dot3) {
-        if (dot1.isRowBomb()) {
-            currentMatches.Union(getRowDots(dot1.getY())); 
-        }
-        if (dot2.isRowBomb()) {
-            currentMatches.Union(getRowDots(dot2.getY())); 
-        }
-        if (dot3.isRowBomb()) {
-            currentMatches.Union(getRowDots(dot3.getY())); 
-        }
-    }
-
-    // Adds column matches to currentMatches
-    private void addColMatches(Dot dot1, Dot dot2, Dot dot3) {
-        if (dot1.isColBomb()) {
-            currentMatches.Union(getColDots(dot1.getX())); 
-        }
-        if (dot2.isColBomb()) {
-            currentMatches.Union(getColDots(dot2.getX())); 
-        }
-        if (dot3.isColBomb()) {
-            currentMatches.Union(getColDots(dot3.getX())); 
-        }
-    }
-
     // Adds match-3 to currentMatches
     private void addMatches(GameObject dot1, GameObject dot2, GameObject dot3) {
         if (!currentMatches.Contains(dot1)) {
@@ -117,6 +91,38 @@ public class FindMatches : MonoBehaviour {
         dot1.GetComponent<Dot>().setMatched(true);  
         dot2.GetComponent<Dot>().setMatched(true);  
         dot3.GetComponent<Dot>().setMatched(true); 
+    }
+
+    // Adds row matches to currentMatches
+    private void addRowMatches(Dot dot1, Dot dot2, Dot dot3) {
+        if (dot1.isRowBomb()) {
+            currentMatches.Union(getRowDots(dot1.getY())); 
+            board.BombDmgRow(dot1.getY()); 
+        }
+        if (dot2.isRowBomb()) {
+            currentMatches.Union(getRowDots(dot2.getY())); 
+            board.BombDmgRow(dot2.getY()); 
+        }
+        if (dot3.isRowBomb()) {
+            currentMatches.Union(getRowDots(dot3.getY())); 
+            board.BombDmgRow(dot3.getY()); 
+        }
+    }
+
+    // Adds column matches to currentMatches
+    private void addColMatches(Dot dot1, Dot dot2, Dot dot3) {
+        if (dot1.isColBomb()) {
+            currentMatches.Union(getColDots(dot1.getX())); 
+            board.BombDmgCol(dot1.getX()); 
+        }
+        if (dot2.isColBomb()) {
+            currentMatches.Union(getColDots(dot2.getX())); 
+            board.BombDmgCol(dot2.getX()); 
+        }
+        if (dot3.isColBomb()) {
+            currentMatches.Union(getColDots(dot3.getX())); 
+            board.BombDmgCol(dot3.getX()); 
+        }
     }
 
     // Adds adjacent matches to currentMatches 
@@ -207,7 +213,6 @@ public class FindMatches : MonoBehaviour {
             }
         }
     }
-
 
     /// <summary>returns true if there are 5 in a row or column, else false (like a T-shape or L-shape match)</summary>
     private int colRowMatch() {

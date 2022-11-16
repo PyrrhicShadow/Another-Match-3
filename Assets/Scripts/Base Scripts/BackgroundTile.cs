@@ -30,6 +30,11 @@ public class BackgroundTile : MonoBehaviour
         this.TileDmg(); 
     }
 
+    public void TakeDmg() {
+        hp -= 1; 
+        this.TileDmg(); 
+    }
+
     /// <summary>Takes current sprite alpha and cut it in half</summary>
     private void TileDmg() {
         Color color = sprite.color; 

@@ -47,9 +47,11 @@ public class Board : MonoBehaviour {
     [SerializeField] private Tile[] boardLayout; 
     [SerializeField] private BackgroundTile[,] breakableTiles; 
     [SerializeField] private bool[,] blankSpaces; 
-    [SerializeField] private bool[,] blockingTiles; 
+    [SerializeField] private BackgroundTile[,] lockedTiles; 
+    [SerializeField] private BackgroundTile[,] blockingTiles; 
     [SerializeField] private GameObject tilePrefab; 
     [SerializeField] private GameObject breakableTilePrefab; 
+    [SerializeField] private GameObject lockedTilePrefab; 
     [SerializeField] private GameObject destroyEffect; 
     [SerializeField] private float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 
@@ -86,7 +88,8 @@ public class Board : MonoBehaviour {
         allDots = new GameObject[width, height]; 
         breakableTiles = new BackgroundTile[width, height]; 
         blankSpaces = new bool[width, height]; 
-        blockingTiles = new bool[width, height]; 
+        lockedTiles = new BackgroundTile[width, height]; 
+        blockingTiles = new BackgroundTile[width, height]; 
 
         // peer objects
         findMatches = gameObject.GetComponent<FindMatches>(); 
@@ -145,6 +148,8 @@ public class Board : MonoBehaviour {
 
         // place breakable background tiles
         GenerateBreakableTiles(); 
+        // place locked tiles 
+        GenerateLockedTiles(); 
     }
 
     void Update() {
@@ -173,16 +178,32 @@ public class Board : MonoBehaviour {
                 Vector2 tempPos = new Vector2(boardLayout[i].x, boardLayout[i].y); 
                 GameObject tile = Instantiate(breakableTilePrefab, tempPos, Quaternion.identity);
                 breakableTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>(); 
-                tile.transform.parent = this.transform;  
+                tile.transform.parent = this.transform; 
             }
         }
     }
 
     private void GenerateBlankTiles() {
-        // generate blank tiles
+        // look at all tiles in layout
         for (int i = 0; i < boardLayout.Length; i++) {
+            // if tile is blank
             if (boardLayout[i].tile == TileType.blank) {
+                // generate blank tile
                 blankSpaces[boardLayout[i].x, boardLayout[i].y] = true; 
+            }
+        }
+    }
+
+    private void GenerateLockedTiles() {
+        // look at all tiles in layout 
+        for (int i = 0; i < boardLayout.Length; i++) {
+            // if tile is locked 
+            if (boardLayout[i].tile == TileType.locked) {
+                // create locked tile at that position 
+                Vector2 tempPos = new Vector2(boardLayout[i].x, boardLayout[i].y); 
+                GameObject tile = Instantiate(lockedTilePrefab, tempPos, Quaternion.identity);
+                lockedTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>(); 
+                tile.transform.parent = this.transform; 
             }
         }
     }
@@ -232,6 +253,16 @@ public class Board : MonoBehaviour {
                    breakableTiles[x, y] = null; 
                 }
             }
+
+            // checks if a tile needs to be unlocked, then unlocks it
+            if (lockedTiles[x, y] != null) {
+                lockedTiles[x, y].TakeDmg(1); 
+                if (lockedTiles[x, y].getHp() <= 0) {
+                    lockedTiles[x, y] = null; 
+                }
+            }
+
+            // DamageConcrete(x, y); 
 
             if (scoreManager != null) {
                 // add the broken dot to the score 
@@ -382,6 +413,28 @@ public class Board : MonoBehaviour {
         }
         // is deadlocked
         return true; 
+    }
+
+    public void BombDmgRow(int row) {
+        for (int i = 0; i < width; i++) {
+            if (blockingTiles[i, row].GetComponent<BackgroundTile>() != null) {
+                blockingTiles[i, row].TakeDmg(1);
+                if (blockingTiles[i, row].getHp() <= 0) {
+                    blockingTiles[i, row] = null; 
+                }
+            }
+        }
+    }
+
+    public void BombDmgCol(int col) {
+        for (int j = 0; j < height; j++) {
+            if (blockingTiles[col, j].GetComponent<BackgroundTile>() != null) {
+                blockingTiles[col, j].TakeDmg(1); 
+                if (blockingTiles[col, j].getHp() <= 0) {
+                    blockingTiles[col, j] = null; 
+                }
+            }
+        }
     }
 
     /// <summary>Records every piece on the board, randomly suffles them, and then, if deadlocked, calls ShuffleBoard() again.</summary>
