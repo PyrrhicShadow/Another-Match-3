@@ -25,7 +25,7 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_ProjectLocaleIdentifier:
-    m_Code: fr
+    m_Code: en
   m_PreloadBehavior: 1
   m_InitializeSynchronously: 0
   references:
@@ -43,7 +43,7 @@ MonoBehaviour:
       type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_LocaleId:
-          m_Code: fr
+          m_Code: en
     - rid: 992407481764020227
       type: {class: LocalesProvider, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
     - rid: 992407481764020228
@@ -65,8 +65,8 @@ MonoBehaviour:
           rid: -2
         m_CustomTablePostprocessor:
           rid: -2
-        m_UseFallback: 0
-        m_MissingTranslationState: 1
+        m_UseFallback: 1
+        m_MissingTranslationState: 2
         m_NoTranslationFoundMessage: No translation found for '{key}' in {table.TableCollectionName}
         m_SmartFormat:
           rid: 992407481764020230

@@ -55,4 +55,8 @@ public class SoundManager : MonoBehaviour {
         return soundEffectsOn; 
     }
 
+    public void backgroundMusicVol(float volume) {
+        backgroundMusic.volume = volume; 
+    }
+
 }

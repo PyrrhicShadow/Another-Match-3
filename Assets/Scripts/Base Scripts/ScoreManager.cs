@@ -157,7 +157,7 @@ public class ScoreManager : MonoBehaviour {
 
        _currentStringTable = tableLoading; 
 
-        lvlLabel = _currentStringTable["level_0"].LocalizedValue; 
+        lvlLabel = _currentStringTable["level_:"].LocalizedValue; 
         scoreLabel = _currentStringTable["score"].LocalizedValue; 
 
         SetUpGoals(); 
@@ -186,7 +186,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void SetUpGoals() {
-        levelText.text = lvlLabel + ": " + level; 
+        levelText.text = lvlLabel + " " + level; 
 
         for (int i = 0; i < levelGoals.Length; i++) {
             // create a new goal panel at the goalIntroParent position 
@@ -297,7 +297,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void UpdateScore() {
-        scoreText.text = scoreLabel + ": " + score; 
+        scoreText.text = scoreLabel + " " + score; 
     }
 
     /// <summary>Checks for score and changes background color </summary>

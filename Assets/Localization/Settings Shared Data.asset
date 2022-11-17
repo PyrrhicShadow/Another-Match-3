@@ -13,8 +13,32 @@ MonoBehaviour:
   m_Name: Settings Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Settings
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: fd527a6f91b6a7b4b92b7cd4a824e8f7
+  m_Entries:
+  - m_Id: 6984470528
+    m_Key: music_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32934629376
+    m_Key: effect_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55680339968
+    m_Key: language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 178598612992
+    m_Key: en
+    m_Metadata:
+      m_Items: []
+  - m_Id: 230872223744
+    m_Key: fr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327165054976
+    m_Key: ja
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

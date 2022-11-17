@@ -45,7 +45,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15527796707328
-    m_Localized: 'Objectifs:'
+    m_Localized: 'Objectifs: '
     m_Metadata:
       m_Items: []
   - m_Id: 59536883748864
@@ -53,19 +53,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 59672045195264
-    m_Localized: Score
+    m_Localized: 'Score :'
     m_Metadata:
       m_Items: []
   - m_Id: 59825619636224
-    m_Localized: 'Temps:'
+    m_Localized: 'Temps :'
     m_Metadata:
       m_Items: []
   - m_Id: 59763208392704
-    m_Localized: 'Coups:'
+    m_Localized: 'Coups :'
     m_Metadata:
       m_Items: []
   - m_Id: 62736126873600
-    m_Localized: Rejouer!
+    m_Localized: Rejouer !
     m_Metadata:
       m_Items: []
   - m_Id: 62803202183168
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62839906537472
-    m_Localized: 'Score Final:'
+    m_Localized: 'Score final :'
     m_Metadata:
       m_Items: []
   - m_Id: 63117330386944
@@ -81,11 +81,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 64423637979136
-    m_Localized: "T'as gagn\xE9!"
+    m_Localized: "T'as gagn\xE9 !"
     m_Metadata:
       m_Items: []
   - m_Id: 65712501460992
     m_Localized: Nouveau jeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349305077403648
+    m_Localized: 'Niveau :'
     m_Metadata:
       m_Items: []
   references:

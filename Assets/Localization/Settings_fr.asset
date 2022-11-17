@@ -17,7 +17,31 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: fd527a6f91b6a7b4b92b7cd4a824e8f7, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 55680339968
+    m_Localized: Langue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 178598612992
+    m_Localized: Anglais
+    m_Metadata:
+      m_Items: []
+  - m_Id: 230872223744
+    m_Localized: "Fran\xE7ais"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327165054976
+    m_Localized: Japonais
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6984470528
+    m_Localized: Volume de musique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32934629376
+    m_Localized: Volume des effets
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

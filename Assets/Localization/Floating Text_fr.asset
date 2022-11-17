@@ -19,35 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 898353762304
-    m_Localized: "G\xE9nial"
+    m_Localized: "G\xE9nial "
     m_Metadata:
       m_Items: []
   - m_Id: 975101136896
-    m_Localized: Stellaire
+    m_Localized: 'Stellaire '
     m_Metadata:
       m_Items: []
   - m_Id: 917790167040
-    m_Localized: Incroyable
+    m_Localized: 'Incroyable '
     m_Metadata:
       m_Items: []
   - m_Id: 936282853376
-    m_Localized: Super
+    m_Localized: 'Super '
     m_Metadata:
       m_Items: []
   - m_Id: 952418340864
-    m_Localized: Fantastique
+    m_Localized: 'Fantastique '
     m_Metadata:
       m_Items: []
   - m_Id: 990804611072
-    m_Localized: Lumineux
+    m_Localized: 'Lumineux '
     m_Metadata:
       m_Items: []
   - m_Id: 1005367234560
-    m_Localized: Manifiques
+    m_Localized: 'Manifiques '
     m_Metadata:
       m_Items: []
   - m_Id: 1028020670464
-    m_Localized: Extrodinaire
+    m_Localized: 'Extrodinaire '
     m_Metadata:
       m_Items: []
   references:

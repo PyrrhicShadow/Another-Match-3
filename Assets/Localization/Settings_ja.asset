@@ -10,36 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Settings_en
+  m_Name: Settings_ja
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
+    m_Code: ja
   m_SharedData: {fileID: 11400000, guid: fd527a6f91b6a7b4b92b7cd4a824e8f7, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
   - m_Id: 6984470528
-    m_Localized: Music Volume
-    m_Metadata:
-      m_Items: []
-  - m_Id: 32934629376
-    m_Localized: Effect Volume
-    m_Metadata:
-      m_Items: []
-  - m_Id: 55680339968
-    m_Localized: Language
-    m_Metadata:
-      m_Items: []
-  - m_Id: 178598612992
-    m_Localized: English
-    m_Metadata:
-      m_Items: []
-  - m_Id: 230872223744
-    m_Localized: French
-    m_Metadata:
-      m_Items: []
-  - m_Id: 327165054976
-    m_Localized: Japanese
+    m_Localized: 
     m_Metadata:
       m_Items: []
   references:

@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 59672045195264
-    m_Localized: Score
+    m_Localized: 'Score:'
     m_Metadata:
       m_Items: []
   - m_Id: 59763208392704
@@ -86,6 +86,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 65712501460992
     m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349305077403648
+    m_Localized: 'Level:'
     m_Metadata:
       m_Items: []
   references:
