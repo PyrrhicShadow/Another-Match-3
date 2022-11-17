@@ -17,6 +17,8 @@ Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main
 * Save system
 * Music and sounds! (sorta) 
 * Beautiful royalty-free art (see Credits for sources)
+* Available in English and French 
+    * more languages on request and with help
 
 ## Controls 
 
@@ -43,5 +45,7 @@ These are technically debugging tools but I left them in here as cheat-codes/eas
 ## Credits 
 
 All art used in this game are either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections. 
+
+The French localization was done by PyrrhicSilva. Report any errors [here](https://forms.gle/twwYvKxhxmNrm1hcA).
 
 All art credit can be found in the [Art Sources](https://pyrrhicshadow.github.io/Another-Match-3/Assets/Art/artSources) file.

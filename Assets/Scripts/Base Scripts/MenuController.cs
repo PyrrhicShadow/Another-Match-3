@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 using UnityEngine.SceneManagement; 
 
 public class MenuController : MonoBehaviour {
@@ -14,11 +15,16 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private GameObject menu; 
     [SerializeField] protected Animator startAnim;
     [SerializeField] protected Animator endAnim; 
-    [SerializeField] protected Animator winAnim;  
+    [SerializeField] protected Animator winAnim; 
+
+    [Header("Pause Manager")]
+    [SerializeField] private GameObject pauseMenu; 
+    [SerializeField] private bool paused = false; 
 
     protected void Start() {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         gameData = FindObjectOfType<GameData>(); 
+        pauseMenu.SetActive(false); 
         lvl = PlayerPrefs.GetInt("CurrentLevel", 0); 
         if (menu != null) {
             menu.SetActive(true); 
@@ -78,7 +84,7 @@ public class MenuController : MonoBehaviour {
         yield return new WaitForSeconds(1f); 
         // if this is the last level, play winAnim
         if (board.getLvl() == (board.world.levels[board.world.levels.Length - 1]) && winAnim != null) {
-            board.soundManager.backgroundMusicOn(false); 
+            board.soundManager.setBackgroundMusic(false); 
             winAnim.SetBool("end", true); 
             board.soundManager.PlayJumpNoise(); 
         }
@@ -112,5 +118,31 @@ public class MenuController : MonoBehaviour {
         board.scoreManager.clearLevelGoals(); 
 
         StartCoroutine(GameStartCo()); 
+    }
+
+    /*****     PauseManager     *****/
+
+    public void PauseGame() {
+        paused = !paused; 
+    }
+
+    private void Update() {
+        if (paused && !pauseMenu.activeInHierarchy) {
+            pauseMenu.SetActive(true); 
+            board.currentState = GameState.pause; 
+        }
+        if (!paused && pauseMenu.activeInHierarchy) {
+            pauseMenu.SetActive(false); 
+            board.currentState = GameState.move; 
+        }
+    }
+
+    public void Sounds() {
+        if (board.soundManager.isBackgroundMusicOn()) {
+            board.soundManager.setBackgroundMusic(false); 
+        }
+        else {
+            board.soundManager.setBackgroundMusic(true); 
+        }
     }
 }

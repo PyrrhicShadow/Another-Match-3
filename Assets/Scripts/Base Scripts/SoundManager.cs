@@ -9,32 +9,50 @@ public class SoundManager : MonoBehaviour {
     [SerializeField] private AudioSource loseNoise; 
     [SerializeField] private AudioSource jumpNoise; 
     [SerializeField] private AudioSource backgroundMusic; 
-    // private bool backgroundMusicOn = true; 
-
+    private bool backgroundMusicOn = true; 
+    private bool soundEffectsOn = true; 
 
     public void PlayDestroyNoise() {
-        destroyNoise.Play(); 
+        if (soundEffectsOn) {
+            destroyNoise.Play(); 
+        }
     }
     
     public void PlayWinNoise() {
-        winNoise.Play(); 
+        if (soundEffectsOn) {
+            winNoise.Play(); 
+        }
     }
 
     public void PlayLoseNoise() {
-        loseNoise.Play(); 
+        if (soundEffectsOn) {
+            loseNoise.Play(); 
+        }
     }
 
     public void PlayJumpNoise() {
         jumpNoise.Play(); 
     }
 
-    public void backgroundMusicOn(bool on) {
+    public void setBackgroundMusic(bool on) {
         if (on) {
             backgroundMusic.Pause(); 
         }
         else {
             backgroundMusic.UnPause(); 
         }
+    }
+
+    public bool isBackgroundMusicOn() {
+        return backgroundMusicOn; 
+    }
+
+    public void setSoundEffects(bool on) {
+        soundEffectsOn = on; 
+    }
+
+    public bool isSoundEffectsOn() {
+        return soundEffectsOn; 
     }
 
 }
