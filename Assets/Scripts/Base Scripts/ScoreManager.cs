@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
+using UnityEngine.Localization; 
+using UnityEngine.Localization.Tables; 
 
 [System.Serializable]
 public class BlankGoal {
@@ -107,6 +109,12 @@ public class ScoreManager : MonoBehaviour {
     private int counter; 
     private float timer; 
 
+    [Header("Localization")] 
+    [SerializeField] private LocalizedStringTable _localizedStringTable;
+    private StringTable _currentStringTable;
+    private string lvlLabel; 
+    private string scoreLabel; 
+
     // Start is called before the first frame update
     void Start() {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
@@ -139,6 +147,19 @@ public class ScoreManager : MonoBehaviour {
             reqs = myLvl.reqs; 
         }
 
+        StartCoroutine(SetUpCo()); 
+    }
+
+    private IEnumerator SetUpCo() {
+        var tableLoading = _localizedStringTable.GetTable(); 
+
+        yield return tableLoading; 
+
+       _currentStringTable = tableLoading; 
+
+        lvlLabel = _currentStringTable["level_0"].LocalizedValue; 
+        scoreLabel = _currentStringTable["score"].LocalizedValue; 
+
         SetUpGoals(); 
         SetUpReqs(); 
     }
@@ -165,7 +186,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void SetUpGoals() {
-        levelText.text = "Level: " + level; 
+        levelText.text = lvlLabel + ": " + level; 
 
         for (int i = 0; i < levelGoals.Length; i++) {
             // create a new goal panel at the goalIntroParent position 
@@ -276,7 +297,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void UpdateScore() {
-        scoreText.text = "Score: " + score; 
+        scoreText.text = scoreLabel + ": " + score; 
     }
 
     /// <summary>Checks for score and changes background color </summary>

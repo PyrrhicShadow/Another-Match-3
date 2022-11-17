@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 using UnityEngine.SceneManagement; 
+using UnityEngine.Localization; 
+using UnityEngine.Localization.Tables; 
 
 public class ConfirmPanel : MonoBehaviour {
 
@@ -18,11 +20,19 @@ public class ConfirmPanel : MonoBehaviour {
     [SerializeField] Image[] starImages; 
     [SerializeField] Text highScoreText; 
     [SerializeField] Text flavorText; 
+    [SerializeField] Text lvlNumText; 
+
+    [Header("Localization")] 
+    [SerializeField] private LocalizedStringTable _localizedStringTable;
+    private StringTable _currentStringTable;
+    private string lvlLabel; 
 
     // Start is called before the first frame update
     private void Start() {
         gameData = FindObjectOfType<GameData>(); 
 
+        lvl = PlayerPrefs.GetInt("CurrentLevel", 0);
+        StartCoroutine(SetUpCo()); 
         LoadData(); 
         Cancel(); 
     }
@@ -30,9 +40,27 @@ public class ConfirmPanel : MonoBehaviour {
     void OnEnable() {
         gameData = FindObjectOfType<GameData>(); 
         LoadData(); 
+        StartCoroutine(SetUpCo()); 
+    }
+
+    private IEnumerator SetUpCo() {
+        var tableLoading = _localizedStringTable.GetTable(); 
+
+        yield return tableLoading; 
+
+       _currentStringTable = tableLoading; 
+
+        lvlLabel = _currentStringTable["level_0"].LocalizedValue; 
+        // Debug.Log("Level translated: " + lvlLabel); 
+
+        UpdateLevelNum(); 
         UpdateHighScore(); 
         ActivateStars(); 
-        LoadFlavorText(); 
+        LoadFlavorText();  
+    }
+
+    private void UpdateLevelNum() {
+        lvlNumText.text = lvlLabel + " " + (lvl + 1).ToString(); 
     }
 
     private void ActivateStars() {
@@ -50,12 +78,12 @@ public class ConfirmPanel : MonoBehaviour {
 
     private void LoadFlavorText() {
         if (world != null) {
-            //flavorText.text = world.levels[lvl - 1].flavorText; 
+            
             string tempFlavor = ""; 
-            for (int i = 0; i < world.levels[lvl - 1].flavorText.Length - 1; i++) {
-                tempFlavor = tempFlavor + world.levels[lvl - 1].flavorText[i] + "\n"; 
+            for (int i = 0; i < world.levels[lvl].flavorText.Length - 1; i++) {
+                tempFlavor = tempFlavor + world.levels[lvl].flavorText[i] + "\n"; 
             }
-            tempFlavor = tempFlavor + world.levels[lvl - 1].flavorText[world.levels[lvl - 1].flavorText.Length - 1];
+            tempFlavor = tempFlavor + world.levels[lvl].flavorText[world.levels[lvl].flavorText.Length - 1];
             flavorText.text = tempFlavor;  
         }
     }
@@ -63,10 +91,9 @@ public class ConfirmPanel : MonoBehaviour {
     private void LoadData() {
         if (gameData != null) {
             if (lvl <= gameData.saveData.Count()){
-                Debug.Log("Level: " + lvl); 
                 SaveData thisLevel = gameData.saveData; 
-                stars = thisLevel.getStar(lvl - 1); 
-                highScore = thisLevel.getHighScore(lvl - 1); 
+                stars = thisLevel.getStar(lvl); 
+                highScore = thisLevel.getHighScore(lvl); 
             }
             else {
                 Debug.Log("Level not found");
@@ -88,14 +115,8 @@ public class ConfirmPanel : MonoBehaviour {
         this.gameObject.SetActive(false); 
     }
 
-    // public void OnEnable() {
-    //     LoadData(); 
-    //     UpdateHighScore(); 
-    //     ActivateStars(); 
-    // }
-
     public void Play() {
-        PlayerPrefs.SetInt("CurrentLevel", lvl - 1); 
+        PlayerPrefs.SetInt("CurrentLevel", lvl);
         SceneManager.LoadScene(sceneToLoad); 
     }
 

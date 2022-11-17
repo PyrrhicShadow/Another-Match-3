@@ -154,6 +154,11 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
+        if (Input.GetKeyDown("s")) {
+            ShuffleBoard(); 
+            Debug.Log("s"); 
+        }
+
         if (currentState == GameState.move) {
             moveIndicatorImage.color = moveColors[0]; 
         }
@@ -162,10 +167,6 @@ public class Board : MonoBehaviour {
         }
         else {
             moveIndicatorImage.color = moveColors[2]; 
-        }
-
-        if (Input.GetKeyDown("s")) {
-            StartCoroutine(ShuffleBoardCo());
         }
     }
 
@@ -458,7 +459,7 @@ public class Board : MonoBehaviour {
         //for ever spot on the board . . . 
         for (int k = 0; k < width; k++) {
             for (int l = 0; l < height; l++) {
-                if (!blankSpaces[k, l] && !blockingTiles[k, l]) {
+                if (!blankSpaces[k, l] && blockingTiles[k, l] != null) {
                     // pick random number (dot)
                     int dotToUse = Random.Range(0, newBoard.Count); 
                     // Make sure using this dot here doesn't create a match 
@@ -552,5 +553,9 @@ public class Board : MonoBehaviour {
         else {
             return null; 
         }
+    }
+
+    private void ShuffleBoard() {
+        StartCoroutine(ShuffleBoardCo()); 
     }
 }

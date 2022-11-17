@@ -10,9 +10,13 @@ Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main
 
 ## Features
 
-* <s>5 </s>multiple custom levels!
-* Sounds! (sorta) 
-* Beautiful royalty-free art
+* Match 3, 4, 5! 
+* <s>5</s> <s>12</s> multiple custom levels!
+* Both time-based and move-limited levels 
+* Multiple tile-types with different mechanics!
+* Save system
+* Music and sounds! (sorta) 
+* Beautiful royalty-free art (see Credits for sources)
 
 ## Controls 
 
@@ -21,22 +25,23 @@ Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main
 * a number of secret "debug" codes 
 
 <details>
-    <summary><i>Click to view</i></summary>
+    <summary><i>Click for debug codes</i></summary>
 
 These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!
 
-* "s" to shuffle the board
+* "s" key to shuffle the board 
+    * shuffle happens automatically at deadlock, but manual shuffle is helpful if looking for a specific configuration
 * bomb commands (turns the piece the mouse is hovering over into said bomb)
-    * "c" for color bomb
-    * "a" for adjacent bomb
+    * "c" key for color bomb
+    * "a" key for adjacent bomb
     * right or left arrow key for row bomb
     * up or down arrow key for col bomb 
-    * right-click to unmake bomb 
+    * right-mouse to unmake bomb 
 
 </details>
 
 ## Credits 
 
-All art used in this game are either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections 
+All art used in this game are either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections. 
 
-All art credit can be found in the file [artSources.md](https://pyrrhicshadow.github.io/Another-Match-3/Assets/Art/artSources) 
+All art credit can be found in the [Art Sources](https://pyrrhicshadow.github.io/Another-Match-3/Assets/Art/artSources) file.

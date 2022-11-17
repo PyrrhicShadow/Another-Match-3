@@ -33,15 +33,15 @@ public class LevelButton : MonoBehaviour {
 
     private void LoadData() {
         if (gameData != null) {
-            if (gameData.saveData.isActive(lvl - 1)) {
+            if (gameData.saveData.isActive(lvl)) {
                 active = true; 
-                stars = gameData.saveData.getStar(lvl - 1);
+                stars = gameData.saveData.getStar(lvl);
             } 
             else {
                 active = false; 
             }
         } 
-        if (lvl == 1) {
+        if (lvl == 0) {
             active = true; 
         }
     }
@@ -71,7 +71,7 @@ public class LevelButton : MonoBehaviour {
     }
 
     void ShowLevel() {
-        levelText.text = lvl.ToString(); 
+        levelText.text = (lvl + 1).ToString(); 
     }
 
     // Update is called once per frame

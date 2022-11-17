@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq; 
+using UnityEngine.Localization; 
+using UnityEngine.Localization.Tables; 
 
 public class FindMatches : MonoBehaviour {
 
@@ -10,24 +12,38 @@ public class FindMatches : MonoBehaviour {
     private FloatingTextManager floatingTextManager; 
     private string[] bombText; 
 
+    [Header("Localization")] 
+    [SerializeField] private LocalizedStringTable _localizedStringTable;
+    private StringTable _currentStringTable;
+
     // Start is called before the first frame update
     void Start() {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         floatingTextManager = board.floatingTextManager; 
         currentMatches = new List<GameObject>(); 
 
-        bombText = new string[10];
-        bombText[0] = "Awesome"; 
-        bombText[1] = "Amazing"; 
-        bombText[2] = "Great"; 
-        bombText[3] = "Fantastic"; 
-        bombText[4] = "Stellar"; 
-        bombText[5] = "Brilliant"; 
-        bombText[6] = "Spectacular"; 
-        bombText[7] = "Epic"; 
-        bombText[8] = "Pog"; 
-        bombText[9] = "Cool"; 
+        bombText = new string[8];
+        StartCoroutine(BombTextCo()); 
     }
+
+    private IEnumerator BombTextCo() {
+
+        var tableLoading = _localizedStringTable.GetTable(); 
+
+        yield return tableLoading; 
+
+       _currentStringTable = tableLoading; 
+
+        bombText[0] = _currentStringTable["awesome"].LocalizedValue; 
+        bombText[1] = _currentStringTable["amazing"].LocalizedValue; 
+        bombText[2] = _currentStringTable["great"].LocalizedValue; 
+        bombText[3] = _currentStringTable["fantastic"].LocalizedValue; 
+        bombText[4] = _currentStringTable["stellar"].LocalizedValue; 
+        bombText[5] = _currentStringTable["brilliant"].LocalizedValue; 
+        bombText[6] = _currentStringTable["spectacular"].LocalizedValue; 
+        bombText[7] = _currentStringTable["epic"].LocalizedValue; 
+    }
+
 
     public void FindAllMatches() { 
         StartCoroutine(FindAllMatchesCo());  
