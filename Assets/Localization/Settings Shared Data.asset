@@ -39,6 +39,22 @@ MonoBehaviour:
     m_Key: ja
     m_Metadata:
       m_Items: []
+  - m_Id: 356335167115264
+    m_Key: settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357099868426240
+    m_Key: reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360916806701056
+    m_Key: exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362967607447552
+    m_Key: disclaimer
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

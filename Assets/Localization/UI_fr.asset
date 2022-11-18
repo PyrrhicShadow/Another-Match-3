@@ -16,14 +16,12 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: 9f30d329b6b497b40a07947b8d9b60b3, type: 2}
   m_Metadata:
-    m_Items:
-    - rid: 992407481764020269
+    m_Items: []
   m_TableData:
   - m_Id: 105416396800
     m_Localized: Niveau
     m_Metadata:
-      m_Items:
-      - rid: 992407481764020269
+      m_Items: []
   - m_Id: 647840567296
     m_Localized: Retour
     m_Metadata:
@@ -45,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15527796707328
-    m_Localized: 'Objectifs: '
+    m_Localized: 'Objectifs : '
     m_Metadata:
       m_Items: []
   - m_Id: 59536883748864
@@ -94,8 +92,4 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds:
-    - rid: 992407481764020269
-      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
-      data:
-        m_Entries: 00904e8b18000000
+    RefIds: []

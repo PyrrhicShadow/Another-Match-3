@@ -4,7 +4,7 @@ A simple match-3 game by Pyrrhic Silva created using Mister Taft Creates's tutor
 
 Warning: Do not play if you are easily frightened or at 3AM while your housemates are sleeping.
 
-[Try it now!](https://pyrrhicshadow.github.io/Another-Match-3/Builds/Another%20Match%203%20WebGL/anothermatch3.html) 
+[Try it now!](https://pyrrhicshadow.github.io/Another-Match-3/Builds/Another%20Match%203%20WebGL/index.html) 
 
 Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Another%20Match%203%20PC.zip)
 

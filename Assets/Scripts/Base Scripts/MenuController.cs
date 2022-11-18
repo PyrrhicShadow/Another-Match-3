@@ -17,14 +17,9 @@ public class MenuController : MonoBehaviour {
     [SerializeField] protected Animator endAnim; 
     [SerializeField] protected Animator winAnim; 
 
-    [Header("Pause Manager")]
-    [SerializeField] private GameObject pauseMenu; 
-    [SerializeField] private bool paused = false; 
-
     protected void Start() {
         board = GameObject.FindWithTag("board").GetComponent<Board>(); 
         gameData = FindObjectOfType<GameData>(); 
-        pauseMenu.SetActive(false); 
         lvl = PlayerPrefs.GetInt("CurrentLevel", 0); 
         if (menu != null) {
             menu.SetActive(true); 
@@ -120,29 +115,4 @@ public class MenuController : MonoBehaviour {
         StartCoroutine(GameStartCo()); 
     }
 
-    /*****     PauseManager     *****/
-
-    public void PauseGame() {
-        paused = !paused; 
-    }
-
-    private void Update() {
-        if (paused && !pauseMenu.activeInHierarchy) {
-            pauseMenu.SetActive(true); 
-            board.currentState = GameState.pause; 
-        }
-        if (!paused && pauseMenu.activeInHierarchy) {
-            pauseMenu.SetActive(false); 
-            board.currentState = GameState.move; 
-        }
-    }
-
-    public void Sounds() {
-        if (board.soundManager.isBackgroundMusicOn()) {
-            board.soundManager.setBackgroundMusic(false); 
-        }
-        else {
-            board.soundManager.setBackgroundMusic(true); 
-        }
-    }
 }

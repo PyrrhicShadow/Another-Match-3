@@ -42,6 +42,22 @@ MonoBehaviour:
     m_Localized: Japanese
     m_Metadata:
       m_Items: []
+  - m_Id: 356335167115264
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357099868426240
+    m_Localized: Reset Progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360916806701056
+    m_Localized: Exit Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362967607447552
+    m_Localized: Some language settings only apply on reload.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

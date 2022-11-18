@@ -42,6 +42,23 @@ MonoBehaviour:
     m_Localized: Volume des effets
     m_Metadata:
       m_Items: []
+  - m_Id: 356335167115264
+    m_Localized: "Param\xE8tres"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357099868426240
+    m_Localized: "R\xE9initialise"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360916806701056
+    m_Localized: Sortir du niveau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362967607447552
+    m_Localized: "Certains param\xE8tres de langue ne s\u2019appliquent qu\u2019au
+      rechargement."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
