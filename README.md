@@ -18,6 +18,7 @@ Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main
 * Music and sounds! (sorta) 
 * Beautiful royalty-free art (see Credits for sources)
 * Available in English and French 
+    * Japanese and Polish under construction
     * more languages on request and with help
 
 ## Controls 
