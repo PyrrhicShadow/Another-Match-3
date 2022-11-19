@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
-  m_Name: UI
+  m_Name: Floating Text
   m_EditorClassIdentifier: 
-  m_SharedTableData: {fileID: 11400000, guid: 9f30d329b6b497b40a07947b8d9b60b3, type: 2}
+  m_SharedTableData: {fileID: 11400000, guid: 073073c25304d71488daae4444f207eb, type: 2}
   m_Tables:
-  - {fileID: 11400000, guid: f7fe09c5877c1884880df81f67e786d2, type: 2}
-  - {fileID: 11400000, guid: e32ee6ebad087da4497b06ec5efb10fd, type: 2}
-  - {fileID: 11400000, guid: a83537bc72a075342b4832c6a73d50fd, type: 2}
-  - {fileID: 11400000, guid: 8ac57ff5597aca04dbbbbbc267eca535, type: 2}
+  - {fileID: 11400000, guid: b4575385cd5c02b4e92a98f93cda5e25, type: 2}
+  - {fileID: 11400000, guid: 15cda5a910821b84b886b522e3465dc5, type: 2}
+  - {fileID: 11400000, guid: f937749710d914744979a3966d7de35e, type: 2}
   m_Extensions: []
   m_Group: String Table
   references:

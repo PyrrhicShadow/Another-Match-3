@@ -9,19 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Settings_ja
+  m_Script: {fileID: 11500000, guid: 1bb1838fe8befb0429646b938e757ff3, type: 3}
+  m_Name: toki pona (tok)
   m_EditorClassIdentifier: 
-  m_LocaleId:
-    m_Code: ja
-  m_SharedData: {fileID: 11400000, guid: fd527a6f91b6a7b4b92b7cd4a824e8f7, type: 2}
+  m_Identifier:
+    m_Code: tok
   m_Metadata:
     m_Items: []
-  m_TableData:
-  - m_Id: 6984470528
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
+  m_LocaleName: toki pona (tok)
+  m_CustomFormatCultureCode: en-GB
+  m_UseCustomFormatter: 1
+  m_SortOrder: 10000
   references:
     version: 2
     RefIds: []

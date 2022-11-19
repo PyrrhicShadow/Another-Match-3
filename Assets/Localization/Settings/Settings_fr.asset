@@ -59,6 +59,14 @@ MonoBehaviour:
       rechargement."
     m_Metadata:
       m_Items: []
+  - m_Id: 653401638473728
+    m_Localized: toki pona
+    m_Metadata:
+      m_Items: []
+  - m_Id: 653349348085760
+    m_Localized: Polonais
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

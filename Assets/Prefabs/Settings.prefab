@@ -2974,11 +2974,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: EN
+    - m_Text: English
       m_Image: {fileID: 0}
-    - m_Text: FR
+    - m_Text: "Fran\xE7ais"
       m_Image: {fileID: 0}
-    - m_Text: JA
+    - m_Text: "\u65E5\u672C\u8A9E"
+      m_Image: {fileID: 0}
+    - m_Text: Polski
+      m_Image: {fileID: 0}
+    - m_Text: toki pona
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
