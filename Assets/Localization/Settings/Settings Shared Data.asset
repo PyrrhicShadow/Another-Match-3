@@ -28,15 +28,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 178598612992
-    m_Key: en
+    m_Key: English (en)
     m_Metadata:
       m_Items: []
   - m_Id: 230872223744
-    m_Key: fr
+    m_Key: French (fr)
     m_Metadata:
       m_Items: []
   - m_Id: 327165054976
-    m_Key: ja
+    m_Key: Japanese (ja)
     m_Metadata:
       m_Items: []
   - m_Id: 356335167115264
@@ -56,11 +56,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 653349348085760
-    m_Key: pl
+    m_Key: Polish (pl)
     m_Metadata:
       m_Items: []
   - m_Id: 653401638473728
-    m_Key: tok
+    m_Key: toki pona (tok)
     m_Metadata:
       m_Items: []
   m_Metadata:

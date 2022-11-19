@@ -1459,7 +1459,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 546135729}
+  dropdown: {fileID: 545182425}
   paused: 0
+  _localizedStringTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:fd527a6f91b6a7b4b92b7cd4a824e8f7
 --- !u!1 &227620236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,6 +2492,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162427554}
   m_CullTransparentMesh: 1
+--- !u!114 &545182425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1769514326076034651, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+  m_PrefabInstance: {fileID: 1769514324719396380}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &546135729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1769514324173273261, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}

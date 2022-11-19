@@ -1,36 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 using UnityEngine.Localization.Settings; 
+using UnityEngine.Localization; 
+using UnityEngine.Localization.Tables; 
 
 public class SettingsController : MonoBehaviour {
 
     private Board board; 
     private SoundManager soundManager; 
     [SerializeField] private GameObject pauseMenu; 
+    [SerializeField] private Dropdown dropdown;
     [SerializeField] private bool paused = false; 
 
-    private void Start() {
+    [Header("Localization")] 
+    [SerializeField] private LocalizedStringTable _localizedStringTable;
+    private StringTable _currentStringTable;
+
+    private IEnumerator Start() {
         board = this.gameObject.GetComponent<Board>(); 
         soundManager = this.gameObject.GetComponent<SoundManager>(); 
         pauseMenu.SetActive(false); 
 
-        StartCoroutine(setLanguageCo()); 
-    }
-    public void LanguageDropDown(int value) {
-        PlayerPrefs.SetInt("Locale", value);
-        ChangeLanguage(); 
-    }
-
-    public IEnumerator setLanguageCo() {
         // Wait for the localization system to initialize, loading Locales, preloading, etc.
         yield return LocalizationSettings.InitializationOperation;
 
-        // This variable selects the language. For example, if in the table your first language is English then 0 = English. 
-        int i = PlayerPrefs.GetInt("Locale", 0); 
+        var tableLoading = _localizedStringTable.GetTable(); 
 
-        // This part changes the language
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i];
+        yield return tableLoading; 
+
+       _currentStringTable = tableLoading;
+
+        List<Dropdown.OptionData> options = new List<Dropdown.OptionData>(); 
+
+        int selected = PlayerPrefs.GetInt("Locale", 0); 
+        for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++) {
+            var locale = LocalizationSettings.AvailableLocales.Locales[i]; 
+            if (LocalizationSettings.AvailableLocales.Locales[selected] == locale) {
+                selected = i;
+            }
+            string localizedLocal = _currentStringTable[locale.name].LocalizedValue; 
+            options.Add(new Dropdown.OptionData(localizedLocal)); 
+        }
+        dropdown.options = options; 
+        dropdown.value = selected; 
+        dropdown.onValueChanged.AddListener(LocaleSelected); 
+        ChangeLanguage(); 
+    }
+
+    static void LocaleSelected(int index) {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index]; 
+        PlayerPrefs.SetInt("Locale", index); 
+    }
+
+    public void LanguageDropDown(int value) {
+        PlayerPrefs.SetInt("Locale", value);
+        ChangeLanguage(); 
     }
 
     private void ChangeLanguage() {

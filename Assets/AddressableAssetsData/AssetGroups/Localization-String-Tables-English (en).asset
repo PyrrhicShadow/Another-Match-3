@@ -17,12 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 9ba5bb64d323ab0438779e21a0541d4c
   m_SerializeEntries:
-  - m_GUID: f7fe09c5877c1884880df81f67e786d2
-    m_Address: UI_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4575385cd5c02b4e92a98f93cda5e25
     m_Address: Floating Text_en
     m_ReadOnly: 1

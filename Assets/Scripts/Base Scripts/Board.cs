@@ -379,7 +379,7 @@ public class Board : MonoBehaviour {
 
         if (isDeadLocked()) {
             Debug.Log("Deadlocked!"); 
-            StartCoroutine(ShuffleBoardCo()); 
+            ShuffleBoard(); 
         }
 
         yield return new WaitForSeconds(refillDelay); 
@@ -441,9 +441,9 @@ public class Board : MonoBehaviour {
 
     /// <summary>Records every piece on the board, randomly suffles them, and then, if deadlocked, calls ShuffleBoard() again.</summary>
     private IEnumerator ShuffleBoardCo() {
-        yield return new WaitForSeconds(refillDelay); 
         // Create a list of dots on the board 
         List<GameObject> newBoard = new List<GameObject>(); 
+        yield return new WaitForSeconds(refillDelay); 
 
         // Add every piece to this list 
         for (int i = 0; i < width; i++) {
@@ -454,12 +454,12 @@ public class Board : MonoBehaviour {
             }
         }
 
-        yield return new WaitForSeconds(refillDelay); 
+        yield return new WaitForSeconds(refillDelay);
 
         //for ever spot on the board . . . 
         for (int k = 0; k < width; k++) {
             for (int l = 0; l < height; l++) {
-                if (!blankSpaces[k, l] && blockingTiles[k, l] != null) {
+                if (!blankSpaces[k, l] && blockingTiles[k, l] == null) {
                     // pick random number (dot)
                     int dotToUse = Random.Range(0, newBoard.Count); 
                     // Make sure using this dot here doesn't create a match 
@@ -482,7 +482,7 @@ public class Board : MonoBehaviour {
 
         // check for deadlock 
         if (isDeadLocked()) {
-            StartCoroutine(ShuffleBoardCo()); 
+            ShuffleBoard(); 
         }
     }
 
@@ -555,7 +555,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    private void ShuffleBoard() {
+    public void ShuffleBoard() {
         StartCoroutine(ShuffleBoardCo()); 
     }
 }
