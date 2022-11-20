@@ -9,8 +9,26 @@ public class SoundManager : MonoBehaviour {
     [SerializeField] private AudioSource loseNoise; 
     [SerializeField] private AudioSource jumpNoise; 
     [SerializeField] private AudioSource backgroundMusic; 
-    private bool backgroundMusicOn = true; 
     private bool soundEffectsOn = true; 
+
+    private void Start() {
+        this.setBackgroundMusicVol(PlayerPrefs.GetFloat("MusicVol", 1)); 
+        this.setSoundEffectsVol(PlayerPrefs.GetFloat("EffectsVol", 1)); 
+
+        if (PlayerPrefs.GetInt("Music", 1) == 1) {
+            backgroundMusic.mute = false; 
+        }
+        else {
+            backgroundMusic.mute = true; 
+        }
+        if (PlayerPrefs.GetInt("Effects", 1) == 1) {
+            soundEffectsOn = true; 
+        }
+        else {
+            soundEffectsOn = false; 
+        }
+        this.setSoundEffects(soundEffectsOn); 
+    }
 
     public void PlayDestroyNoise() {
         if (soundEffectsOn) {
@@ -36,27 +54,50 @@ public class SoundManager : MonoBehaviour {
 
     public void setBackgroundMusic(bool on) {
         if (on) {
-            backgroundMusic.Pause(); 
+            backgroundMusic.mute = false; 
+            PlayerPrefs.SetInt("Music", 1); 
         }
         else {
-            backgroundMusic.UnPause(); 
+            backgroundMusic.mute = true; 
+            PlayerPrefs.SetInt("Music", 0); 
         }
     }
 
     public bool isBackgroundMusicOn() {
-        return backgroundMusicOn; 
+        return !backgroundMusic.mute; 
     }
 
     public void setSoundEffects(bool on) {
         soundEffectsOn = on; 
+        if (on) {
+            destroyNoise.mute = false; 
+            winNoise.mute = false; 
+            loseNoise.mute = false; 
+            jumpNoise.mute = false; 
+            PlayerPrefs.SetInt("Effects", 1); 
+        }
+        else {
+            destroyNoise.mute = true; 
+            winNoise.mute = true; 
+            loseNoise.mute = true; 
+            jumpNoise.mute = true; 
+            PlayerPrefs.SetInt("Effects", 0); 
+        }
     }
 
     public bool isSoundEffectsOn() {
         return soundEffectsOn; 
     }
 
-    public void backgroundMusicVol(float volume) {
-        backgroundMusic.volume = volume; 
+    public void setBackgroundMusicVol(float volume) {
+        backgroundMusic.volume = volume * 0.5f; 
+        PlayerPrefs.SetFloat("MusicVol", volume); 
     }
 
+    public void setSoundEffectsVol(float volume) {
+        destroyNoise.volume = volume; 
+        winNoise.volume = volume; 
+        loseNoise.volume = volume; 
+        PlayerPrefs.SetFloat("EffectsVol", volume); 
+    }
 }

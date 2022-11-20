@@ -95,8 +95,8 @@ public class Board : MonoBehaviour {
         // peer objects
         findMatches = gameObject.GetComponent<FindMatches>(); 
         scoreManager = gameObject.GetComponent<ScoreManager>(); 
-        soundManager = gameObject.GetComponentInChildren<SoundManager>(); 
-        floatingTextManager = gameObject.GetComponentInChildren<FloatingTextManager>(); 
+        soundManager = FindObjectOfType<SoundManager>(); 
+        floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
 
         // move colors 
         moveColors = new List<Color>(); 

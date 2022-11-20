@@ -14,13 +14,19 @@ public class SettingsController : MonoBehaviour {
     [SerializeField] private Dropdown dropdown;
     [SerializeField] private bool paused = false; 
 
+    [Header("Sound")]
+    [SerializeField] Image musicVol; 
+    [SerializeField] Image effectVol; 
+    [SerializeField] Sprite unmute; 
+    [SerializeField] Sprite mute; 
+
     [Header("Localization")] 
     [SerializeField] private LocalizedStringTable _localizedStringTable;
     private StringTable _currentStringTable;
 
     private IEnumerator Start() {
         board = this.gameObject.GetComponent<Board>(); 
-        soundManager = this.gameObject.GetComponent<SoundManager>(); 
+        soundManager = FindObjectOfType<SoundManager>(); 
         pauseMenu.SetActive(false); 
 
         // Wait for the localization system to initialize, loading Locales, preloading, etc.
@@ -86,9 +92,22 @@ public class SettingsController : MonoBehaviour {
                 board.currentState = GameState.move; 
             }
         }
+
+        if (soundManager.isBackgroundMusicOn()) {
+            musicVol.sprite = unmute; 
+        }
+        else {
+            musicVol.sprite = mute; 
+        }
+        if (soundManager.isSoundEffectsOn()) {
+            effectVol.sprite = unmute; 
+        }
+        else {
+            effectVol.sprite = mute; 
+        }
     }
 
-    public void Sounds() {
+    public void MusicSounds() {
         if (soundManager != null) {
             if (soundManager.isBackgroundMusicOn()) {
                 soundManager.setBackgroundMusic(false); 
@@ -100,6 +119,19 @@ public class SettingsController : MonoBehaviour {
         else {
 
         }
-        // save volume PlayerPrefs.SetFloat("MusicVol", 0f); PlayerPrefs.SetFloat("EffectsVol", 0f); 
+    }
+
+    public void EffectSounds() {
+        if (soundManager != null) {
+            if (soundManager.isSoundEffectsOn()) {
+                soundManager.setSoundEffects(false); 
+            }
+            else {
+                soundManager.setSoundEffects(true); 
+            }
+        }
+        else {
+
+        }
     }
 }
