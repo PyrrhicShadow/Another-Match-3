@@ -17,12 +17,15 @@ public class SettingsController : MonoBehaviour {
     [Header("Sound")]
     [SerializeField] Image musicVol; 
     [SerializeField] Image effectVol; 
+    [SerializeField] Text allSounds; 
     [SerializeField] Sprite unmute; 
     [SerializeField] Sprite mute; 
 
     [Header("Localization")] 
     [SerializeField] private LocalizedStringTable _localizedStringTable;
     private StringTable _currentStringTable;
+    private string muteLabel; 
+    private string unmuteLabel; 
 
     private IEnumerator Start() {
         board = this.gameObject.GetComponent<Board>(); 
@@ -49,10 +52,17 @@ public class SettingsController : MonoBehaviour {
             string localizedLocal = _currentStringTable[locale.name].LocalizedValue; 
             options.Add(new Dropdown.OptionData(localizedLocal)); 
         }
+
+        ChangeLanguage(); 
+
         dropdown.options = options; 
         dropdown.value = selected; 
         dropdown.onValueChanged.AddListener(LocaleSelected); 
-        ChangeLanguage(); 
+
+        muteLabel = _currentStringTable["mute_label"].LocalizedValue; 
+        unmuteLabel = _currentStringTable["unmute_label"].LocalizedValue; 
+
+        allSounds.text = muteLabel; 
     }
 
     static void LocaleSelected(int index) {
@@ -105,6 +115,13 @@ public class SettingsController : MonoBehaviour {
         else {
             effectVol.sprite = mute; 
         }
+
+        if (soundManager.isAllSoundsOn()) {
+            allSounds.text = muteLabel; 
+        }
+        else {
+            allSounds.text = unmuteLabel; 
+        }
     }
 
     public void MusicSounds() {
@@ -115,9 +132,6 @@ public class SettingsController : MonoBehaviour {
             else {
                 soundManager.setBackgroundMusic(true); 
             }
-        }
-        else {
-
         }
     }
 
@@ -130,8 +144,16 @@ public class SettingsController : MonoBehaviour {
                 soundManager.setSoundEffects(true); 
             }
         }
-        else {
+    }
 
+    public void AllSounds() {
+        if (soundManager != null) {
+            if (soundManager.isAllSoundsOn()) {
+                soundManager.setAllSounds(false); 
+            }
+            else {
+                soundManager.setAllSounds(true); 
+            }
         }
     }
 }

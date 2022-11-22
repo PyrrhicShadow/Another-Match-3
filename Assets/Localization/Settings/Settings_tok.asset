@@ -62,6 +62,18 @@ MonoBehaviour:
     m_Localized: toki Posuka
     m_Metadata:
       m_Items: []
+  - m_Id: 1725146315264000
+    m_Localized: kalama
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1725102660947968
+    m_Localized: kalama ala
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362967607447552
+    m_Localized: sitelen toki sona li alente.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

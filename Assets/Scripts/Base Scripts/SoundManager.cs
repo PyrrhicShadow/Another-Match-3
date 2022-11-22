@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour {
     [SerializeField] private AudioSource jumpNoise; 
     [SerializeField] private AudioSource backgroundMusic; 
     private bool soundEffectsOn = true; 
+    private bool allSoundsOn = true; 
 
     private void Start() {
         this.setBackgroundMusicVol(PlayerPrefs.GetFloat("MusicVol", 1)); 
@@ -27,7 +28,14 @@ public class SoundManager : MonoBehaviour {
         else {
             soundEffectsOn = false; 
         }
+        if (PlayerPrefs.GetInt("AllSound", 1) == 1) {
+            allSoundsOn = true;
+        }
+        else {
+            allSoundsOn = false; 
+        }
         this.setSoundEffects(soundEffectsOn); 
+        this.setAllSounds(allSoundsOn); 
     }
 
     public void PlayDestroyNoise() {
@@ -72,21 +80,36 @@ public class SoundManager : MonoBehaviour {
         if (on) {
             destroyNoise.mute = false; 
             winNoise.mute = false; 
-            loseNoise.mute = false; 
-            jumpNoise.mute = false; 
+            loseNoise.mute = false;  
             PlayerPrefs.SetInt("Effects", 1); 
         }
         else {
             destroyNoise.mute = true; 
             winNoise.mute = true; 
             loseNoise.mute = true; 
-            jumpNoise.mute = true; 
             PlayerPrefs.SetInt("Effects", 0); 
+        }
+    }
+
+    public void setAllSounds(bool on) {
+        setSoundEffects(on); 
+        allSoundsOn = on; 
+        if (on) {
+            backgroundMusic.mute = false; 
+            jumpNoise.mute = false; 
+        }
+       else {
+            backgroundMusic.mute = true; 
+            jumpNoise.mute = true; 
         }
     }
 
     public bool isSoundEffectsOn() {
         return soundEffectsOn; 
+    }
+
+    public bool isAllSoundsOn() {
+        return allSoundsOn; 
     }
 
     public void setBackgroundMusicVol(float volume) {
