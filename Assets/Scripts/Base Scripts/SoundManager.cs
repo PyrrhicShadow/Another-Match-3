@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour {
     [SerializeField] private AudioSource backgroundMusic; 
     private bool soundEffectsOn = true; 
     private bool allSoundsOn = true; 
+    private float backgroundVolumeScale = 0.5f; 
 
     private void Start() {
         this.setBackgroundMusicVol(PlayerPrefs.GetFloat("MusicVol", 1)); 
@@ -113,7 +114,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void setBackgroundMusicVol(float volume) {
-        backgroundMusic.volume = volume * 0.5f; 
+        backgroundMusic.volume = volume * backgroundVolumeScale; 
         PlayerPrefs.SetFloat("MusicVol", volume); 
     }
 
