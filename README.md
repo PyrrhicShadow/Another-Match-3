@@ -47,6 +47,8 @@ These are technically debugging tools but I left them in here as cheat-codes/eas
 
 All art used in this game was either created by PyrrhicSilva (Jake), used with express permission from the creator, or sourced from royalty-free art collections. 
 
-The French and toki pona localizations were done by PyrrhicSilva. Report any errors [here](https://forms.gle/twwYvKxhxmNrm1hcA).
+The French and toki pona localizations were done by PyrrhicSilva. Report any errors [here](https://forms.gle/twwYvKxhxmNrm1hcA). 
+
+Thank you to the toki pona dictionary at https://lipu-linku.github.io/
 
 All art credit can be found in the [Art Sources](https://pyrrhicshadow.github.io/Another-Match-3/Assets/Art/artSources) file.
