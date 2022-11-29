@@ -76,7 +76,7 @@ public class SettingsController : MonoBehaviour {
     }
 
     private void ChangeLanguage() {
-        // This variable selects the language. For example, if in the table your first language is English then 0 = English. 
+        // This variable selects the language. For example, the first language in the table is English, so 0 = English. 
         int i = PlayerPrefs.GetInt("Locale", 0); 
 
         // This part changes the language
