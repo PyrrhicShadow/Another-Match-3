@@ -47,6 +47,10 @@ public class MenuController : MonoBehaviour {
             thisLevel.setActive(lvl + 1, true); 
             if (board.scoreManager.getScore() > thisLevel.getHighScore(lvl)) {
                 thisLevel.setHighScore(lvl, board.scoreManager.getScore()); 
+            } 
+
+            if (lvl == thisLevel.Count() - 1) {
+                thisLevel.Summoned(); 
             }
 
             gameData.Save(); 

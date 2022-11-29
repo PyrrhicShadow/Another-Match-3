@@ -90,6 +90,10 @@ MonoBehaviour:
     m_Localized: 'ijo tawa:'
     m_Metadata:
       m_Items: []
+  - m_Id: 4430661239607296
+    m_Localized: musi jo sike ante
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
