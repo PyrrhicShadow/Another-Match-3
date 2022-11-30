@@ -82,7 +82,6 @@ public class ScoreManager : MonoBehaviour {
     [Header ("Background Manager")]
     [SerializeField]
     private Image background; 
-    private List<Color> bgColors; 
     private int bgTier; 
 
     [Header("Goal Manager")]
@@ -123,16 +122,7 @@ public class ScoreManager : MonoBehaviour {
         currentGoals = new List<GoalPanel>(); 
         score = 0; 
 
-        // big list of colors 
-        bgColors = new List<Color>();  
-        bgColors.Add(new Color(0.235493f, 0.2646766f, 0.3396226f, 1f)); // blue-black 
-        bgColors.Add(new Color(0.2470588f, 0.2431373f, 0.3137255f, 1f)); // off-blue
-        bgColors.Add(new Color(0.2588235f, 0.2196079f, 0.282353f, 1f)); // off-purple
-        bgColors.Add(new Color(0.2705882f, 0.2f, 0.2588235f, 1f)); // purple
-        bgColors.Add(new Color(0.3137255f, 0.1294118f, 0.1764706f, 1f)); // pale-red
-        bgColors.Add(new Color(0.369f, 0f, 0.0115967f, 1f)); // blood-red
-
-        // background.color = bgColors[0]; 
+        // background.color = GameColors.bgColors[0]; 
         // bgTier = 0; 
 
         Level myLvl = board.getLvl(); 
@@ -321,8 +311,8 @@ public class ScoreManager : MonoBehaviour {
 
     /// <summary>Changes the background color to match the current tier</summary>
     private void ChangeBackgroundColor(int tier) {
-        if (tier > 0 && tier < (bgColors.Count) && bgTier != tier) {
-            background.color = bgColors[tier]; 
+        if (tier > 0 && tier < (GameColors.bgColors.Length) && bgTier != tier) {
+            background.color = GameColors.bgColors[tier]; 
             bgTier = tier; 
             Debug.Log("Background tier increased to " + tier); 
         }
