@@ -12,10 +12,23 @@ public class SoundManager : MonoBehaviour {
     private bool soundEffectsOn = true; 
     private bool allSoundsOn = true; 
     private float backgroundVolumeScale = 0.5f; 
+    private static SoundManager soundManager; 
+
+    void Awake() {
+        if (soundManager == null) {
+            DontDestroyOnLoad(this.gameObject); 
+            soundManager = this; 
+        }
+        else {
+            Destroy(this.gameObject); 
+        }
+    }
 
     private void Start() {
         this.setBackgroundMusicVol(PlayerPrefs.GetFloat("MusicVol", 1)); 
         this.setSoundEffectsVol(PlayerPrefs.GetFloat("EffectsVol", 1)); 
+
+        backgroundMusic.Play(); 
 
         if (PlayerPrefs.GetInt("Music", 1) == 1) {
             backgroundMusic.mute = false; 

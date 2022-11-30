@@ -68,8 +68,7 @@ public class GameData : MonoBehaviour {
     [SerializeField] internal World world; 
     public SaveData saveData; 
     // Start is called before the first frame update
-    void Awake()
-    {
+    void Awake() {
         if (gameData == null) {
             DontDestroyOnLoad(this.gameObject); 
             gameData = this; 

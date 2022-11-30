@@ -17,6 +17,7 @@ TagManager:
   - board
   - locked
   - blocking
+  - sound
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,7 @@ public class GameColors {
 public class SettingsController : MonoBehaviour {
 
     private Board board; 
-    private SoundManager soundManager; 
+    [SerializeField] private SoundManager soundManager; 
     [SerializeField] private GameObject pauseMenu; 
     [SerializeField] private Dropdown dropdown;
     [SerializeField] private bool paused = false; 
@@ -46,7 +46,7 @@ public class SettingsController : MonoBehaviour {
 
     private IEnumerator Start() {
         board = this.gameObject.GetComponent<Board>(); 
-        soundManager = FindObjectOfType<SoundManager>(); 
+        soundManager = GameObject.FindWithTag("sound").GetComponent<SoundManager>(); 
         pauseMenu.SetActive(false); 
 
         // Wait for the localization system to initialize, loading Locales, preloading, etc.
