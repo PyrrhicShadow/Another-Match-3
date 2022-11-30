@@ -14,5 +14,11 @@ public class StartController : MonoBehaviour {
     void Start()
     {
         // if gamedata.hasSummoned, make game and start x-scale = -1 and background color different
+        GameData data = FindObjectOfType<GameData>(); 
+        Vector3 flipX = new Vector3(-1, 1, 1); 
+        if (data.saveData.hasSummoned()) {
+            game.rectTransform.localScale = flipX; 
+            start.rectTransform.localScale = flipX; 
+        }
     }
 }

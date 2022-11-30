@@ -43,7 +43,6 @@ public class Board : MonoBehaviour {
     [Header("Board components")]
     [SerializeField] private Dot currentDot; 
     [SerializeField] private Image moveIndicatorImage;  
-    private List<Color> moveColors; 
     [SerializeField] private Tile[] boardLayout; 
     [SerializeField] private BackgroundTile[,] breakableTiles; 
     [SerializeField] private bool[,] blankSpaces; 
@@ -97,12 +96,6 @@ public class Board : MonoBehaviour {
         scoreManager = gameObject.GetComponent<ScoreManager>(); 
         soundManager = FindObjectOfType<SoundManager>(); 
         floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
-
-        // move colors 
-        moveColors = new List<Color>(); 
-        moveColors.Add(new Color(0f, 0.872f, 0.1591406f, 1f)); // move, green
-        moveColors.Add(new Color(1f, 0.6806262f, 0f, 1f)); // wait, orange
-        moveColors.Add(new Color(0.1933962f, 0.86737f, 1f, 1f)); // none, blue
 
         SetUp(); 
 
@@ -160,13 +153,13 @@ public class Board : MonoBehaviour {
         }
 
         if (currentState == GameState.move) {
-            moveIndicatorImage.color = moveColors[0]; 
+            moveIndicatorImage.color = GameColors.moveColors[0]; 
         }
         else if(currentState == GameState.wait) {
-            moveIndicatorImage.color = moveColors[1]; 
+            moveIndicatorImage.color = GameColors.moveColors[1]; 
         }
         else {
-            moveIndicatorImage.color = moveColors[2]; 
+            moveIndicatorImage.color = GameColors.moveColors[2]; 
         }
     }
 

@@ -6,6 +6,23 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Localization; 
 using UnityEngine.Localization.Tables; 
 
+public class GameColors {
+    public static Color[] bgColors = {
+        new Color(0.235493f, 0.2646766f, 0.3396226f, 1f), // blue-black
+        new Color(0.2470588f, 0.2431373f, 0.3137255f, 1f), // off-blue
+        new Color(0.2588235f, 0.2196079f, 0.282353f, 1f), // off-purple
+        new Color(0.2705882f, 0.2f, 0.2588235f, 1f), // purple 
+        new Color(0.3137255f, 0.1294118f, 0.1764706f, 1f), // pale-red
+        new Color(0.369f, 0f, 0.0115967f, 1f) // blood-red
+        }; 
+        
+    public static Color[] moveColors = {
+        new Color(0f, 0.872f, 0.1591406f, 1f), // move, green
+        new Color(1f, 0.6806262f, 0f, 1f), // wait, orange
+        new Color(0.1933962f, 0.86737f, 1f, 1f) // other, blue
+    }; 
+}
+
 public class SettingsController : MonoBehaviour {
 
     private Board board; 
