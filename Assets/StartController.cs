@@ -9,7 +9,6 @@ public class StartController : MonoBehaviour {
     [SerializeField] Text start; 
     [SerializeField] Image background; 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +18,12 @@ public class StartController : MonoBehaviour {
         if (data.saveData.hasSummoned()) {
             game.rectTransform.localScale = flipX; 
             start.rectTransform.localScale = flipX; 
+            background.color = GameColors.bgColors[5]; 
+        }
+        else {
+            game.rectTransform.localScale = Vector3.one; 
+            start.rectTransform.localScale = Vector3.one; 
+            background.color = GameColors.bgColors[0]; 
         }
     }
 }

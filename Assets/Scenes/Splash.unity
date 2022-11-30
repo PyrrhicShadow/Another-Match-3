@@ -199,6 +199,7 @@ MonoBehaviour:
   - {fileID: 1162085869, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   - {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   - {fileID: 400462826, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+  heart: {fileID: 21300000, guid: c461b4bc3a80a7146abae2212a0619d4, type: 3}
 --- !u!114 &9905427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,7 +1053,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1000, y: 800}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2514,6 +2515,7 @@ MonoBehaviour:
   - {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   - {fileID: 400462826, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   - {fileID: -803583901, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+  heart: {fileID: 21300000, guid: c461b4bc3a80a7146abae2212a0619d4, type: 3}
 --- !u!114 &533908994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4284,7 +4286,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1000, y: 800}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -8095,7 +8097,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1000, y: 800}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -8339,6 +8341,7 @@ MonoBehaviour:
   - {fileID: 1162085869, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   - {fileID: 1994900389, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
   - {fileID: 400462826, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
+  heart: {fileID: 21300000, guid: c461b4bc3a80a7146abae2212a0619d4, type: 3}
 --- !u!114 &1710367183
 MonoBehaviour:
   m_ObjectHideFlags: 0
