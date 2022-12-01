@@ -31,22 +31,22 @@ For information on what features are included in which builds, see the [Git Repo
 <details>
     <summary><i>Click for debug codes</i></summary>
 
-    <p>These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!</p>
+<p>These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!</p>
 
-    <ul>
-        <li> "s" key to shuffle the board </li>
-            <ul>
-                <li> shuffle happens automatically at deadlock, but manual shuffle is helpful if looking for a specific configuration</li>
-            </ul>
-        <li> bomb commands (turns the piece the mouse is hovering over into said bomb)</li>
-            <ul>
-                <li> "c" key for color bomb</li>
-                <li> "a" key for adjacent bomb</li>
-                <li> right or left arrow key for row bomb</li>
-                <li> up or down arrow key for col bomb </li>
-                <li> right-mouse to unmake bomb </li>
-            </ul>
-    </ul>
+<ul>
+    <li> "s" key to shuffle the board </li>
+        <ul>
+            <li> shuffle happens automatically at deadlock, but manual shuffle is helpful if looking for a specific configuration</li>
+        </ul>
+    <li> bomb commands (turns the piece the mouse is hovering over into said bomb)</li>
+        <ul>
+            <li> "c" key for color bomb</li>
+            <li> "a" key for adjacent bomb</li>
+            <li> right or left arrow key for row bomb</li>
+            <li> up or down arrow key for col bomb </li>
+            <li> right-mouse to unmake bomb </li>
+        </ul>
+</ul>
 
 </details>
 
