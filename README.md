@@ -12,7 +12,7 @@ For information on what features are included in which builds, see the [Git Repo
 ## Features
 
 * Match 3, 4, 5! 
-* <s>5</s> <s>12</s> <s>6</s> multiple custom levels!
+* <s>5 12 6</s>multiple custom levels!
 * Both time-based and move-limited levels 
 * Multiple tile-types with different mechanics!
 * Save system
@@ -31,16 +31,22 @@ For information on what features are included in which builds, see the [Git Repo
 <details>
     <summary><i>Click for debug codes</i></summary>
 
-These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!
+    <p>These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!</p>
 
-* "s" key to shuffle the board 
-    * shuffle happens automatically at deadlock, but manual shuffle is helpful if looking for a specific configuration
-* bomb commands (turns the piece the mouse is hovering over into said bomb)
-    * "c" key for color bomb
-    * "a" key for adjacent bomb
-    * right or left arrow key for row bomb
-    * up or down arrow key for col bomb 
-    * right-mouse to unmake bomb 
+    <ul>
+        <li> "s" key to shuffle the board </li>
+            <ul>
+                <li> shuffle happens automatically at deadlock, but manual shuffle is helpful if looking for a specific configuration</li>
+            </ul>
+        <li> bomb commands (turns the piece the mouse is hovering over into said bomb)</li>
+            <ul>
+                <li> "c" key for color bomb</li>
+                <li> "a" key for adjacent bomb</li>
+                <li> right or left arrow key for row bomb</li>
+                <li> up or down arrow key for col bomb </li>
+                <li> right-mouse to unmake bomb </li>
+            </ul>
+    </ul>
 
 </details>
 
