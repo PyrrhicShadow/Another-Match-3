@@ -41,19 +41,6 @@ public class MenuController : MonoBehaviour {
 
     /// <summary>called to generate new game menus</summar>
     public void toSplashWin() {
-        if (gameData != null) {
-            SaveData thisLevel = gameData.saveData; 
-            thisLevel.setActive(lvl + 1, true); 
-            if (board.scoreManager.getScore() > thisLevel.getHighScore(lvl)) {
-                thisLevel.setHighScore(lvl, board.scoreManager.getScore()); 
-            } 
-
-            if (lvl == thisLevel.Count() - 1) {
-                thisLevel.Summoned(); 
-            }
-
-            gameData.Save(); 
-        }
         SceneManager.LoadScene(sceneToLoad); 
     }
 
@@ -75,6 +62,24 @@ public class MenuController : MonoBehaviour {
      * else this is a normal level, use win screen
      */ 
     public void winGame() {
+        if (gameData != null) {
+            SaveData thisLevel = gameData.saveData; 
+            thisLevel.setActive(lvl + 1, true); 
+            if (board.scoreManager.getScore() > thisLevel.getHighScore(lvl)) {
+                thisLevel.setHighScore(lvl, board.scoreManager.getScore()); 
+            }
+
+            if (board.scoreManager.getStars() > thisLevel.getStar(lvl)) {
+                thisLevel.setStar(lvl, board.scoreManager.getStars()); 
+            } 
+
+            if (lvl == thisLevel.Count() - 1) {
+                thisLevel.Summoned(); 
+            }
+
+            gameData.Save(); 
+        }
+        
         StartCoroutine(GameEndCo()); 
     }
 

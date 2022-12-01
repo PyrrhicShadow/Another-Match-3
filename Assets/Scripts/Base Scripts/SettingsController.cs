@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Localization.Settings; 
 using UnityEngine.Localization; 
 using UnityEngine.Localization.Tables; 
+using UnityEngine.SceneManagement; 
 
 public class GameColors {
     public static Color[] bgColors = {
@@ -28,8 +29,10 @@ public class SettingsController : MonoBehaviour {
     private Board board; 
     [SerializeField] private SoundManager soundManager; 
     [SerializeField] private GameObject pauseMenu; 
+    [SerializeField] private GameData data; 
     [SerializeField] private Dropdown dropdown;
     [SerializeField] private bool paused = false; 
+    [SerializeField] string sceneToLoad; 
 
     [Header("Sound")]
     [SerializeField] Image musicVol; 
@@ -47,6 +50,7 @@ public class SettingsController : MonoBehaviour {
     private IEnumerator Start() {
         board = this.gameObject.GetComponent<Board>(); 
         soundManager = GameObject.FindWithTag("sound").GetComponent<SoundManager>(); 
+        data = FindObjectOfType<GameData>(); 
         pauseMenu.SetActive(false); 
 
         // Wait for the localization system to initialize, loading Locales, preloading, etc.
@@ -172,5 +176,10 @@ public class SettingsController : MonoBehaviour {
                 soundManager.setAllSounds(true); 
             }
         }
+    }
+
+    public void ResetProgress() {
+        data.ClearSave(); 
+        SceneManager.LoadScene(sceneToLoad); 
     }
 }

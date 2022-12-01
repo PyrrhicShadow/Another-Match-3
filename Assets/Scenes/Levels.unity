@@ -2711,7 +2711,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 638442025}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1694052214}
+        m_TargetAssemblyTypeName: LevelSelection, Assembly-CSharp
+        m_MethodName: toStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &638442025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7279,6 +7291,14 @@ PrefabInstance:
     - target: {fileID: 1769514324005908120, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1694052213}
+    - target: {fileID: 1769514324005908120, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetProgress
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769514324005908120, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1769514324015016666, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7809,6 +7829,7 @@ GameObject:
   - component: {fileID: 1694052210}
   - component: {fileID: 1694052209}
   - component: {fileID: 1694052213}
+  - component: {fileID: 1694052214}
   m_Layer: 5
   m_Name: Level Select
   m_TagString: Untagged
@@ -7913,8 +7934,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   pauseMenu: {fileID: 1660401903}
+  data: {fileID: 0}
   dropdown: {fileID: 1072551092}
   paused: 0
+  sceneToLoad: Start
   musicVol: {fileID: 1972841233}
   effectVol: {fileID: 1471143415}
   allSounds: {fileID: 1660401904}
@@ -7923,6 +7946,19 @@ MonoBehaviour:
   _localizedStringTable:
     m_TableReference:
       m_TableCollectionName: GUID:fd527a6f91b6a7b4b92b7cd4a824e8f7
+--- !u!114 &1694052214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694052208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935573019733cea43a194f68bb4e9998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: Start
 --- !u!1 &1765610242
 GameObject:
   m_ObjectHideFlags: 0
@@ -8589,7 +8625,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 40, y: 30}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2094506230
 MonoBehaviour:

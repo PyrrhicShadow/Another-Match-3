@@ -75,8 +75,9 @@ public class ScoreManager : MonoBehaviour {
     [Header("Score Manager")]
     [SerializeField] int score; 
     private int lastScore; 
-    [SerializeField] int scoreGoal; 
-    [SerializeField] Text scoreText;  
+    private int scoreGoal;
+    private int stars; 
+    [SerializeField] Text scoreText; 
     [SerializeField] Image scoreBar; 
 
     [Header ("Background Manager")]
@@ -121,6 +122,11 @@ public class ScoreManager : MonoBehaviour {
         level = PlayerPrefs.GetInt("CurrentLevel", 0) + 1;  
         currentGoals = new List<GoalPanel>(); 
         score = 0; 
+        stars = 0; 
+
+        for (int i = 0; i < winStars.Length; i++) {
+            winStars[i].SetActive(false); 
+        }
 
         // background.color = GameColors.bgColors[0]; 
         // bgTier = 0; 
@@ -167,12 +173,17 @@ public class ScoreManager : MonoBehaviour {
 
     /// <summary>Increases score by given amount <paramref name="amt"/></summary>
     public void IncreaseScore(int amt) {
-        if (board != null && scoreBar != null) {
-            score += amt; 
-            scoreBar.fillAmount = (float)score / (float)(board.balance * scoreGoal); 
-            UpdateScore(); 
-            // ChangeBackgroundColor(); 
-        }
+        
+        score += amt; 
+        // for(int i = 0; i < scoreGoal; i++) {
+        //     if (score > board.balance * i && stars < i + 1) {
+        //         stars++; 
+        //     }
+        // }
+
+        UpdateScore(); 
+        // ChangeBackgroundColor(); 
+        
     }
 
     private void SetUpGoals() {
@@ -212,7 +223,7 @@ public class ScoreManager : MonoBehaviour {
         }
 
         if (goalsCompleted >= levelGoals.Length) {
-            if (menuController != null && score >= scoreGoal * board.balance) {
+            if (menuController != null) {
                 Debug.Log("You win!"); 
                 WinGame(); 
             }
@@ -269,6 +280,7 @@ public class ScoreManager : MonoBehaviour {
         winPanel.SetActive(true); 
         winScore.text = score.ToString();
         winEndScore.text = score.ToString(); 
+        setStars(); 
         menuController.winGame(); 
     }
 
@@ -287,7 +299,30 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void UpdateScore() {
-        scoreText.text = scoreLabel + " " + score; 
+        if (board != null && scoreBar != null) {
+            scoreText.text = scoreLabel + " " + score; 
+            scoreBar.fillAmount = (float)score / (float)(board.balance * scoreGoal); 
+        }
+    }
+
+    private void setStars() {
+        float weight = board.balance * scoreGoal; 
+        if (score > (int)(weight)) {
+            stars = 3; 
+        }
+        else if (score > (int)(weight / 3)) {
+            stars = 2; 
+        }
+        else if (score > (int)(weight / 4)) {
+            stars = 1; 
+        }
+        else {
+            stars = 0; 
+        }
+
+        for (int i = 0; i < stars; i++) {
+            winStars[i].SetActive(true); 
+        } 
     }
 
     /// <summary>Checks for score and changes background color </summary>
@@ -321,6 +356,10 @@ public class ScoreManager : MonoBehaviour {
     /// <summary>get score </summary>
     public int getScore() {
         return score; 
+    }
+
+    public int getStars() {
+        return stars; 
     }
 
     /// <summary>clear score </summary>

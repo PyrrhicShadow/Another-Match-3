@@ -15,7 +15,6 @@ public class Level : ScriptableObject {
     public GameObject[] eyes; 
     public int eyeRatio; 
     public int balance; 
-    // public Animator endAnim; 
 
     [Header("Score")]
     public int scoreGoal; 
