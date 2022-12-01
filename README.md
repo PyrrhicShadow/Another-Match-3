@@ -4,14 +4,16 @@ A simple match-3 game by Pyrrhic Silva created using Mister Taft Creates's tutor
 
 Warning: Do not play if you are easily frightened or at 3AM while your housemates are sleeping.
 
-[Try it now!](https://pyrrhicshadow.github.io/Another-Match-3/Builds/Another%20Match%203%20WebGL/index.html) 
+[Try it now!](https://pyrrhicshadow.github.io/Another-Match-3/Builds/Another%20Match%203%20WebGL/index.html) (most current build)
 
-Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Another%20Match%203%20PC.zip)
+Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Another%20Match%203%20PC.zip) (older build, supports saves)
+
+For information on what features are included in which builds, see the [Git Rep](https://github.com/PyrrhicShadow/Another-Match-3). 
 
 ## Features
 
 * Match 3, 4, 5! 
-* <s>5</s> <s>12</s> multiple custom levels!
+* <s>5</s> <s>12</s> <s>6</s> multiple custom levels!
 * Both time-based and move-limited levels 
 * Multiple tile-types with different mechanics!
 * Save system
