@@ -8,7 +8,7 @@ Warning: Do not play if you are easily frightened or at 3AM while your housemate
 
 Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Another%20Match%203%20PC.zip) (older build, supports saves)
 
-For information on what features are included in which builds, see the [Git Rep](https://github.com/PyrrhicShadow/Another-Match-3). 
+For information on what features are included in which builds, see the [Git Repo](https://github.com/PyrrhicShadow/Another-Match-3). 
 
 ## Features
 
