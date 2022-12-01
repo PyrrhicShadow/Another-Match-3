@@ -30,7 +30,7 @@ public class StartController : MonoBehaviour {
     }
 
     public void buttonStart() {
-        SceneManager.LoadScene(sceneToLoad); 
         Debug.Log("Next Scene"); 
+        SceneManager.LoadScene(sceneToLoad); 
     }
 }
