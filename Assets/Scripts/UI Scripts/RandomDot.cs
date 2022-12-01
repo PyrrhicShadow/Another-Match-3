@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class RandomDots : MonoBehaviour {
+public class RandomDot : MonoBehaviour {
     [SerializeField] Sprite[] dots; 
     [SerializeField] Sprite heart; 
     private Image myImage; 

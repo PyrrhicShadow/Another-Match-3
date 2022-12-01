@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Key: game
     m_Metadata:
       m_Items: []
+  - m_Id: 5147329955794944
+    m_Key: click_start
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

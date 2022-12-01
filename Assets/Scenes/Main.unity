@@ -1211,6 +1211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022bb6301581f3448a5237e656bbcc2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
   pauseMenu: {fileID: 546135729}
   dropdown: {fileID: 545182425}
   paused: 0
@@ -6624,6 +6625,22 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 211335030}
+    - target: {fileID: 3504024979488229520, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 211335030}
+    - target: {fileID: 3504024979488229520, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504024979488229520, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504024979488229520, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4286410504135797010, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
       propertyPath: m_Name
       value: Mute Label

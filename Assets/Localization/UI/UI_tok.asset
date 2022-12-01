@@ -94,6 +94,10 @@ MonoBehaviour:
     m_Localized: musi jo sike ante
     m_Metadata:
       m_Items: []
+  - m_Id: 5147329955794944
+    m_Localized: sina luka e lipu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

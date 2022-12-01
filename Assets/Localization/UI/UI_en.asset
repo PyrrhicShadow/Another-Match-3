@@ -94,6 +94,10 @@ MonoBehaviour:
     m_Localized: Another Match 3
     m_Metadata:
       m_Items: []
+  - m_Id: 5147329955794944
+    m_Localized: Click to Start
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

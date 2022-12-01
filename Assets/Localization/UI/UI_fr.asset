@@ -94,6 +94,10 @@ MonoBehaviour:
     m_Localized: Un autre Match 3
     m_Metadata:
       m_Items: []
+  - m_Id: 5147329955794944
+    m_Localized: "Touche l'\xE9cran"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
