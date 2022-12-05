@@ -12,17 +12,6 @@ public class SoundManager : MonoBehaviour {
     private bool soundEffectsOn = true; 
     private bool allSoundsOn = true; 
     private float backgroundVolumeScale = 0.5f; 
-    private static SoundManager soundManager; 
-
-    void Awake() {
-        if (soundManager == null) {
-            DontDestroyOnLoad(this.gameObject); 
-            soundManager = this; 
-        }
-        else {
-            Destroy(this.gameObject); 
-        }
-    }
 
     private void Start() {
         this.setBackgroundMusicVol(PlayerPrefs.GetFloat("MusicVol", 1)); 

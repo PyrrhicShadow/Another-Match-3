@@ -18,6 +18,10 @@ public class SaveData {
 
     public bool isActive(int i) {
         return actives[i]; 
+    } 
+
+    public int activeCount() {
+        return actives.Length; 
     }
 
     public void setStar(int i, int star) {

@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myImage: {fileID: 8600493827027272524}
   mySprite: {fileID: 0}
-  myColor: {r: 0, g: 0, b: 0, a: 0}
+  myColor: {r: 1, g: 1, b: 1, a: 1}
   myText: {fileID: 8600493825891359814}
   goalText: 
 --- !u!1 &8600493827027272530
