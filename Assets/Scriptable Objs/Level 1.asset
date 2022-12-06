@@ -33,17 +33,14 @@ MonoBehaviour:
   backgroundColor: {r: 0.2470588, g: 0.2431373, b: 0.3137255, a: 1}
   levelGoals:
   - numNeeded: 6
-    goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: ruby
+    goalObject: {fileID: 6422950250267594635, guid: 35584c7f5264cff4f82ad48bb9c1323a, type: 3}
   - numNeeded: 6
-    goalSprite: {fileID: -55886626, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 1}
     matchTag: emerald
+    goalObject: {fileID: 4492141300796167634, guid: 06f6c540527b76d4ca9d770edf8618bf, type: 3}
   - numNeeded: 6
-    goalSprite: {fileID: 1611978529, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: diamond
+    goalObject: {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
   reqs:
     gameType: 1
     counter: 100

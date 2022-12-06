@@ -489,7 +489,7 @@ public class Board : MonoBehaviour {
 
     public void BombDmgRow(int row) {
         for (int i = 0; i < width; i++) {
-            if (blockingTiles[i, row].GetComponent<BackgroundTile>() != null) {
+            if (blockingTiles[i, row] != null) {
                 blockingTiles[i, row].TakeDmg(1);
                 if (blockingTiles[i, row].getHp() <= 0) {
                     blockingTiles[i, row] = null; 
@@ -500,7 +500,7 @@ public class Board : MonoBehaviour {
 
     public void BombDmgCol(int col) {
         for (int j = 0; j < height; j++) {
-            if (blockingTiles[col, j].GetComponent<BackgroundTile>() != null) {
+            if (blockingTiles[col, j] != null) {
                 blockingTiles[col, j].TakeDmg(1); 
                 if (blockingTiles[col, j].getHp() <= 0) {
                     blockingTiles[col, j] = null; 

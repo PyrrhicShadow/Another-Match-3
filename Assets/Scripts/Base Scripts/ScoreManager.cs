@@ -7,11 +7,10 @@ using UnityEngine.Localization.Tables;
 
 [System.Serializable]
 public class BlankGoal {
-    [SerializeField] private int numNeeded; 
+    [SerializeField] int numNeeded; 
     private int numCollected;  
-    [SerializeField] private Sprite goalSprite; 
-    [SerializeField] private Color goalSpriteColor = Color.white; 
-    [SerializeField] private string matchTag; 
+    [SerializeField] string matchTag; 
+    [SerializeField] GameObject goalObject; 
 
     public void addCollected(int amt) {
         numCollected += amt; 
@@ -30,7 +29,7 @@ public class BlankGoal {
     }
 
     public string getTag() {
-        return matchTag; 
+        return goalObject.tag; 
     }
 
     public bool isComplete() {
@@ -38,11 +37,11 @@ public class BlankGoal {
     }
 
     public Sprite getSprite() {
-        return goalSprite; 
+        return goalObject.GetComponent<SpriteRenderer>().sprite; 
     }
 
     public Color getSpriteColor() {
-        return goalSpriteColor;
+        return goalObject.GetComponent<SpriteRenderer>().color;
     }
 }
 
