@@ -14,11 +14,20 @@ public class SoundManager : MonoBehaviour {
     private float backgroundVolumeScale = 0.5f; 
 
     private void Start() {
+        LoadSettings(); 
+        backgroundMusic.Play(); 
+    }
+
+    private void LoadSettings() {
         this.setBackgroundMusicVol(PlayerPrefs.GetFloat("MusicVol", 1)); 
         this.setSoundEffectsVol(PlayerPrefs.GetFloat("EffectsVol", 1)); 
 
-        backgroundMusic.Play(); 
-
+        if (PlayerPrefs.GetInt("AllSound", 1) == 1) {
+            allSoundsOn = true;
+        }
+        else {
+            allSoundsOn = false; 
+        }
         if (PlayerPrefs.GetInt("Music", 1) == 1) {
             backgroundMusic.mute = false; 
         }
@@ -30,12 +39,6 @@ public class SoundManager : MonoBehaviour {
         }
         else {
             soundEffectsOn = false; 
-        }
-        if (PlayerPrefs.GetInt("AllSound", 1) == 1) {
-            allSoundsOn = true;
-        }
-        else {
-            allSoundsOn = false; 
         }
         this.setSoundEffects(soundEffectsOn); 
         this.setAllSounds(allSoundsOn); 
@@ -67,6 +70,7 @@ public class SoundManager : MonoBehaviour {
         if (on) {
             backgroundMusic.mute = false; 
             PlayerPrefs.SetInt("Music", 1); 
+            PlayerPrefs.SetInt("AllSound", 1); 
         }
         else {
             backgroundMusic.mute = true; 
@@ -85,6 +89,7 @@ public class SoundManager : MonoBehaviour {
             winNoise.mute = false; 
             loseNoise.mute = false;  
             PlayerPrefs.SetInt("Effects", 1); 
+            PlayerPrefs.SetInt("AllSound", 1); 
         }
         else {
             destroyNoise.mute = true; 
@@ -95,15 +100,17 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void setAllSounds(bool on) {
-        setSoundEffects(on); 
+        setSoundEffects(isSoundEffectsOn()); 
         allSoundsOn = on; 
         if (on) {
-            backgroundMusic.mute = false; 
+            setBackgroundMusic(isBackgroundMusicOn()); 
             jumpNoise.mute = false; 
+            PlayerPrefs.SetInt("AllSound", 1); 
         }
        else {
-            backgroundMusic.mute = true; 
+            setBackgroundMusic(on); 
             jumpNoise.mute = true; 
+            PlayerPrefs.SetInt("AllSound", 0); 
         }
     }
 

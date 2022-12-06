@@ -1503,6 +1503,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1471143417, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1704298522}
+    - target: {fileID: 1471143417, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EffectSounds
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972841235, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1704298522}
+    - target: {fileID: 1972841235, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MusicSounds
+      objectReference: {fileID: 0}
     - target: {fileID: 210344324186288331, guid: e9fb54140c2afbf4bb4b532475fc261a, type: 3}
       propertyPath: m_IsActive
       value: 0

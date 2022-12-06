@@ -9,6 +9,7 @@ public enum GameState {
 
 public enum TileType {
     breakable, blank, locked, blocking, normal 
+    // jelly, blank, licorice, chocolate, normal
 }
 
 [System.Serializable]
@@ -22,18 +23,18 @@ public class Board : MonoBehaviour {
 
     [Header("World")]
     [SerializeField] internal World world; 
-    [SerializeField] private int lvl; 
+    [SerializeField] int lvl; 
 
     [Header("Board properites")]
     public GameState currentState = GameState.pause; 
-    [SerializeField] private int width = 7; 
-    [SerializeField] private int height = 10;  
-    [SerializeField] private int offset = 20; 
-    [SerializeField] private int eyeRatio = 0; // must be between 0 and 100 
+    [SerializeField] int width = 7; 
+    [SerializeField] int height = 10;  
+    [SerializeField] int offset = 20; 
+    [SerializeField] int eyeRatio = 0; // must be between 0 and 100 
     public int balance = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
-    [SerializeField] private GameObject[,] allDots; 
+    [SerializeField] GameObject[,] allDots; 
     internal FindMatches findMatches; 
     internal ScoreManager scoreManager; 
     internal SoundManager soundManager; 
@@ -41,24 +42,26 @@ public class Board : MonoBehaviour {
     private int streakValue = 1; 
 
     [Header("Board components")]
-    [SerializeField] private Dot currentDot; 
-    [SerializeField] private Image moveIndicatorImage;  
-    [SerializeField] private Tile[] boardLayout; 
-    [SerializeField] private BackgroundTile[,] breakableTiles; 
-    [SerializeField] private bool[,] blankSpaces; 
-    [SerializeField] private BackgroundTile[,] lockedTiles; 
-    [SerializeField] private BackgroundTile[,] blockingTiles; 
-    [SerializeField] private GameObject tilePrefab; 
-    [SerializeField] private GameObject breakableTilePrefab; 
-    [SerializeField] private GameObject lockedTilePrefab; 
-    [SerializeField] private GameObject blockingtilePrefab; 
-    [SerializeField] private GameObject destroyEffect; 
-    [SerializeField] private float particleLifetime = 0.5f; 
+    [SerializeField] Dot currentDot; 
+    [SerializeField] Image moveIndicatorImage;  
+    [SerializeField] Tile[] boardLayout; 
+    [SerializeField] BackgroundTile[,] breakableTiles; 
+    [SerializeField] bool[,] blankSpaces; 
+    [SerializeField] BackgroundTile[,] lockedTiles; 
+    [SerializeField] BackgroundTile[,] blockingTiles; 
+
+    [Header("Component prefabs")]
+    [SerializeField] GameObject tilePrefab; 
+    [SerializeField] GameObject breakableTilePrefab; 
+    [SerializeField] GameObject lockedTilePrefab; 
+    [SerializeField] GameObject blockingtilePrefab; 
+    [SerializeField] GameObject destroyEffect; 
+    [SerializeField] float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 
 
     [Header("Dot types")]
-    [SerializeField] private GameObject[] dots; 
-    [SerializeField] private GameObject[] eyes; 
+    [SerializeField] GameObject[] dots; 
+    [SerializeField] GameObject[] eyes; 
 
     // Awake. It's probably before start, right? 
     private void Awake() {
@@ -550,5 +553,12 @@ public class Board : MonoBehaviour {
 
     public void ShuffleBoard() {
         StartCoroutine(ShuffleBoardCo()); 
+    }
+
+    public bool isLockedTile(Dot dot1, Dot dot2) {
+        bool lock1 = lockedTiles[dot1.getX(), dot1.getY()] != null; 
+        bool lock2 = lockedTiles[dot2.getX(), dot2.getY()] != null; 
+        Debug.Log("dot 1: " + lock1 + ", dot 2: " + lock2); 
+        return (lock1 || lock2); 
     }
 }

@@ -10,6 +10,7 @@
 * a diamond placed in a sea of glass: https://unsplash.com/photos/ypk__5RJOBM by Bas van den Eijkhof
 * unnamed pear-cut purple gemstone: https://unsplash.com/photos/7ZmtUtAArRI by Conscious Design
 * diamonds on dark surface: https://www.pexels.com/photo/diamonds-on-dark-surface-5442447/ by The Glorious Studio
+    * recolored to form different gemstones
 * unnamed red gemstone necklace and earring set: https://unsplash.com/photos/EhPih0l5bjw by Victoria Priessnitz
 * unnamed pearl earing: https://www.pexels.com/photo/close-up-photo-of-a-pearl-earring-9428779/ by cottonbro
 * blue emerald cut tanzanite gemstone: https://unsplash.com/photos/Talnaz9Bug0 by Sabrianna
@@ -45,4 +46,4 @@
 
 ## Sounds
 
-* Three Chain Links – Die Historic: https://youtu.be/ZyVq4HF8oRw, Creative Commons Attribution 3.0 - http://bit.ly/RFP_CClicense
+* Three Chain Links – Die Historic: https://youtu.be/ZyVq4HF8oRw, [Creative Commons Attribution 3.0](http://bit.ly/RFP_CClicense)

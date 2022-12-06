@@ -11,13 +11,18 @@ For information on what features are included in which builds, see the [Git Repo
 
 ## Features
 
-* Match 3, 4, 5! 
+* Match 3, 4, and 5! 
 * <s>5 12 6</s>multiple custom levels!
 * Both time-based and move-limited levels 
 * Multiple tile-types with different mechanics!
+    * breakable tiles
+    * blank tiles
+    * locked tiles (in progress)
+    * blocking tiles (in progress)
 * Save system
 * Music and sounds! (sorta) 
 * Beautiful royalty-free art (see Credits for sources)
+* Light story for those who dig that sorta thing
 * Available in English, French, and toki pona!
     * Japanese and Polish under construction
     * more languages on request and with help
@@ -29,7 +34,7 @@ For information on what features are included in which builds, see the [Git Repo
 * a number of secret "debug" codes 
 
 <details>
-    <summary><i>Click for debug codes</i></summary>
+    <summary><i>Click for secrets</i></summary>
 
 <p>These are technically debugging tools but I left them in here as cheat-codes/easter eggs. Have fun!</p>
 

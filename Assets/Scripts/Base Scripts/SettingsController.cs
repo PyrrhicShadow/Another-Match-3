@@ -112,7 +112,7 @@ public class SettingsController : MonoBehaviour {
     private void Update() {
         if (paused && !pauseMenu.activeInHierarchy) {
             pauseMenu.SetActive(true); 
-            Debug.Log("Make pause menu active"); 
+            // Debug.Log("Make pause menu active"); 
             if (board != null) {
                 board.currentState = GameState.pause; 
             }

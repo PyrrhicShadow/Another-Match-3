@@ -32,7 +32,7 @@ public class RandomDot : MonoBehaviour {
         else {
             int rand = Random.Range(0, dots.Length); 
             myImage.sprite = dots[rand]; 
-            Debug.Log("Sprite Changed"); 
+            // Debug.Log("Sprite Changed"); 
         }
     }
 
