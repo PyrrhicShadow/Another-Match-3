@@ -71,7 +71,7 @@ public class GameData : MonoBehaviour {
     public static GameData gameData; 
     [SerializeField] internal World world; 
     public SaveData saveData; 
-    // Start is called before the first frame update
+    public string[] debugData; 
     void Awake() {
         if (gameData == null) {
             DontDestroyOnLoad(this.gameObject); 
@@ -83,10 +83,6 @@ public class GameData : MonoBehaviour {
 
         Load(); 
     }
-
-    private void Start() {
-    }
-
     public void Save() {
         // create a binary formatter that can read binary files 
         BinaryFormatter formatter = new BinaryFormatter(); 
@@ -106,6 +102,7 @@ public class GameData : MonoBehaviour {
         file.Close(); 
 
         // Debug.Log("Saved"); 
+        SaveDebugData(); 
     }
 
     public void Load() {
@@ -142,6 +139,18 @@ public class GameData : MonoBehaviour {
             ClearSave(); 
             Load(); 
         }
+        if (File.Exists(Application.persistentDataPath + "/playerdebug.txt")) {
+            // Read debug Data
+            debugData = System.IO.File.ReadAllLines(Application.persistentDataPath + "/playerdebug.txt"); 
+        }
+        else {
+            debugData = new String[world.levels.Length];
+            SaveDebugData(); 
+        }
+    }
+
+    public async void SaveDebugData() {
+        await File.WriteAllLinesAsync(Application.persistentDataPath + "/playerdebug.txt", debugData); 
     }
 
     private void OnDisable() {

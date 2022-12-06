@@ -7,42 +7,13 @@ using UnityEngine.Localization.Tables;
 
 [System.Serializable]
 public class BlankGoal {
-    [SerializeField] int numNeeded; 
-    private int numCollected;  
-    [SerializeField] string matchTag; 
+    public int numNeeded { get; set; } 
+    public int numCollected { get; set; } 
     [SerializeField] GameObject goalObject; 
-
-    public void addCollected(int amt) {
-        numCollected += amt; 
-    }
-
-    public void clearCollected() {
-        numCollected = 0; 
-    }
-
-    public int getNumCollected() {
-        return numCollected; 
-    }
-
-    public int getNumNeeded() {
-        return numNeeded; 
-    }
-
-    public string getTag() {
-        return goalObject.tag; 
-    }
-
-    public bool isComplete() {
-        return numCollected >= numNeeded; 
-    }
-
-    public Sprite getSprite() {
-        return goalObject.GetComponent<SpriteRenderer>().sprite; 
-    }
-
-    public Color getSpriteColor() {
-        return goalObject.GetComponent<SpriteRenderer>().color;
-    }
+    public Sprite sprite { get { return goalObject.GetComponent<SpriteRenderer>().sprite; } }
+    public Color color { get { return goalObject.GetComponent<SpriteRenderer>().color; } }
+    public string tag { get { return goalObject.tag; } }
+    public bool isComplete { get { return numCollected >= numNeeded; } }
 }
 
 public enum GameType {
@@ -51,20 +22,8 @@ public enum GameType {
 
 [System.Serializable]
 public class EndGameReqs {
-    [SerializeField] private GameType gameType; 
-    [SerializeField] private int counter; 
-
-    public int getCounter() {
-        return counter; 
-    }
-
-    public void setCouter(int amt) {
-        counter = amt; 
-    }
-
-    public GameType getGameType() {
-        return gameType; 
-    }
+    public GameType gameType { get; private set; }
+    public int counter { get; set; } 
 }
 public class ScoreManager : MonoBehaviour {
     
@@ -72,17 +31,16 @@ public class ScoreManager : MonoBehaviour {
     private MenuController menuController;
 
     [Header("Score Manager")]
-    [SerializeField] int score; 
-    private int lastScore; 
-    private int scoreGoal;
-    private int stars; 
     [SerializeField] Text scoreText; 
     [SerializeField] Image scoreBar; 
+    public int score {get; private set;} 
+    private int lastScore; 
+    private int scoreGoal;
+    public int stars {get; private set;} 
 
     [Header ("Background Manager")]
-    [SerializeField]
-    private Image background; 
-    private int bgTier; 
+    [SerializeField] Image background; 
+    public int bgTier { get; private set; } 
 
     [Header("Goal Manager")]
     [SerializeField] int level; 
@@ -94,7 +52,6 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] GameObject goalGameParent; 
 
     [Header("Endgame Manager")]
-    [SerializeField] EndGameReqs reqs; 
     [SerializeField] GameObject reqMoveText;
     [SerializeField] GameObject reqTimeText;  
     [SerializeField] GameObject winPanel; 
@@ -105,6 +62,7 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] Text loseScore; 
     [SerializeField] Image reqBar; 
     [SerializeField] Text counterText; 
+    public EndGameReqs reqs {get; private set;} 
     private int counter; 
     private float timer; 
 
@@ -161,7 +119,7 @@ public class ScoreManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (reqs.getGameType() == GameType.time && counter > 0) {
+        if (reqs.gameType == GameType.time && counter > 0) {
             timer -= Time.deltaTime; 
             if (timer <= 0) {
                 DecreaseCounter(); 
@@ -199,12 +157,12 @@ public class ScoreManager : MonoBehaviour {
             
             // set the image and text of the goal 
             GoalPanel startPanel = startGoal.GetComponent<GoalPanel>(); 
-            startPanel.setSprite(levelGoals[i].getSprite(), levelGoals[i].getSpriteColor()); 
-            startPanel.setText(levelGoals[i].getNumNeeded().ToString()); 
+            startPanel.setSprite(levelGoals[i].sprite, levelGoals[i].color); 
+            startPanel.setText(levelGoals[i].numNeeded.ToString()); 
 
             GoalPanel gamePanel = gameGoal.GetComponent<GoalPanel>(); 
-            gamePanel.setSprite(levelGoals[i].getSprite(), levelGoals[i].getSpriteColor()); 
-            gamePanel.setText("0/" + levelGoals[i].getNumNeeded()); 
+            gamePanel.setSprite(levelGoals[i].sprite, levelGoals[i].color); 
+            gamePanel.setText("0/" + levelGoals[i].numNeeded); 
 
             // add this goal to list of current goals
             currentGoals.Add(gamePanel); 
@@ -214,10 +172,10 @@ public class ScoreManager : MonoBehaviour {
     public void UpdateGoals() {
         int goalsCompleted = 0;
         for (int i = 0; i < levelGoals.Length; i++) {
-            currentGoals[i].setText(levelGoals[i].getNumCollected().ToString() + "/" + levelGoals[i].getNumNeeded()); 
-            if (levelGoals[i].isComplete()) {
+            currentGoals[i].setText(levelGoals[i].numCollected.ToString() + "/" + levelGoals[i].numNeeded); 
+            if (levelGoals[i].isComplete) {
                 goalsCompleted++; 
-                currentGoals[i].setText(levelGoals[i].getNumNeeded().ToString() + "/" + levelGoals[i].getNumNeeded()); 
+                currentGoals[i].setText(levelGoals[i].numNeeded.ToString() + "/" + levelGoals[i].numNeeded); 
             }
         }
 
@@ -231,19 +189,19 @@ public class ScoreManager : MonoBehaviour {
 
     public void compareGoal(string goal) {
         for (int i = 0; i < levelGoals.Length; i++) {
-            if (goal == levelGoals[i].getTag()) {
-                levelGoals[i].addCollected(1); 
+            if (goal == levelGoals[i].tag) {
+                levelGoals[i].numCollected++; 
             }
         }
     }
 
     private void SetUpReqs() {
-        counter = reqs.getCounter(); 
-        if (reqs.getGameType() == GameType.moves) {
+        counter = reqs.counter; 
+        if (reqs.gameType == GameType.moves) {
             reqMoveText.SetActive(true); 
             reqTimeText.SetActive(false); 
         }
-        else if (reqs.getGameType() == GameType.time) {
+        else if (reqs.gameType == GameType.time) {
             reqMoveText.SetActive(false); 
             reqTimeText.SetActive(true); 
             timer = 1; 
@@ -264,7 +222,7 @@ public class ScoreManager : MonoBehaviour {
         }
 
         if (reqBar != null) {
-            reqBar.fillAmount = (float)counter / (float)reqs.getCounter(); 
+            reqBar.fillAmount = (float)counter / (float)reqs.counter; 
         }
 
         if (counter <= 0) {
@@ -291,10 +249,6 @@ public class ScoreManager : MonoBehaviour {
         counterText.text = counter.ToString(); 
         loseScore.text = score.ToString(); 
         menuController.loseGame(); 
-    }
-
-    public GameType getGameType() {
-        return reqs.getGameType(); 
     }
 
     private void UpdateScore() {
@@ -352,15 +306,6 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-    /// <summary>get score </summary>
-    public int getScore() {
-        return score; 
-    }
-
-    public int getStars() {
-        return stars; 
-    }
-
     /// <summary>clear score </summary>
     public void clearScore() {
         score = 0; 
@@ -368,7 +313,7 @@ public class ScoreManager : MonoBehaviour {
 
     public void clearLevelGoals() {
         foreach (BlankGoal goal in levelGoals) {
-            goal.clearCollected();
+            goal.numCollected = 0;
         }
     }
 }
