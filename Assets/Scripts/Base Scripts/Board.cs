@@ -321,7 +321,7 @@ public class Board : MonoBehaviour {
         int nullCount = 0; 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (allDots[i, j] == null) {
+                if (allDots[i, j] == null && !nullSpace(i, j)) {
                     nullCount++; 
                 }
                 else if (nullCount > 0) {
@@ -340,7 +340,7 @@ public class Board : MonoBehaviour {
     private void RefillBoard() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (allDots[i, j] == null && !blankSpaces[i, j] && !blockingTiles[i, j]) {
+                if (allDots[i, j] == null && !nullSpace(i, j)) {
                     Vector2 tempPos = new Vector2(i, j + offset); 
                     int dice = Random.Range(0, 100); 
                     int dotToUse = Random.Range(0, dots.Length); 
@@ -471,7 +471,7 @@ public class Board : MonoBehaviour {
         //for ever spot on the board . . . 
         for (int k = 0; k < width; k++) {
             for (int l = 0; l < height; l++) {
-                if (!blankSpaces[k, l] && !blockingTiles[k, l]) {
+                if (nullSpace(k, l)) {
                     // pick random number (dot)
                     int dotToUse = Random.Range(0, newBoard.Count); 
                     // Make sure using this dot here doesn't create a match 
@@ -499,7 +499,7 @@ public class Board : MonoBehaviour {
     }
 
     private IEnumerator WaitForSecondsCo() {
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(refillDelay); 
     }
 
 /********************* Public Getters and Setters *********************/ 
@@ -573,5 +573,14 @@ public class Board : MonoBehaviour {
 
     public bool isLockedTile(Dot dot) {
         return lockedTiles[dot.getX(), dot.getY()] != null;
+    }
+
+    public bool nullSpace(int i, int j) {
+        if (blankSpaces[i, j] || blockingTiles[i, j]) {
+            return true; 
+        }
+        else {
+            return false; 
+        }
     }
 }
