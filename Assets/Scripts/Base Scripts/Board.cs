@@ -116,7 +116,7 @@ public class Board : MonoBehaviour {
         // set up board
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (!blankSpaces[i, j] && !blockingTiles[i, j]) {
+                if (!nullSpace(i, j)) {
                     Vector2 tempPos = new Vector2(i, j); 
                     // create a backgroundTile
                     GameObject backgroundTile = Instantiate(tilePrefab, tempPos, Quaternion.identity); 
@@ -276,7 +276,7 @@ public class Board : MonoBehaviour {
                 }
             }
 
-            // DamageConcrete(x, y); 
+            // DamageBlocking(x, y); 
 
             if (scoreManager != null) {
                 // add the broken dot to the score 
@@ -299,6 +299,41 @@ public class Board : MonoBehaviour {
         }
     }
 
+    private void DamageBlocking(int x, int y) {
+        if (x > 0) {
+            if (blockingTiles[x - 1, y]) {
+                blockingTiles[x - 1, y].TakeDmg(1); 
+                if (blockingTiles[x - 1, y].getHp() <= 0) {
+                    blockingTiles[x - 1, y] = null; 
+                }
+            }
+        }
+        if (x < width - 1) {
+            if (blockingTiles[x + 1, y]) {
+                blockingTiles[x + 1, y].TakeDmg(1); 
+                if (blockingTiles[x + 1, y].getHp() <= 0) {
+                    blockingTiles[x + 1, y] = null; 
+                }
+            }
+        }
+        if (y > 0) {
+            if (blockingTiles[x, y - 1]) {
+                blockingTiles[x, y - 1].TakeDmg(1); 
+                if (blockingTiles[x, y - 1].getHp() <= 0) {
+                    blockingTiles[x, y - 1] = null; 
+                }
+            }
+        }
+        if (y < height - 1) {
+            if (blockingTiles[x, y + 1]) {
+                blockingTiles[x, y + 1].TakeDmg(1); 
+                if (blockingTiles[x, y + 1].getHp() <= 0) {
+                    blockingTiles[x, y + 1] = null; 
+                }
+            }
+        }
+    }
+
     /// <summary>Loops through the entire board and destroys matches</summary>
     public void DestroyMatches() {
         if (currentDot != null) {
@@ -318,23 +353,28 @@ public class Board : MonoBehaviour {
 
     /// <summary>Makes dots fall when the dot under them is null</summary>
     private IEnumerator DecreaseRowCo() {
-        int nullCount = 0; 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (allDots[i, j] == null && !nullSpace(i, j)) {
-                    nullCount++; 
-                }
-                else if (nullCount > 0) {
-                    allDots[i, j].GetComponent<Dot>().setY(allDots[i, j].GetComponent<Dot>().getY() - nullCount); 
-                    allDots[i, j] = null; 
+        for (int i = 0; i < width; i ++) {
+            for (int j = 0; j < height; j ++) {
+                //if the current spot isn't blank and is empty. . . 
+                if(allDots[i,j] == null && !nullSpace(i, j)) {
+                    //loop from the space above to the top of the column
+                    for (int k = j + 1; k < height; k++) {
+                        //if a dot is found. . .
+                        if(allDots[i, k] != null) {
+                            //move that dot to this empty space
+                            allDots[i, k].GetComponent<Dot>().setY(j);
+                            //set that spot to be null
+                            allDots[i, k] = null;
+                            //break out of the loop;
+                            break;
+                        }
+                    }
                 }
             }
-            nullCount = 0; 
         }
-        yield return new WaitForSeconds(refillDelay); 
-
-        StartCoroutine(FillBoardCo()); 
-    }
+		yield return new WaitForSeconds(refillDelay * 0.5f);
+		StartCoroutine(FillBoardCo());
+	}
 
     /// <summary>Refills dots from the top of the board</summary>
     private void RefillBoard() {
@@ -357,6 +397,10 @@ public class Board : MonoBehaviour {
                     dot.GetComponent<Dot>().setX(i); 
                     dot.GetComponent<Dot>().setY(j); 
                     dot.GetComponent<Dot>().updatePrevXY(); 
+                    // Debug.Log("(" + i + ", " + j + ") is null and is not a nullSpace"); 
+                }
+                else {
+                    // Debug.Log("(" + i + ", " + j + ") is not null or is a nullSpace"); 
                 }
             }
         }
@@ -404,7 +448,7 @@ public class Board : MonoBehaviour {
     public void SwitchPieces(int x, int y, Vector2 dir) {
         // take other piece and save it in holder 
         GameObject holder = allDots[x + (int)dir.x, y + (int)dir.y] as GameObject; 
-        if (holder.GetComponent<Dot>() != null) {
+        if (holder != null) {
             allDots[x + (int)dir.x, y + (int)dir.y] = allDots[x, y];
             allDots[x, y] = holder; 
         }
@@ -471,7 +515,7 @@ public class Board : MonoBehaviour {
         //for ever spot on the board . . . 
         for (int k = 0; k < width; k++) {
             for (int l = 0; l < height; l++) {
-                if (nullSpace(k, l)) {
+                if (!nullSpace(k, l)) {
                     // pick random number (dot)
                     int dotToUse = Random.Range(0, newBoard.Count); 
                     // Make sure using this dot here doesn't create a match 
@@ -577,9 +621,11 @@ public class Board : MonoBehaviour {
 
     public bool nullSpace(int i, int j) {
         if (blankSpaces[i, j] || blockingTiles[i, j]) {
+            Debug.Log("(" + i + ", " + j + ") is a null space"); 
             return true; 
         }
         else {
+            Debug.Log("(" + i + ", " + j + ") is not a null space"); 
             return false; 
         }
     }

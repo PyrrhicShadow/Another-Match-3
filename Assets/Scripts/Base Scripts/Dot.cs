@@ -129,10 +129,12 @@ public class Dot : MonoBehaviour {
             findMatches.MatchColors(otherDot.tag); 
             this.setMatched(true); 
         }
-        else if (otherDot.GetComponent<Dot>().isColorBomb()) {
-            // The other dot is a color bomb, and this dot is the color to destroy
-            findMatches.MatchColors(this.gameObject.tag); 
-            otherDot.GetComponent<Dot>().setMatched(true); 
+        else if (otherDot != null) {
+            if (otherDot.GetComponent<Dot>().isColorBomb()) {
+                // The other dot is a color bomb, and this dot is the color to destroy
+                findMatches.MatchColors(this.gameObject.tag); 
+                otherDot.GetComponent<Dot>().setMatched(true); 
+            }
         }
         
         if (otherDot != null) {
@@ -225,15 +227,10 @@ public class Dot : MonoBehaviour {
     /// <summary>swaps this dot with a left, right, up, or down neighbor dot</summary>
     private void SwapDots(int x, int y) {
         otherDot = board.getDot(x, y); 
-        if (!board.isLockedTile(this)) {
-            if (otherDot != null) {
-                if (!board.isLockedTile(otherDot.GetComponent<Dot>())){
-                otherDot.GetComponent<Dot>().setX(this.x); 
-                otherDot.GetComponent<Dot>().setY(this.y); 
-                }
-                else {
-                    board.currentState = GameState.move; 
-                }
+        if (!board.isLockedTile(this) && otherDot != null) {
+            if (!board.isLockedTile(otherDot.GetComponent<Dot>())){
+            otherDot.GetComponent<Dot>().setX(this.x); 
+            otherDot.GetComponent<Dot>().setY(this.y); 
             }
             else {
                 board.currentState = GameState.move; 

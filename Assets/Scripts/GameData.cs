@@ -105,7 +105,7 @@ public class GameData : MonoBehaviour {
         // close data stream *important*
         file.Close(); 
 
-        Debug.Log("Saved"); 
+        // Debug.Log("Saved"); 
     }
 
     public void Load() {
@@ -135,7 +135,7 @@ public class GameData : MonoBehaviour {
                 Load(); 
             }
 
-            Debug.Log("Save loaded from file"); 
+            // Debug.Log("Save loaded from file"); 
         }
         else { 
             Debug.Log("No saves found: fresh save created"); 
