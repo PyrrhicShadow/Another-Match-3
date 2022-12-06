@@ -17,31 +17,31 @@ MonoBehaviour:
   boardLayout:
   - x: 2
     y: 4
-    tile: 0
+    tile: 3
   - x: 2
     y: 5
-    tile: 0
+    tile: 3
   - x: 2
     y: 6
-    tile: 0
+    tile: 3
   - x: 3
     y: 4
-    tile: 0
+    tile: 3
   - x: 3
     y: 5
-    tile: 0
+    tile: 3
   - x: 3
     y: 6
-    tile: 0
+    tile: 3
   - x: 4
     y: 4
-    tile: 0
+    tile: 3
   - x: 4
     y: 5
-    tile: 0
+    tile: 3
   - x: 4
     y: 6
-    tile: 0
+    tile: 3
   dots:
   - {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
   - {fileID: 4492141300796167634, guid: 06f6c540527b76d4ca9d770edf8618bf, type: 3}

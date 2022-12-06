@@ -225,10 +225,15 @@ public class Dot : MonoBehaviour {
     /// <summary>swaps this dot with a left, right, up, or down neighbor dot</summary>
     private void SwapDots(int x, int y) {
         otherDot = board.getDot(x, y); 
-        if (!board.isLockedTile(this) && !board.isLockedTile(otherDot.GetComponent<Dot>())) {
+        if (!board.isLockedTile(this)) {
             if (otherDot != null) {
+                if (!board.isLockedTile(otherDot.GetComponent<Dot>())){
                 otherDot.GetComponent<Dot>().setX(this.x); 
                 otherDot.GetComponent<Dot>().setY(this.y); 
+                }
+                else {
+                    board.currentState = GameState.move; 
+                }
             }
             else {
                 board.currentState = GameState.move; 

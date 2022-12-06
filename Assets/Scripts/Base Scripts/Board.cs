@@ -9,7 +9,7 @@ public enum GameState {
 
 public enum TileType {
     breakable, blank, locked, blocking, normal 
-    // jelly, blank, licorice, chocolate, normal
+    // jelly, blank, licorice, icing, normal
 }
 
 [System.Serializable]
@@ -54,7 +54,7 @@ public class Board : MonoBehaviour {
     [SerializeField] GameObject tilePrefab; 
     [SerializeField] GameObject breakableTilePrefab; 
     [SerializeField] GameObject lockedTilePrefab; 
-    [SerializeField] GameObject blockingtilePrefab; 
+    [SerializeField] GameObject blockingTilePrefab; 
     [SerializeField] GameObject destroyEffect; 
     [SerializeField] float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 
@@ -108,8 +108,10 @@ public class Board : MonoBehaviour {
     /// <summary>Creates board, tiles, and dots on board </summary>
     private void SetUp() {
 
-        // put blank tiles in place
+        // place blank tiles
         GenerateBlankTiles(); 
+        // place blocking tiles
+        GenerateBlockingTiles(); 
 
         // set up board
         for (int i = 0; i < width; i++) {
@@ -201,6 +203,20 @@ public class Board : MonoBehaviour {
                 Vector2 tempPos = new Vector2(boardLayout[i].x, boardLayout[i].y); 
                 GameObject tile = Instantiate(lockedTilePrefab, tempPos, Quaternion.identity);
                 lockedTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>(); 
+                tile.transform.parent = this.transform; 
+            }
+        }
+    }
+
+    private void GenerateBlockingTiles() {
+        // look at all tiles in layout 
+        for (int i = 0; i < boardLayout.Length; i++) {
+            // if tile is blocking 
+            if (boardLayout[i].tile == TileType.blocking) {
+                // create locked tile at that position 
+                Vector2 tempPos = new Vector2(boardLayout[i].x, boardLayout[i].y); 
+                GameObject tile = Instantiate(blockingTilePrefab, tempPos, Quaternion.identity);
+                blockingTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>(); 
                 tile.transform.parent = this.transform; 
             }
         }
@@ -324,7 +340,7 @@ public class Board : MonoBehaviour {
     private void RefillBoard() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (allDots[i, j] == null) {
+                if (allDots[i, j] == null && !blankSpaces[i, j] && !blockingTiles[i, j]) {
                     Vector2 tempPos = new Vector2(i, j + offset); 
                     int dice = Random.Range(0, 100); 
                     int dotToUse = Random.Range(0, dots.Length); 
@@ -455,7 +471,7 @@ public class Board : MonoBehaviour {
         //for ever spot on the board . . . 
         for (int k = 0; k < width; k++) {
             for (int l = 0; l < height; l++) {
-                if (!blankSpaces[k, l] && blockingTiles[k, l] == null) {
+                if (!blankSpaces[k, l] && !blockingTiles[k, l]) {
                     // pick random number (dot)
                     int dotToUse = Random.Range(0, newBoard.Count); 
                     // Make sure using this dot here doesn't create a match 
@@ -554,7 +570,7 @@ public class Board : MonoBehaviour {
     public void ShuffleBoard() {
         StartCoroutine(ShuffleBoardCo()); 
     }
-    
+
     public bool isLockedTile(Dot dot) {
         return lockedTiles[dot.getX(), dot.getY()] != null;
     }

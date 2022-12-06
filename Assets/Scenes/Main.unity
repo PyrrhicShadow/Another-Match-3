@@ -1134,7 +1134,7 @@ MonoBehaviour:
   tilePrefab: {fileID: 7174289057552050543, guid: eb2015a82614e6547ade11a5a6f372ec, type: 3}
   breakableTilePrefab: {fileID: 4594637226539004720, guid: f3a73fc63b0cff94eafcd750791dd238, type: 3}
   lockedTilePrefab: {fileID: 6176897707943177935, guid: e0eefcbfbc84b8845a257e3afea95c7d, type: 3}
-  blockingtilePrefab: {fileID: 456718300741076894, guid: 65a3f67898bda124cbbbfef438d8a587, type: 3}
+  blockingTilePrefab: {fileID: 456718300741076894, guid: 65a3f67898bda124cbbbfef438d8a587, type: 3}
   destroyEffect: {fileID: 8152617049232996360, guid: cdf9d99e968553e4a87dc5bf8659fb56, type: 3}
   particleLifetime: 0.5
   dots:

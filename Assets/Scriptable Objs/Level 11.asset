@@ -74,9 +74,9 @@ MonoBehaviour:
     goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: ruby
   - numNeeded: 6
-    goalSprite: {fileID: 21300000, guid: 3b4355bc3aed0434794eb822b8987fc2, type: 3}
-    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-    matchTag: breakable
+    goalSprite: {fileID: 21300000, guid: d24e6d8f1e3a2a640ad96beb7230a439, type: 3}
+    goalSpriteColor: {r: 0.26477394, g: 0.30581415, b: 0.3207547, a: 1}
+    matchTag: locked
   reqs:
     gameType: 0
     counter: 100
