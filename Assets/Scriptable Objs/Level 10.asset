@@ -15,8 +15,17 @@ MonoBehaviour:
   width: 7
   height: 11
   boardLayout:
-  - x: 4
-    y: 8
+  - x: 0
+    y: 0
+    tile: 4
+  - x: 0
+    y: 10
+    tile: 4
+  - x: 6
+    y: 0
+    tile: 4
+  - x: 6
+    y: 10
     tile: 4
   dots:
   - {fileID: 8614924838474643066, guid: 5228ddf112f676946a3116a178d737c2, type: 3}
@@ -48,8 +57,8 @@ MonoBehaviour:
     matchTag: diamond
     goalObject: {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
   - numNeeded: 6
-    matchTag: pearl
-    goalObject: {fileID: 7226521100336894959, guid: a5d791a24f8ce66428b0404c0e92cf9b, type: 3}
+    matchTag: cancer
+    goalObject: {fileID: 3811408026724356143, guid: 422e1bd5dfa26c040bf26d4858c3bff1, type: 3}
   reqs:
     gameType: 0
     counter: 100

@@ -149,10 +149,10 @@ public class Dot : MonoBehaviour {
             } 
             else { 
                 if (scoreManager != null) {
-                    if (scoreManager.getGameType() == GameType.moves) {
+                    if (scoreManager.reqs.gameType == GameType.moves) {
                         scoreManager.DecreaseCounter(); 
                     } 
-                    else if (scoreManager.getGameType() == GameType.time) {
+                    else if (scoreManager.reqs.gameType == GameType.time) {
 
                     }
                 }

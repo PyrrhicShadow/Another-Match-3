@@ -31,25 +31,26 @@ public class Board : MonoBehaviour {
     [SerializeField] int height = 10;  
     [SerializeField] int offset = 20; 
     [SerializeField] int eyeRatio = 0; // must be between 0 and 100 
-    public int balance = 500; // controls the pace at which the game moves
+    public int balance { get; private set; } = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] GameObject[,] allDots; 
-    internal FindMatches findMatches; 
-    internal ScoreManager scoreManager; 
-    internal SoundManager soundManager; 
-    internal FloatingTextManager floatingTextManager; 
+    public FindMatches findMatches { get; private set; }
+    public ScoreManager scoreManager { get; private set; } 
+    public SoundManager soundManager { get; private set; } 
+    public FloatingTextManager floatingTextManager { get; private set; }
     private int streakValue = 1; 
+    private bool cancerDmg = false; 
 
     [Header("Board components")]
     [SerializeField] Dot currentDot; 
     [SerializeField] Image moveIndicatorImage;  
     [SerializeField] Tile[] boardLayout; 
-    [SerializeField] BackgroundTile[,] breakableTiles; 
-    [SerializeField] bool[,] blankSpaces; 
-    [SerializeField] BackgroundTile[,] lockedTiles; 
-    [SerializeField] BackgroundTile[,] blockingTiles; 
-    [SerializeField] BackgroundTile[,] cancerTiles; 
+    private BackgroundTile[,] breakableTiles; 
+    private bool[,] blankSpaces; 
+    private BackgroundTile[,] lockedTiles; 
+    private BackgroundTile[,] blockingTiles; 
+    private BackgroundTile[,] cancerTiles; 
 
     [Header("Component prefabs")]
     [SerializeField] GameObject tilePrefab; 
@@ -305,11 +306,6 @@ public class Board : MonoBehaviour {
             DamageBlocking(x, y); 
             DamageCancer(x, y); 
 
-            // if (!cancerDmg) {
-            //     SpawnCancerTile(); 
-            // }
-            // cancerDmg = false; 
-
             if (scoreManager != null) {
                 // add the broken dot to the score 
                 scoreManager.IncreaseScore(dot.getPoints() * streakValue); 
@@ -398,7 +394,7 @@ public class Board : MonoBehaviour {
                         scoreManager.IncreaseScore(cancerTiles[x - 1, y].getPoints() * streakValue); 
                     }
                     cancerTiles[x - 1, y] = null; 
-                    // cancerDmg = true; 
+                    cancerDmg = true; 
                 }
             }
         }
@@ -410,7 +406,7 @@ public class Board : MonoBehaviour {
                         scoreManager.IncreaseScore(cancerTiles[x + 1, y].getPoints() * streakValue); 
                     }
                     cancerTiles[x + 1, y] = null; 
-                    // cancerDmg = true; 
+                    cancerDmg = true; 
                 }
             }
         }
@@ -422,7 +418,7 @@ public class Board : MonoBehaviour {
                         scoreManager.IncreaseScore(cancerTiles[x, y - 1].getPoints() * streakValue); 
                     }
                     cancerTiles[x, y - 1] = null; 
-                    // cancerDmg = true; 
+                    cancerDmg = true; 
                 }
             }
         }
@@ -434,7 +430,7 @@ public class Board : MonoBehaviour {
                         scoreManager.IncreaseScore(cancerTiles[x, y + 1].getPoints() * streakValue); 
                     }
                     cancerTiles[x, y + 1] = null; 
-                    // cancerDmg = true; 
+                    cancerDmg = true; 
                 }
             }
         }
@@ -528,12 +524,14 @@ public class Board : MonoBehaviour {
         yield return new WaitForSeconds(refillDelay * 0.5f); 
 
         while(MatchesOnBoard()) {
-            streakValue ++; 
+            streakValue++; 
             DestroyMatches(); 
             yield return new WaitForSeconds(refillDelay); 
         }
         findMatches.getCurrentMatches().Clear(); 
         currentDot = null; 
+
+        SpawnCancerTiles(); 
 
         if (isDeadLocked()) {
             Debug.Log("Deadlocked!"); 
@@ -541,6 +539,8 @@ public class Board : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(refillDelay); 
+        cancerDmg = false; 
+
         if (currentState == GameState.wait) {
             currentState = GameState.move; 
         }
@@ -641,6 +641,62 @@ public class Board : MonoBehaviour {
         // check for deadlock 
         if (isDeadLocked()) {
             ShuffleBoard(); 
+        }
+    }
+
+    private void SpawnCancerTiles() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (cancerTiles[i, j] && !cancerDmg) {
+                    Debug.Log("Spawn cancer tile");
+                    SpawnCancerTile(); 
+                    return; 
+                }
+            }
+        }
+    }
+
+    private Vector2 CancerAdjacent(int x, int y) {
+        // have a dot to the right, return right direction
+        if (x < width - 1 && allDots[x + 1, y]) {
+            return Vector2.right; 
+        }
+        // have a dot to the left, return left direction
+        if (x > 0 && allDots[x - 1, y]) {
+            return Vector2.left; 
+        }
+        if (y < height - 1 && allDots[x, y + 1]) {
+            return Vector2.up; 
+        }
+        if (y > 0 && allDots[x, y - 1]) {
+            return Vector2.down; 
+        }
+
+        return Vector2.zero; 
+    }
+
+    private void SpawnCancerTile() {
+        bool cancer = false; 
+        int loops = 0; 
+
+        while (!cancer && loops < (width * height)) {
+            // choose a random spot on the board
+            int newX = Random.Range(0, width); 
+            int newY = Random.Range(0, height); 
+            // if a cancer piece exists at this spot, try to spawn a new one
+            if (cancerTiles[newX, newY]) {
+                Vector2 adj = CancerAdjacent(newX, newY); 
+                if (adj != Vector2.zero) {
+                    // Destroy the dot at chosen position
+                    Destroy(allDots[newX + (int)adj.x, newY + (int)adj.y]); 
+                    Vector2 tempPos = new Vector2(newX + adj.x, newY + adj.y); 
+                    GameObject tile = Instantiate(cancerTilePrefab, tempPos, Quaternion.identity); 
+                    tile.transform.parent = this.transform; 
+                    cancerTiles[(int)tempPos.x, (int)tempPos.y] = tile.GetComponent<BackgroundTile>(); 
+                    cancer = true; 
+                }
+            }
+            loops++; 
         }
     }
 
