@@ -98,7 +98,7 @@ public class Board : MonoBehaviour {
         blockingTiles = new BackgroundTile[width, height]; 
         cancerTiles = new BackgroundTile[width, height]; 
 
-        // peer objects
+        // child and peer objects
         findMatches = gameObject.GetComponent<FindMatches>(); 
         scoreManager = gameObject.GetComponent<ScoreManager>(); 
         soundManager = FindObjectOfType<SoundManager>(); 
@@ -141,8 +141,8 @@ public class Board : MonoBehaviour {
 
                     GameObject dotObj = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
                     Dot dot = dotObj.GetComponent<Dot>(); 
-                    dot.setX(i); 
-                    dot.setY(j); 
+                    dot.x = i; 
+                    dot.y = j; 
                     dot.updatePrevXY(); 
                     dotObj.transform.parent = this.transform; 
                     //dot.name = "dot (" + i + ", " + j + ")";
@@ -278,14 +278,14 @@ public class Board : MonoBehaviour {
     /// <summary>Checks findMatches for bomb-making, adds score, breaks breakable tiles, then destroys matched dot</summary>
     private void DestroyMatchesAt(int x, int y) {
         Dot dot = allDots[x, y].GetComponent<Dot>(); 
-        if (dot.isMatched()) {
+        if (dot.isMatched) {
 
             // checks if a tile needs to be broken, then breaks it
             if (breakableTiles[x, y] != null) {
                 breakableTiles[x, y].TakeDmg(1); 
-                if (breakableTiles[x, y].getHp() <= 0) {
+                if (breakableTiles[x, y].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(breakableTiles[x, y].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(breakableTiles[x, y].points * streakValue); 
                     }
                    breakableTiles[x, y] = null; 
                 }
@@ -294,9 +294,9 @@ public class Board : MonoBehaviour {
             // checks if a tile needs to be unlocked, then unlocks it
             if (lockedTiles[x, y] != null) {
                 lockedTiles[x, y].TakeDmg(1); 
-                if (lockedTiles[x, y].getHp() <= 0) {
+                if (lockedTiles[x, y].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(lockedTiles[x, y].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(lockedTiles[x, y].points * streakValue); 
                     }
                     lockedTiles[x, y] = null; 
                 }
@@ -308,7 +308,7 @@ public class Board : MonoBehaviour {
 
             if (scoreManager != null) {
                 // add the broken dot to the score 
-                scoreManager.IncreaseScore(dot.getPoints() * streakValue); 
+                scoreManager.IncreaseScore(dot.points * streakValue); 
                 scoreManager.compareGoal(allDots[x, y].tag); 
                 scoreManager.UpdateGoals(); 
             }
@@ -330,9 +330,9 @@ public class Board : MonoBehaviour {
     /// <summary>Streamline tile damage script? Might have some dangling reference issues with tile arrays</summary>
     private void DamageTile(BackgroundTile tile) {
         tile.TakeDmg(1); 
-        if (tile.getHp() <= 0) {
+        if (tile.hp <= 0) {
             if (scoreManager != null) {
-                scoreManager.IncreaseScore(tile.getPoints() * streakValue); 
+                scoreManager.IncreaseScore(tile.points * streakValue); 
             }
             tile = null; 
         }
@@ -342,9 +342,9 @@ public class Board : MonoBehaviour {
         if (x > 0) {
             if (blockingTiles[x - 1, y]) {
                 blockingTiles[x - 1, y].TakeDmg(1); 
-                if (blockingTiles[x - 1, y].getHp() <= 0) {
+                if (blockingTiles[x - 1, y].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(blockingTiles[x - 1, y].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(blockingTiles[x - 1, y].points * streakValue); 
                     }
                     blockingTiles[x - 1, y] = null; 
                 }
@@ -353,9 +353,9 @@ public class Board : MonoBehaviour {
         if (x < width - 1) {
             if (blockingTiles[x + 1, y]) {
                 blockingTiles[x + 1, y].TakeDmg(1); 
-                if (blockingTiles[x + 1, y].getHp() <= 0) {
+                if (blockingTiles[x + 1, y].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(blockingTiles[x + 1, y].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(blockingTiles[x + 1, y].points * streakValue); 
                     }
                     blockingTiles[x + 1, y] = null; 
                 }
@@ -364,9 +364,9 @@ public class Board : MonoBehaviour {
         if (y > 0) {
             if (blockingTiles[x, y - 1]) {
                 blockingTiles[x, y - 1].TakeDmg(1); 
-                if (blockingTiles[x, y - 1].getHp() <= 0) {
+                if (blockingTiles[x, y - 1].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(blockingTiles[x, y - 1].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(blockingTiles[x, y - 1].points * streakValue); 
                     }
                     blockingTiles[x, y - 1] = null; 
                 }
@@ -375,9 +375,9 @@ public class Board : MonoBehaviour {
         if (y < height - 1) {
             if (blockingTiles[x, y + 1]) {
                 blockingTiles[x, y + 1].TakeDmg(1); 
-                if (blockingTiles[x, y + 1].getHp() <= 0) {
+                if (blockingTiles[x, y + 1].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(blockingTiles[x, y + 1].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(blockingTiles[x, y + 1].points * streakValue); 
                     }
                     blockingTiles[x, y + 1] = null; 
                 }
@@ -389,9 +389,9 @@ public class Board : MonoBehaviour {
         if (x > 0) {
             if (cancerTiles[x - 1, y]) {
                 cancerTiles[x - 1, y].TakeDmg(1); 
-                if (cancerTiles[x - 1, y].getHp() <= 0) {
+                if (cancerTiles[x - 1, y].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(cancerTiles[x - 1, y].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(cancerTiles[x - 1, y].points * streakValue); 
                     }
                     cancerTiles[x - 1, y] = null; 
                     cancerDmg = true; 
@@ -401,9 +401,9 @@ public class Board : MonoBehaviour {
         if (x < width - 1) {
             if (cancerTiles[x + 1, y]) {
                 cancerTiles[x + 1, y].TakeDmg(1); 
-                if (cancerTiles[x + 1, y].getHp() <= 0) {
+                if (cancerTiles[x + 1, y].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(cancerTiles[x + 1, y].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(cancerTiles[x + 1, y].points * streakValue); 
                     }
                     cancerTiles[x + 1, y] = null; 
                     cancerDmg = true; 
@@ -413,9 +413,9 @@ public class Board : MonoBehaviour {
         if (y > 0) {
             if (cancerTiles[x, y - 1]) {
                 cancerTiles[x, y - 1].TakeDmg(1); 
-                if (cancerTiles[x, y - 1].getHp() <= 0) {
+                if (cancerTiles[x, y - 1].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(cancerTiles[x, y - 1].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(cancerTiles[x, y - 1].points * streakValue); 
                     }
                     cancerTiles[x, y - 1] = null; 
                     cancerDmg = true; 
@@ -425,9 +425,9 @@ public class Board : MonoBehaviour {
         if (y < height - 1) {
             if (cancerTiles[x, y + 1]) {
                 cancerTiles[x, y + 1].TakeDmg(1); 
-                if (cancerTiles[x, y + 1].getHp() <= 0) {
+                if (cancerTiles[x, y + 1].hp <= 0) {
                     if (scoreManager != null) {
-                        scoreManager.IncreaseScore(cancerTiles[x, y + 1].getPoints() * streakValue); 
+                        scoreManager.IncreaseScore(cancerTiles[x, y + 1].points * streakValue); 
                     }
                     cancerTiles[x, y + 1] = null; 
                     cancerDmg = true; 
@@ -464,7 +464,7 @@ public class Board : MonoBehaviour {
                         //if a dot is found. . .
                         if(allDots[i, k] != null) {
                             //move that dot to this empty space
-                            allDots[i, k].GetComponent<Dot>().setY(j);
+                            allDots[i, k].GetComponent<Dot>().y = j;
                             //set that spot to be null
                             allDots[i, k] = null;
                             //break out of the loop;
@@ -496,8 +496,8 @@ public class Board : MonoBehaviour {
                     GameObject dot = Instantiate(chosen, tempPos, Quaternion.identity); 
                     dot.transform.parent = this.transform; 
                     allDots[i, j] = dot; 
-                    dot.GetComponent<Dot>().setX(i); 
-                    dot.GetComponent<Dot>().setY(j); 
+                    dot.GetComponent<Dot>().x = i; 
+                    dot.GetComponent<Dot>().y = j; 
                     dot.GetComponent<Dot>().updatePrevXY(); 
                 }
             }
@@ -509,7 +509,7 @@ public class Board : MonoBehaviour {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (allDots[i, j] != null) {
-                    if (allDots[i, j].GetComponent<Dot>().isMatched()) {
+                    if (allDots[i, j].GetComponent<Dot>().isMatched) {
                         return true; 
                     }
                 }
@@ -579,7 +579,7 @@ public class Board : MonoBehaviour {
         for (int i = 0; i < width; i++) {
             if (blockingTiles[i, row] != null) {
                 blockingTiles[i, row].TakeDmg(1);
-                if (blockingTiles[i, row].getHp() <= 0) {
+                if (blockingTiles[i, row].hp <= 0) {
                     blockingTiles[i, row] = null; 
                 }
             }
@@ -590,7 +590,7 @@ public class Board : MonoBehaviour {
         for (int j = 0; j < height; j++) {
             if (blockingTiles[col, j] != null) {
                 blockingTiles[col, j].TakeDmg(1); 
-                if (blockingTiles[col, j].getHp() <= 0) {
+                if (blockingTiles[col, j].hp <= 0) {
                     blockingTiles[col, j] = null; 
                 }
             }
@@ -628,8 +628,8 @@ public class Board : MonoBehaviour {
                     }
                     maxIterations = 0; 
                     // assign new x and y for dot
-                    newBoard[dotToUse].GetComponent<Dot>().setX(k); 
-                    newBoard[dotToUse].GetComponent<Dot>().setY(l); 
+                    newBoard[dotToUse].GetComponent<Dot>().x = k; 
+                    newBoard[dotToUse].GetComponent<Dot>().y = l; 
                     // put new dot on its place on the board
                     allDots[k, l] = newBoard[dotToUse]; 
                     // remove dot from pool of unassigned dots
@@ -774,7 +774,7 @@ public class Board : MonoBehaviour {
     }
 
     public bool isLockedTile(Dot dot) {
-        return lockedTiles[dot.getX(), dot.getY()] != null;
+        return lockedTiles[dot.x, dot.y] != null;
     }
 
     public bool nullSpace(int i, int j) {

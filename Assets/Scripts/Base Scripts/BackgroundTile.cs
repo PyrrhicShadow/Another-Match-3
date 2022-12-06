@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class BackgroundTile : MonoBehaviour
 {
-    [SerializeField] int hp = 1; 
-    [SerializeField] int points = 10; 
-    [SerializeField] SpriteRenderer sprite; 
+    [SerializeField] int _hp = 1;
+    public int hp { get { return _hp; } private set { _hp = value; } } 
+    [SerializeField] int _points = 10;
+    public int points { get { return _points;} private set { _points = value; } } 
+    private SpriteRenderer sprite; 
     private ScoreManager scoreManager; 
 
     void Start() {
-        scoreManager = FindObjectOfType<ScoreManager>(); 
+        scoreManager = GameObject.FindWithTag("board").GetComponent<ScoreManager>(); 
         sprite = GetComponent<SpriteRenderer>(); 
     }
 
@@ -44,13 +46,4 @@ public class BackgroundTile : MonoBehaviour
 
     }
 
-    /// <summary>Returns this tile's current hp</summary>
-    public int getHp() {
-        return hp; 
-    }
-
-    /// <summary>Returns this tile's score value</summary>
-    public int getPoints() {
-        return points; 
-    }
 }

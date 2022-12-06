@@ -5,21 +5,25 @@ using UnityEngine;
 public class Dot : MonoBehaviour {
 
     [Header("Board Variables")]
-    [SerializeField] protected int x;
-    [SerializeField] private int y; 
+    [SerializeField] int _x;
+    public int x { get {return _x; } set {_x = value;} }
+    [SerializeField] int _y;
+    public int y { get {return _y; } set {_y = value;} } 
     private int targetX; 
     private int targetY; 
-    [SerializeField] private int prevX; 
-    [SerializeField] private int prevY; 
-    [SerializeField] private bool matched = false; 
-    protected int points = 20; 
+    [SerializeField] int prevX; 
+    [SerializeField] int prevY; 
+    [SerializeField] bool _isMatched = false;
+    public bool isMatched { get { return _isMatched; } set { _isMatched = value; } } 
+    [SerializeField] int _points = 20; 
+    public int points { get { return _points; } protected set{ _points = value;} }
     [SerializeField] protected string type; 
 
     protected Board board; 
     protected FindMatches findMatches; 
     protected HintManager hintManager; 
     protected ScoreManager scoreManager; 
-    protected GameObject otherDot; 
+    public GameObject otherDot { get; protected set; } 
     protected Vector2 firstTouchPos = Vector2.zero; 
     protected Vector2 finalTouchPos = Vector2.zero;
     protected Vector2 tempPos; 
@@ -31,10 +35,14 @@ public class Dot : MonoBehaviour {
     protected float moveSpeed = 0.4f; 
 
     [Header("Powerups")]
-    [SerializeField] private bool colBomb; 
-    [SerializeField] private bool rowBomb; 
-    [SerializeField] private bool colorBomb; 
-    [SerializeField] private bool adjBomb; 
+    [SerializeField] bool _isColBomb;
+    public bool isColBomb { get { return _isColBomb; } set { _isColBomb = value;} }
+    [SerializeField] bool _isRowBomb;
+    public bool isRowBomb { get {return _isRowBomb; } set { _isRowBomb = value; } } 
+    [SerializeField] bool _isColorBomb; 
+    public bool isColorBomb { get { return _isColorBomb; } set { _isColorBomb = value; } }
+    [SerializeField] bool _isAdjBomb; 
+    public bool isAdjBomb { get { return _isAdjBomb; } set { _isAdjBomb = value; } }
 
     [SerializeField] protected GameObject rowArrow; 
     [SerializeField] protected GameObject colArrow; 
@@ -49,17 +57,17 @@ public class Dot : MonoBehaviour {
         hintManager = GameObject.FindWithTag("board").GetComponent<HintManager>(); 
         scoreManager = board.scoreManager; 
 
-        colBomb = false; 
-        rowBomb = false; 
-        colorBomb = false; 
-        adjBomb = false; 
+        isColBomb = false; 
+        isRowBomb = false; 
+        isColorBomb = false; 
+        isAdjBomb = false; 
 
     }
 
     // This is for testing and debug only; and a bit of a cheat code for players who find it.
     protected void OnMouseOver() {
         if (board.currentState == GameState.move){
-            if (!this.colBomb && !this.rowBomb && !this.colorBomb && !this.adjBomb) {
+            if (!this.isColBomb && !this.isRowBomb && !this.isColorBomb && !this.isAdjBomb) {
                 if (Input.GetKeyDown("up") || Input.GetKeyDown("down")) {
                     this.makeColBomb(); 
                     Debug.Log("Player created a column bomb"); 
@@ -124,23 +132,23 @@ public class Dot : MonoBehaviour {
     public IEnumerator CheckMoveCo() {
         yield return new WaitForSeconds(0.5f); 
 
-        if (colorBomb) {
+        if (isColorBomb) {
             // This dot is a color bomb, and the other dot is the color to destroy
             findMatches.MatchColors(otherDot.tag); 
-            this.setMatched(true); 
+            this.isMatched = true; 
         }
         else if (otherDot != null) {
-            if (otherDot.GetComponent<Dot>().isColorBomb()) {
+            if (otherDot.GetComponent<Dot>().isColorBomb) {
                 // The other dot is a color bomb, and this dot is the color to destroy
                 findMatches.MatchColors(this.gameObject.tag); 
-                otherDot.GetComponent<Dot>().setMatched(true); 
+                otherDot.GetComponent<Dot>().isMatched = true; 
             }
         }
         
         if (otherDot != null) {
-            if (!matched && !otherDot.GetComponent<Dot>().isMatched()) {
-                otherDot.GetComponent<Dot>().setX(x);
-                otherDot.GetComponent<Dot>().setY(y); 
+            if (!isMatched && !otherDot.GetComponent<Dot>().isMatched) {
+                otherDot.GetComponent<Dot>().x = this.x;
+                otherDot.GetComponent<Dot>().y = this.y; 
                 x = prevX; 
                 y = prevY; 
                 yield return new WaitForSeconds(0.5f); 
@@ -229,8 +237,8 @@ public class Dot : MonoBehaviour {
         otherDot = board.getDot(x, y); 
         if (!board.isLockedTile(this) && otherDot != null) {
             if (!board.isLockedTile(otherDot.GetComponent<Dot>())){
-            otherDot.GetComponent<Dot>().setX(this.x); 
-            otherDot.GetComponent<Dot>().setY(this.y); 
+            otherDot.GetComponent<Dot>().x = this.x; 
+            otherDot.GetComponent<Dot>().y = this.y; 
             }
             else {
                 board.currentState = GameState.move; 
@@ -248,8 +256,8 @@ public class Dot : MonoBehaviour {
 
     /// <summary>turns the current dot into a column bomb</summary>
     public void makeColBomb() {
-        if (!colorBomb && !adjBomb && !rowBomb) {
-            colBomb = true; 
+        if (!isColorBomb && !isAdjBomb && !isRowBomb) {
+            isColBomb = true; 
             GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity); 
             arrow.transform.parent = this.transform; 
         }
@@ -257,8 +265,8 @@ public class Dot : MonoBehaviour {
 
     /// <summary>turns the current dot into a row bomb</summary>
     public void makeRowBomb() {
-        if (!colorBomb && !adjBomb && !colBomb) {
-            rowBomb = true; 
+        if (!isColorBomb && !isAdjBomb && !isColBomb) {
+            isRowBomb = true; 
             GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity); 
             arrow.transform.parent = this.transform; 
             }
@@ -266,8 +274,8 @@ public class Dot : MonoBehaviour {
 
     /// <summary>turns the current dot into a rainbow bomb</summary>
     public void makeColorBomb() {
-        if (!adjBomb && !rowBomb && !colBomb) {
-            colorBomb = true; 
+        if (!isAdjBomb && !isRowBomb && !isColBomb) {
+            isColorBomb = true; 
             this.gameObject.tag = "rainbow"; 
             mySprite.sprite = rainbowBomb; 
             mySprite.color = new Color(1f, 1f, 1f, 1f); 
@@ -276,8 +284,8 @@ public class Dot : MonoBehaviour {
 
     // <summary>turns the current dot into an adjacent bomb</summary>
     public void makeAdjBomb() {
-        if (!colorBomb && !colBomb && !rowBomb) {
-            adjBomb = true; 
+        if (!isColorBomb && !isColBomb && !isRowBomb) {
+            isAdjBomb = true; 
             GameObject marker = Instantiate(adjMarker, transform.position, Quaternion.identity); 
             marker.transform.parent = this.transform;
         }
@@ -285,19 +293,19 @@ public class Dot : MonoBehaviour {
 
     /// <summary>turns the current dot back into a (random) normal dot</summary>
     public void unmakeBomb() {
-        if (colBomb) {
+        if (isColBomb) {
             unmakeColBomb(); 
             Debug.Log("Player returned a column bomb into a " + this.tag + " dot");
         }
-        else if (rowBomb) {
+        else if (isRowBomb) {
             unmakeRowBomb(); 
             Debug.Log("Player returned a row bomb into a " + this.tag + " dot");
         }
-        else if (adjBomb) {
+        else if (isAdjBomb) {
             unmakeAdjBomb(); 
             Debug.Log("Player returned an adjacent bomb into a " + this.tag + " dot");
         }
-        else if (colorBomb) {
+        else if (isColorBomb) {
             unmakeColorBomb(); 
             Debug.Log("Player returned a color bomb into a " + this.tag + " dot");
         }
@@ -307,106 +315,30 @@ public class Dot : MonoBehaviour {
     }
 
     protected void unmakeColBomb() {
-        colBomb = false; 
+        isColBomb = false; 
         GameObject arrow = this.transform.GetChild(0).gameObject;
         Destroy(arrow);  
     }
 
     protected void unmakeRowBomb() {
-        rowBomb = false; 
+        isRowBomb = false; 
         GameObject arrow = this.transform.GetChild(0).gameObject;
         Destroy(arrow);  
     }
 
     protected void unmakeAdjBomb() {
-        adjBomb = false; 
+        isAdjBomb = false; 
         GameObject marker = this.transform.GetChild(0).gameObject;
         Destroy(marker); 
     }
 
     protected void unmakeColorBomb() {
-        colorBomb = false; 
+        isColorBomb = false; 
         GameObject[] dots = board.getDots(); 
         GameObject dotToUse = Instantiate(dots[Random.Range(0, dots.Length)], transform.position, Quaternion.identity);
         this.gameObject.tag = dotToUse.tag; 
         mySprite.sprite = dotToUse.GetComponent<SpriteRenderer>().sprite; 
         Destroy(dotToUse);
-    }
-
-    /************** Public Getters and Setters **************/
-
-    /// <summary>gets current x-value</summary>
-    public int getX() {
-        return x; 
-    }
-
-    /// <summary>gets current y-value</summary>
-    public int getY() {
-        return y; 
-    }
-
-    /// <summary>gets target x-value</summary>
-    public int getTargetX() {
-        return targetX; 
-    }
-
-    /// <summary>gets target y-value</summary>
-    public int getTargetY() {
-        return targetY; 
-    } 
-
-    /// <summary>gets the other dot</summary>
-    public GameObject getOtherDot() {
-        return otherDot; 
-    }
-
-    /// <summary>gets this Dot's Sprite</summary>
-    public Sprite getSprite() {
-        return mySprite.sprite; 
-    }
-
-    public string getType() {
-        return type; 
-    }
-
-    /// <summary>returns true if is matched, otherwise false</summary>
-    public bool isMatched() {
-        return matched; 
-    }
-
-    /// <summary>returns true if is ColBomb, otherwise false </summary>
-    public bool isColBomb() {
-        return colBomb; 
-    }
-
-    /// <summary>returns true if this Dot is a rowBomb, otherwise false</summary>
-    public bool isRowBomb() {
-        return rowBomb; 
-    }
-
-    /// <summary>returns true if is colorBomb, otherwise false </summary>
-    public bool isColorBomb() {
-        return colorBomb; 
-    }
-
-    /// <summary>returns true if is adjBomb, otherwise false </summary>
-    public bool isAdjBomb() {
-        return adjBomb; 
-    }
-
-    /// <summary>returns this dot's point value</summary>
-    public int getPoints() {
-        return points; 
-    }
-
-    /// <summary>set x-value to new x-value</summary>
-    public void setX(int newX) {
-        this.x = newX; 
-    }
-
-    /// <summary>set y-value to new y-value</summary>
-    public void setY(int newY) {
-        this.y = newY; 
     }
 
     /// <summary>set previous x- and y-value to current x- and y-value </summary>
@@ -415,28 +347,4 @@ public class Dot : MonoBehaviour {
         prevY = y; 
     }
 
-    /// <summary>set matched to new bool </summary>
-    public void setMatched(bool matched) {
-        this.matched = matched; 
-    }
-
-    /// <summary>set the point value for this dot</summary> 
-    public void setPoints(int amt) {
-        points = amt; 
-    }
-
-    public void setRowBomb(bool val) {
-        rowBomb = val; 
-    }
-    
-    public void setColBomb(bool val) {
-        colBomb = val; 
-    }
-
-    public void setAdjBomb(bool val) {
-        adjBomb = val;
-    }
-    public void setColorBomb(bool val) {
-        colorBomb = val; 
-    }
 }
