@@ -554,11 +554,8 @@ public class Board : MonoBehaviour {
     public void ShuffleBoard() {
         StartCoroutine(ShuffleBoardCo()); 
     }
-
-    public bool isLockedTile(Dot dot1, Dot dot2) {
-        bool lock1 = lockedTiles[dot1.getX(), dot1.getY()] != null; 
-        bool lock2 = lockedTiles[dot2.getX(), dot2.getY()] != null; 
-        Debug.Log("dot 1: " + lock1 + ", dot 2: " + lock2); 
-        return (lock1 || lock2); 
+    
+    public bool isLockedTile(Dot dot) {
+        return lockedTiles[dot.getX(), dot.getY()] != null;
     }
 }

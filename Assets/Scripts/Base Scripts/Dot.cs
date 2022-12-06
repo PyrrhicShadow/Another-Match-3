@@ -225,7 +225,7 @@ public class Dot : MonoBehaviour {
     /// <summary>swaps this dot with a left, right, up, or down neighbor dot</summary>
     private void SwapDots(int x, int y) {
         otherDot = board.getDot(x, y); 
-        if (!board.isLockedTile(this, otherDot.GetComponent<Dot>())) {
+        if (!board.isLockedTile(this) && !board.isLockedTile(otherDot.GetComponent<Dot>())) {
             if (otherDot != null) {
                 otherDot.GetComponent<Dot>().setX(this.x); 
                 otherDot.GetComponent<Dot>().setY(this.y); 
