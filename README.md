@@ -16,16 +16,18 @@ For information on what features are included in which builds, see the [Git Repo
 * Both time-based and move-limited levels 
 * Multiple tile-types with different mechanics!
     * breakable tiles
-    * blank tiles
-    * locked tiles (in progress)
-    * blocking tiles (in progress)
+    * blank tiles (in progress)
+    * locked tiles 
+    * blocking tiles 
+    * cancer tiles (in progress)
 * Save system
 * Music and sounds! (sorta) 
 * Beautiful royalty-free art (see Credits for sources)
-* Light story for those who dig that sorta thing
+* A fun, light story for those who dig that sorta thing
 * Available in English, French, and toki pona!
     * Japanese and Polish under construction
     * more languages on request and with help
+* Replayablity! (restrictions may apply)
 
 ## Controls 
 
@@ -52,6 +54,8 @@ For information on what features are included in which builds, see the [Git Repo
             <li> right-mouse to unmake bomb </li>
         </ul>
 </ul>
+
+<p>The features also include "replayability", which references how all the levels change after you've successfully summoned the daemon traped in the game. Don't worry, you'll know when you've successfully summoned the daemon.</p>
 
 </details>
 

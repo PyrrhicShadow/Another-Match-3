@@ -8,8 +8,8 @@ public enum GameState {
 }
 
 public enum TileType {
-    breakable, blank, locked, blocking, normal 
-    // jelly, blank, licorice, icing, normal
+    breakable, blank, locked, blocking, cancer, normal 
+    // jelly, blank, licorice, icing, chocolate, background
 }
 
 [System.Serializable]
@@ -49,12 +49,14 @@ public class Board : MonoBehaviour {
     [SerializeField] bool[,] blankSpaces; 
     [SerializeField] BackgroundTile[,] lockedTiles; 
     [SerializeField] BackgroundTile[,] blockingTiles; 
+    [SerializeField] BackgroundTile[,] cancerTiles; 
 
     [Header("Component prefabs")]
     [SerializeField] GameObject tilePrefab; 
     [SerializeField] GameObject breakableTilePrefab; 
     [SerializeField] GameObject lockedTilePrefab; 
     [SerializeField] GameObject blockingTilePrefab; 
+    [SerializeField] GameObject cancerTilePrefab; 
     [SerializeField] GameObject destroyEffect; 
     [SerializeField] float particleLifetime = 0.5f; 
     private float refillDelay = 0.5f; 
@@ -93,6 +95,7 @@ public class Board : MonoBehaviour {
         blankSpaces = new bool[width, height]; 
         lockedTiles = new BackgroundTile[width, height]; 
         blockingTiles = new BackgroundTile[width, height]; 
+        cancerTiles = new BackgroundTile[width, height]; 
 
         // peer objects
         findMatches = gameObject.GetComponent<FindMatches>(); 
@@ -112,6 +115,8 @@ public class Board : MonoBehaviour {
         GenerateBlankTiles(); 
         // place blocking tiles
         GenerateBlockingTiles(); 
+        // place cancer tiles 
+        GenerateCancerTiles(); 
 
         // set up board
         for (int i = 0; i < width; i++) {
@@ -154,7 +159,7 @@ public class Board : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown("s")) {
             ShuffleBoard(); 
-            Debug.Log("s"); 
+            // Debug.Log("s"); 
         }
 
         if (currentState == GameState.move) {
@@ -222,6 +227,20 @@ public class Board : MonoBehaviour {
         }
     }
 
+    private void GenerateCancerTiles() {
+        // look at all tiles in layout 
+        for (int i = 0; i < boardLayout.Length; i++) {
+            // if tile is cancer 
+            if (boardLayout[i].tile == TileType.cancer) {
+                // create locked tile at that position 
+                Vector2 tempPos = new Vector2(boardLayout[i].x, boardLayout[i].y); 
+                GameObject tile = Instantiate(cancerTilePrefab, tempPos, Quaternion.identity);
+                cancerTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>(); 
+                tile.transform.parent = this.transform; 
+            }
+        }
+    }
+
     /// <summary>Returns true if adding this dot in this position would generate a match</summary>
     private bool MatchesAt(int x, int y, GameObject dot) {
         if (x > 1 && y > 1) {
@@ -282,7 +301,14 @@ public class Board : MonoBehaviour {
                 }
             }
 
+            // checks if an adjacent tile needs to be broken, then breaks it 
             DamageBlocking(x, y); 
+            DamageCancer(x, y); 
+
+            // if (!cancerDmg) {
+            //     SpawnCancerTile(); 
+            // }
+            // cancerDmg = false; 
 
             if (scoreManager != null) {
                 // add the broken dot to the score 
@@ -302,6 +328,17 @@ public class Board : MonoBehaviour {
                 Destroy(allDots[x, y]); 
             }
             allDots[x, y] = null; 
+        }
+    }
+
+    /// <summary>Streamline tile damage script? Might have some dangling reference issues with tile arrays</summary>
+    private void DamageTile(BackgroundTile tile) {
+        tile.TakeDmg(1); 
+        if (tile.getHp() <= 0) {
+            if (scoreManager != null) {
+                scoreManager.IncreaseScore(tile.getPoints() * streakValue); 
+            }
+            tile = null; 
         }
     }
 
@@ -347,6 +384,57 @@ public class Board : MonoBehaviour {
                         scoreManager.IncreaseScore(blockingTiles[x, y + 1].getPoints() * streakValue); 
                     }
                     blockingTiles[x, y + 1] = null; 
+                }
+            }
+        }
+    }
+
+    private void DamageCancer(int x, int y) {
+        if (x > 0) {
+            if (cancerTiles[x - 1, y]) {
+                cancerTiles[x - 1, y].TakeDmg(1); 
+                if (cancerTiles[x - 1, y].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(cancerTiles[x - 1, y].getPoints() * streakValue); 
+                    }
+                    cancerTiles[x - 1, y] = null; 
+                    // cancerDmg = true; 
+                }
+            }
+        }
+        if (x < width - 1) {
+            if (cancerTiles[x + 1, y]) {
+                cancerTiles[x + 1, y].TakeDmg(1); 
+                if (cancerTiles[x + 1, y].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(cancerTiles[x + 1, y].getPoints() * streakValue); 
+                    }
+                    cancerTiles[x + 1, y] = null; 
+                    // cancerDmg = true; 
+                }
+            }
+        }
+        if (y > 0) {
+            if (cancerTiles[x, y - 1]) {
+                cancerTiles[x, y - 1].TakeDmg(1); 
+                if (cancerTiles[x, y - 1].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(cancerTiles[x, y - 1].getPoints() * streakValue); 
+                    }
+                    cancerTiles[x, y - 1] = null; 
+                    // cancerDmg = true; 
+                }
+            }
+        }
+        if (y < height - 1) {
+            if (cancerTiles[x, y + 1]) {
+                cancerTiles[x, y + 1].TakeDmg(1); 
+                if (cancerTiles[x, y + 1].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(cancerTiles[x, y + 1].getPoints() * streakValue); 
+                    }
+                    cancerTiles[x, y + 1] = null; 
+                    // cancerDmg = true; 
                 }
             }
         }
@@ -634,12 +722,10 @@ public class Board : MonoBehaviour {
     }
 
     public bool nullSpace(int i, int j) {
-        if (blankSpaces[i, j] || blockingTiles[i, j]) {
-            // Debug.Log("(" + i + ", " + j + ") is a null space"); 
+        if (blankSpaces[i, j] || blockingTiles[i, j] || cancerTiles[i, j]) {
             return true; 
         }
         else {
-            // Debug.Log("(" + i + ", " + j + ") is not a null space"); 
             return false; 
         }
     }

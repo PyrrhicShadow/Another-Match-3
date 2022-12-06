@@ -1135,6 +1135,7 @@ MonoBehaviour:
   breakableTilePrefab: {fileID: 4594637226539004720, guid: f3a73fc63b0cff94eafcd750791dd238, type: 3}
   lockedTilePrefab: {fileID: 6176897707943177935, guid: e0eefcbfbc84b8845a257e3afea95c7d, type: 3}
   blockingTilePrefab: {fileID: 456718300741076894, guid: 65a3f67898bda124cbbbfef438d8a587, type: 3}
+  cancerTilePrefab: {fileID: 3811408026724356143, guid: 422e1bd5dfa26c040bf26d4858c3bff1, type: 3}
   destroyEffect: {fileID: 8152617049232996360, guid: cdf9d99e968553e4a87dc5bf8659fb56, type: 3}
   particleLifetime: 0.5
   dots:
@@ -1191,17 +1192,14 @@ MonoBehaviour:
   levelText: {fileID: 1668311955}
   levelGoals:
   - numNeeded: 6
-    goalSprite: {fileID: 1453271462, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: amethyst
+    goalObject: {fileID: 8614924838474643066, guid: 5228ddf112f676946a3116a178d737c2, type: 3}
   - numNeeded: 6
-    goalSprite: {fileID: -762116564, guid: 14a262466c3993c47a7a116ac78e54f1, type: 3}
-    goalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
     matchTag: ruby
+    goalObject: {fileID: 6422950250267594635, guid: 35584c7f5264cff4f82ad48bb9c1323a, type: 3}
   - numNeeded: 6
-    goalSprite: {fileID: 21300000, guid: 3b4355bc3aed0434794eb822b8987fc2, type: 3}
-    goalSpriteColor: {r: 0.36900002, g: 0, b: 0.011596705, a: 1}
     matchTag: breakable
+    goalObject: {fileID: 4594637226539004720, guid: f3a73fc63b0cff94eafcd750791dd238, type: 3}
   goalPrefab: {fileID: 8600493826628222406, guid: 2c0c27e547aa3cb47821e0164a2a99c7, type: 3}
   goalStartParent: {fileID: 66256945}
   goalGameParent: {fileID: 255234573}

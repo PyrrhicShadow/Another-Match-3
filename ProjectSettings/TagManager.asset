@@ -18,6 +18,7 @@ TagManager:
   - locked
   - blocking
   - sound
+  - cancer
   layers:
   - Default
   - TransparentFX
