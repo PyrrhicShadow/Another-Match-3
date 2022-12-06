@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 3b4355bc3aed0434794eb822b8987fc2, type: 3}
-  m_Color: {r: 0.48046458, g: 0.56689775, b: 0.5754717, a: 0.4627451}
+  m_Color: {r: 0.48046458, g: 0.56689775, b: 0.5754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,4 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  points: 10
   sprite: {fileID: 456718300741076893}

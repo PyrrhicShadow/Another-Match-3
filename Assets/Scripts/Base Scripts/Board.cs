@@ -264,6 +264,9 @@ public class Board : MonoBehaviour {
             if (breakableTiles[x, y] != null) {
                 breakableTiles[x, y].TakeDmg(1); 
                 if (breakableTiles[x, y].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(breakableTiles[x, y].getPoints() * streakValue); 
+                    }
                    breakableTiles[x, y] = null; 
                 }
             }
@@ -272,11 +275,14 @@ public class Board : MonoBehaviour {
             if (lockedTiles[x, y] != null) {
                 lockedTiles[x, y].TakeDmg(1); 
                 if (lockedTiles[x, y].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(lockedTiles[x, y].getPoints() * streakValue); 
+                    }
                     lockedTiles[x, y] = null; 
                 }
             }
 
-            // DamageBlocking(x, y); 
+            DamageBlocking(x, y); 
 
             if (scoreManager != null) {
                 // add the broken dot to the score 
@@ -304,6 +310,9 @@ public class Board : MonoBehaviour {
             if (blockingTiles[x - 1, y]) {
                 blockingTiles[x - 1, y].TakeDmg(1); 
                 if (blockingTiles[x - 1, y].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(blockingTiles[x - 1, y].getPoints() * streakValue); 
+                    }
                     blockingTiles[x - 1, y] = null; 
                 }
             }
@@ -312,6 +321,9 @@ public class Board : MonoBehaviour {
             if (blockingTiles[x + 1, y]) {
                 blockingTiles[x + 1, y].TakeDmg(1); 
                 if (blockingTiles[x + 1, y].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(blockingTiles[x + 1, y].getPoints() * streakValue); 
+                    }
                     blockingTiles[x + 1, y] = null; 
                 }
             }
@@ -320,6 +332,9 @@ public class Board : MonoBehaviour {
             if (blockingTiles[x, y - 1]) {
                 blockingTiles[x, y - 1].TakeDmg(1); 
                 if (blockingTiles[x, y - 1].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(blockingTiles[x, y - 1].getPoints() * streakValue); 
+                    }
                     blockingTiles[x, y - 1] = null; 
                 }
             }
@@ -328,6 +343,9 @@ public class Board : MonoBehaviour {
             if (blockingTiles[x, y + 1]) {
                 blockingTiles[x, y + 1].TakeDmg(1); 
                 if (blockingTiles[x, y + 1].getHp() <= 0) {
+                    if (scoreManager != null) {
+                        scoreManager.IncreaseScore(blockingTiles[x, y + 1].getPoints() * streakValue); 
+                    }
                     blockingTiles[x, y + 1] = null; 
                 }
             }
@@ -397,10 +415,6 @@ public class Board : MonoBehaviour {
                     dot.GetComponent<Dot>().setX(i); 
                     dot.GetComponent<Dot>().setY(j); 
                     dot.GetComponent<Dot>().updatePrevXY(); 
-                    // Debug.Log("(" + i + ", " + j + ") is null and is not a nullSpace"); 
-                }
-                else {
-                    // Debug.Log("(" + i + ", " + j + ") is not null or is a nullSpace"); 
                 }
             }
         }
@@ -621,11 +635,11 @@ public class Board : MonoBehaviour {
 
     public bool nullSpace(int i, int j) {
         if (blankSpaces[i, j] || blockingTiles[i, j]) {
-            Debug.Log("(" + i + ", " + j + ") is a null space"); 
+            // Debug.Log("(" + i + ", " + j + ") is a null space"); 
             return true; 
         }
         else {
-            Debug.Log("(" + i + ", " + j + ") is not a null space"); 
+            // Debug.Log("(" + i + ", " + j + ") is not a null space"); 
             return false; 
         }
     }

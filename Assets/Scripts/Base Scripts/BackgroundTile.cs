@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BackgroundTile : MonoBehaviour
 {
-    [SerializeField] private int hp = 1; 
-    [SerializeField] private SpriteRenderer sprite; 
+    [SerializeField] int hp = 1; 
+    [SerializeField] int points = 10; 
+    [SerializeField] SpriteRenderer sprite; 
     private ScoreManager scoreManager; 
 
     void Start() {
@@ -46,5 +47,10 @@ public class BackgroundTile : MonoBehaviour
     /// <summary>Returns this tile's current hp</summary>
     public int getHp() {
         return hp; 
+    }
+
+    /// <summary>Returns this tile's score value</summary>
+    public int getPoints() {
+        return points; 
     }
 }
