@@ -240,16 +240,16 @@ public class FindMatches : MonoBehaviour {
             List<GameObject> thisMatches = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.tag));
             List<GameObject> otherMatches = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.otherDot.GetComponent<Dot>().tag));
             if (thisMatches.Count > otherMatches.Count) {
-                Debug.Log("Matches for currentDot"); 
+                // Debug.Log("Matches for currentDot"); 
                 matchCopy = thisMatches; 
             }
             else if (otherMatches.Count > thisMatches.Count) {
-                Debug.Log("Matches for otherDot"); 
+                // Debug.Log("Matches for otherDot"); 
                 matchCopy = otherMatches; 
             }
         }
         else {
-            Debug.Log("otherDot not found"); 
+            // Debug.Log("otherDot not found"); 
             matchCopy = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.tag)); 
         }
 

@@ -7,24 +7,26 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 [Serializable]
 public class SaveData {
-    public bool[] actives { get; set; } 
-    public int[] highScores { get; set; } 
-    public int[] stars { get; set; }
-    public bool summon { get; set; } 
+    public bool[] actives { get; private set; } 
+    public int[] highScores { get; private set; } 
+    public int[] stars { get; private set; }
+    public bool summon { get; internal set; } = false;
 
-    public void NewSave(int lvls) {
+    public SaveData(int lvls) {
         actives = new bool[lvls]; 
         stars = new int[lvls];
         highScores = new int[lvls]; 
         actives[0] = true; 
     }
 
-    public int Count() {
-        if (stars.Length == highScores.Length && stars.Length == actives.Length) {
+    public int Count {
+        get { 
+            if (stars.Length == highScores.Length && stars.Length == actives.Length) {
             return stars.Length; 
-        }
-        else {
-            return -1; 
+            }
+            else {
+                return -1; 
+            }
         }
     }
 
@@ -56,7 +58,7 @@ public class GameData : MonoBehaviour {
         FileStream file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.Create); 
 
         // create a copy of save data
-        SaveData data = new SaveData();
+        SaveData data = new SaveData(world.levels.Length);
         data = saveData;  
 
 
@@ -82,20 +84,20 @@ public class GameData : MonoBehaviour {
             file.Close(); 
 
             // if saveData is corrupted or from an old version of the game, shoot an error
-            if (saveData.Count() != world.levels.Length) {
-                // For now, write old file under a new name 
+            // if (saveData.Count != world.levels.Length) {
+            //     // For now, write old file under a new name 
 
-                FileStream fileBkp = File.Open(Application.persistentDataPath + "/playerbkp.dat", FileMode.Create);
-                SaveData bkpData = new SaveData(); 
-                bkpData = saveData; 
-                formatter.Serialize(fileBkp, bkpData); 
-                fileBkp.Close(); 
+            //     FileStream fileBkp = File.Open(Application.persistentDataPath + "/playerbkp.dat", FileMode.Create);
+            //     SaveData bkpData = new SaveData(world.levels.Length); 
+            //     bkpData = saveData; 
+            //     formatter.Serialize(fileBkp, bkpData); 
+            //     fileBkp.Close(); 
 
-                // Load fresh save
-                Debug.Log("Save corrupted or from wrong version: fresh save created");
-                ClearSave(); 
-                Load(); 
-            }
+            //     // Load fresh save
+            //     Debug.Log("Save corrupted or from wrong version: fresh save created");
+            //     ClearSave(); 
+            //     Load(); 
+            // }
 
             // Debug.Log("Save loaded from file"); 
         }
@@ -137,7 +139,9 @@ public class GameData : MonoBehaviour {
     }
 
     public void ClearSave() {
-        saveData.NewSave(world.levels.Length); 
+        bool summoned = saveData.summon; 
+        saveData = new SaveData(world.levels.Length); 
+        saveData.summon = summoned; 
         Save(); 
         Debug.Log("Save cleared"); 
     }

@@ -19,24 +19,23 @@ public class FloatingTextManager : MonoBehaviour
     public void Show(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration) {
         FloatingText floatingText = GetFloatingText();
 
-        floatingText.getTxt().text = msg;
-        floatingText.getTxt().fontSize = fontSize;
-        floatingText.getTxt().color = color;
-        floatingText.getGo().transform.position = Camera.main.WorldToScreenPoint(position); // Transfer world space to screen space so we can use it for the UI
-        floatingText.setMotion(motion);
-        floatingText.setDuration(duration);
+        floatingText.txt.text = msg;
+        floatingText.txt.fontSize = fontSize;
+        floatingText.txt.color = color;
+        floatingText.go.transform.position = Camera.main.WorldToScreenPoint(position); // Transfer world space to screen space so we can use it for the UI
+        floatingText.motion = motion;
+        floatingText.duration = duration;
 
         floatingText.Show(); 
     }
 
     private FloatingText GetFloatingText() {
-        FloatingText txt = floatingTexts.Find(t => !t.isActive()); 
+        FloatingText txt = floatingTexts.Find(t => !t.active); 
 
         if (txt == null) {
             txt = new FloatingText();
-            txt.setGo(Instantiate(textPrefab));
-            txt.getGo().transform.SetParent(textContainer.transform);
-            txt.setTxt(txt.getGo().GetComponent<Text>());
+            txt.go = Instantiate(textPrefab);
+            txt.go.transform.SetParent(textContainer.transform);
 
             floatingTexts.Add(txt); 
         }

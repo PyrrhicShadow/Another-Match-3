@@ -32,7 +32,7 @@ public class LevelButton : MonoBehaviour {
     }
 
     private void LoadData() {
-        if (gameData != null) {
+        if (gameData != null && gameData.saveData != null) {
             if (gameData.saveData.actives[lvl]) {
                 active = true; 
                 stars = gameData.saveData.stars[lvl];

@@ -17,7 +17,7 @@ public class LevelSelection : MonoBehaviour {
         for (int i = 0; i < panels.Length; i++) {
             panels[i].SetActive(false); 
         }
-        if (data != null) {
+        if (data != null && data.saveData != null) {
             for (int i = 0; i < data.saveData.actives.Length; i++) {
                 if (data.saveData.actives[i]) {
                     currentLevel = i; 

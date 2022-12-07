@@ -62,9 +62,9 @@ public class MenuController : MonoBehaviour {
      * else this is a normal level, use win screen
      */ 
     public void winGame() {
-        if (gameData != null) {
+        if (gameData != null && gameData.saveData != null) {
             SaveData thisLevel = gameData.saveData; 
-            if (lvl == thisLevel.Count() - 1) {
+            if (lvl == thisLevel.Count - 1) {
                 thisLevel.summon = true; 
             }
             else {
@@ -78,7 +78,9 @@ public class MenuController : MonoBehaviour {
                 thisLevel.stars[lvl] = board.scoreManager.stars; 
             } 
 
-            gameData.debugData[lvl] = (lvl + 1).ToString() + ": " + board.scoreManager.reqs.counter + " (" + board.scoreManager.reqs.gameType + ")"; 
+            if (lvl >= 0 && lvl < gameData.debugData.Length) {
+                gameData.debugData[lvl] = (lvl + 1).ToString() + ": " + board.scoreManager.reqs.counter + " (" + board.scoreManager.reqs.gameType + ")"; 
+            }
             gameData.Save(); 
         }
         
@@ -122,7 +124,8 @@ public class MenuController : MonoBehaviour {
         board.scoreManager.clearScore(); 
         board.scoreManager.clearLevelGoals(); 
 
-        StartCoroutine(GameStartCo()); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        // StartCoroutine(GameStartCo()); 
     }
 
 }

@@ -91,7 +91,7 @@ public class ConfirmPanel : MonoBehaviour {
 
     private void LoadData() {
         if (gameData != null) {
-            if (lvl <= gameData.saveData.Count()){
+            if (lvl <= gameData.saveData.Count){
                 SaveData thisLevel = gameData.saveData; 
                 stars = thisLevel.stars[lvl]; 
                 highScore = thisLevel.highScores[lvl]; 

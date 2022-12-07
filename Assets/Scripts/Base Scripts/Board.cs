@@ -35,12 +35,12 @@ public class Board : MonoBehaviour {
     [SerializeField] int _height = 10;  
     public int height { get { return _height; } private set { _height = value; } }
     [SerializeField] int offset = 20; 
-    public int eyeRatio { get; set; } = 0;
+    public int eyeRatio { get; private set; } = 0;
     public int balance { get; private set; } = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] GameObject[,] _allDots; 
-    public GameObject[,] allDots { get { return _allDots; } set { _allDots = value; } } 
+    public GameObject[,] allDots { get { return _allDots; } private set { _allDots = value; } } 
     internal FindMatches findMatches { get; private set; }
     internal ScoreManager scoreManager { get; private set; } 
     internal SoundManager soundManager { get; private set; } 
@@ -110,7 +110,7 @@ public class Board : MonoBehaviour {
         floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
 
         GameData data = FindObjectOfType<GameData>(); 
-        if (data.saveData.summon) {
+        if (data != null && data.saveData.summon) {
             eyeRatio = world.levels[lvl].eyeRatio; 
         }
 
@@ -734,5 +734,9 @@ public class Board : MonoBehaviour {
         else {
             return false; 
         }
+    }
+
+    public bool nullSpace(Dot dot) {
+        return nullSpace(dot.x, dot.y); 
     }
 }

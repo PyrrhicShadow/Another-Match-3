@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 public class FloatingText
 {
-    [SerializeField] private bool active;
-    [SerializeField] private GameObject go;
-    [SerializeField] private Text txt;
-    [SerializeField] private Vector3 motion;
-    [SerializeField] private float duration;
-    [SerializeField] private float lastShown; 
+    public bool active { get; private set; }
+    [SerializeField] GameObject _go;
+    public GameObject go { get { return _go; } set { _go = value; } }
+    public Text txt { get { return go.GetComponent<Text>(); } }
+    public Vector3 motion { get; set; } 
+    public float duration  { get; set; } 
+    public float lastShown { get; private set; } 
 
     public void Show() {
         active = true;
@@ -31,49 +32,5 @@ public class FloatingText
         }
 
         go.transform.position += motion * Time.deltaTime; 
-    }
-
-    // get txt 
-    public Text getTxt() {
-        return txt; 
-    }
-
-    // get GameObject 
-    public GameObject getGo() { 
-        return go; 
-    }
-
-    // get motion
-    public Vector3 getMotion() {
-        return motion; 
-    }
-
-    // get duration
-    public float getDuration() {
-        return duration; 
-    }
-
-    public bool isActive() {
-        return active; 
-    }
-
-    // set txt 
-    public void setTxt(Text txt) {
-        this.txt = txt; 
-    }
-
-    // set GameObject
-    public void setGo(GameObject go) {
-        this.go = go; 
-    }
-
-    // set motion 
-    public void setMotion(Vector3 dir) {
-        motion = dir; 
-    }
-
-    // set duration
-    public void setDuration(float amt) {
-        duration = amt; 
     }
 }
