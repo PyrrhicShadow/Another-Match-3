@@ -4,7 +4,7 @@ A simple match-3 game by Pyrrhic Silva created using Mister Taft Creates's tutor
 
 Warning: Do not play if you are easily frightened or at 3AM while your housemates are sleeping.
 
-* [Try it now!](https://pyrrhicshadow.github.io/Another-Match-3/Builds/Another%20Match%203%20WebGL/index.html) (last built 05 Dec 2022)
+* [Try it now!](https://pyrrhicshadow.github.io/Another-Match-3/Builds/Another%20Match%203%20WebGL/index.html) (last built 06 Dec 2022)
 * Or download it [here](https://github.com/PyrrhicShadow/Another-Match-3/tree/main/Builds/Another%20Match%203%20PC.zip) (last built 30 Nov 2022)
 
 For information on what features are included in which builds, see the [Git Repo](https://github.com/PyrrhicShadow/Another-Match-3). 
@@ -16,10 +16,10 @@ For information on what features are included in which builds, see the [Git Repo
 * Both time-based and move-limited levels 
 * Multiple tile-types with different mechanics!
     * breakable tiles
-    * blank tiles (in progress)
-    * locked tiles 
-    * blocking tiles 
-    * cancer tiles (in progress)
+    * blank tiles
+    * locked tiles
+    * blocking tiles
+    * cancer tiles 
 * Save system
 * Music and sounds! (sorta) 
 * Beautiful royalty-free art (see Credits for sources)
