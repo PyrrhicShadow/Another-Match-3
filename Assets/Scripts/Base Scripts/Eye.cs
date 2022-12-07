@@ -14,7 +14,7 @@ public class Eye : Dot
     /// <summary>turns the current dot back into a (random) eye dot</summary>
     new protected void unmakeColorBomb() {
         isColorBomb = false; 
-        GameObject[] eyes = base.board.getEyes(); 
+        GameObject[] eyes = base.board.eyes; 
         GameObject dotToUse = Instantiate(eyes[Random.Range(0, eyes.Length)], transform.position, Quaternion.identity);
         this.gameObject.tag = dotToUse.tag; 
         mySprite.sprite = dotToUse.GetComponent<SpriteRenderer>().sprite; 

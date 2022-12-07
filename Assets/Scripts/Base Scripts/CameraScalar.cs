@@ -14,18 +14,18 @@ public class CameraScalar : MonoBehaviour {
     void Start() {
         board = FindObjectOfType<Board>(); 
         if (board != null) {
-            RepositionCamera(board.getWidth() - 1, board.getHeight() - 1); 
+            RepositionCamera(board.width - 1, board.height - 1); 
         }
     }
 
     public void RepositionCamera(int x, int y) {
         Vector3 tempPos = new Vector3(x / 2 + xOffset, (y / 2) + yOffset, cameraOffset);
         transform.position = tempPos; 
-        if (board.getWidth() >= board.getHeight()) {
-            Camera.main.orthographicSize = (board.getWidth() / 2 + padding); 
+        if (board.width >= board.height) {
+            Camera.main.orthographicSize = (board.width / 2 + padding); 
         }
         else {
-            Camera.main.orthographicSize = board.getHeight() / 2 + padding / aspectRaio; 
+            Camera.main.orthographicSize = board.height / 2 + padding / aspectRaio; 
         }
     }
 }

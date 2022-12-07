@@ -52,13 +52,13 @@ public class FindMatches : MonoBehaviour {
 
     private IEnumerator FindAllMatchesCo() {
         
-        for (int i = 0; i < board.getWidth(); i++) {
-            for (int j = 0; j < board.getHeight(); j++) {
-                GameObject currentDot = board.getDot(i, j); 
+        for (int i = 0; i < board.height; i++) {
+            for (int j = 0; j < board.height; j++) {
+                GameObject currentDot = board.allDots[i, j]; 
                 if (currentDot != null) {
-                    if (i > 0 && i < (board.getWidth() - 1)) {
-                        GameObject leftDot = board.getDot(i - 1, j); 
-                        GameObject rightDot = board.getDot(i + 1, j); 
+                    if (i > 0 && i < (board.width - 1)) {
+                        GameObject leftDot = board.allDots[i - 1, j]; 
+                        GameObject rightDot = board.allDots[i + 1, j]; 
                         if (leftDot != null && rightDot != null && leftDot != currentDot && rightDot != currentDot) {
                             if (leftDot.tag == currentDot.tag && rightDot.tag == currentDot.tag) {
                                 // col/row bombs 
@@ -71,9 +71,9 @@ public class FindMatches : MonoBehaviour {
                             }
                         }
                     }
-                    if (j > 0 && j < board.getHeight() - 1) {
-                        GameObject downDot = board.getDot(i, j - 1); 
-                        GameObject upDot = board.getDot(i, j + 1); 
+                    if (j > 0 && j < board.height - 1) {
+                        GameObject downDot = board.allDots[i, j - 1]; 
+                        GameObject upDot = board.allDots[i, j + 1]; 
                         if (upDot != null && downDot != null && downDot != currentDot && upDot != currentDot) {
                             if (downDot.tag == currentDot.tag && upDot.tag == currentDot.tag) {
                                 // col/row bombs
@@ -157,16 +157,16 @@ public class FindMatches : MonoBehaviour {
     // returns all dots in given column
     private List<GameObject> getColDots(int col) {
         List<GameObject> dots = new List<GameObject>(); 
-        for (int i = 0; i < board.getHeight(); i++) {
-            if (board.getDot(col, i) != null) {
-                Dot dot = board.getDot(col, i).GetComponent<Dot>(); 
+        for (int i = 0; i < board.height; i++) {
+            if (board.allDots[col, i] != null) {
+                Dot dot = board.allDots[col, i].GetComponent<Dot>(); 
                 if (dot.isRowBomb) {
                     dots.Union(getRowDots(i)); 
                 }
                 if (dot.isAdjBomb) {
                     dots.Union(getAdjDots(col, i)); 
                 }
-                dots.Add(board.getDot(col, i));  
+                dots.Add(board.allDots[col, i]);  
                 dot.isMatched = true;  
             }
         }
@@ -176,16 +176,16 @@ public class FindMatches : MonoBehaviour {
     /// <summary>returns all dots in given row</summary>
     private List<GameObject> getRowDots(int row) {
         List<GameObject> dots = new List<GameObject>(); 
-        for (int i = 0; i < board.getWidth(); i++) {
-            if (board.getDot(i, row) != null) {
-                Dot dot = board.getDot(i, row).GetComponent<Dot>();
+        for (int i = 0; i < board.width; i++) {
+            if (board.allDots[i, row] != null) {
+                Dot dot = board.allDots[i, row].GetComponent<Dot>();
                 if (dot.isColBomb) {
                     dots.Union(getColDots(i)); 
                 }
                 if (dot.isAdjBomb) {
                     dots.Union(getAdjDots(i, row)); 
                 }
-                dots.Add(board.getDot(i, row)); 
+                dots.Add(board.allDots[i, row]); 
                 dot.isMatched = true;  
             }
         }
@@ -198,16 +198,16 @@ public class FindMatches : MonoBehaviour {
         for (int i = x - 1; i <= x + 1; i++) {
             // check if dot exists
             for (int j = y - 1; j <= y + 1; j++) {
-                if (i >= 0 && i < board.getWidth() && j >= 0 && j < board.getHeight()) {
-                    if (board.getDot(i, j) != null) {
-                        Dot dot = board.getDot(i, j).GetComponent<Dot>(); 
+                if (i >= 0 && i < board.width && j >= 0 && j < board.height) {
+                    if (board.allDots[i, j] != null) {
+                        Dot dot = board.allDots[i, j].GetComponent<Dot>(); 
                         if (dot.isColBomb && !dot.isMatched) {
                             dots.Union(getColDots(i)); 
                         }
                         if (dot.isRowBomb && !dot.isMatched) {
                             dots.Union(getRowDots(j)); 
                         }
-                        dots.Add(board.getDot(i, j)); 
+                        dots.Add(board.allDots[i, j]); 
                         dot.isMatched = true; 
                     }
                 }
@@ -217,13 +217,13 @@ public class FindMatches : MonoBehaviour {
     }
 
     public void MatchColors(string color) {
-        for (int i = 0; i < board.getWidth(); i++) {
-            for (int j = 0; j < board.getHeight(); j++) {
+        for (int i = 0; i < board.width; i++) {
+            for (int j = 0; j < board.height; j++) {
                 // Check if that piece exists 
-                if (board.getDot(i, j) != null) {
+                if (board.allDots[i, j] != null) {
                     // check tag on dot 
-                    if (board.getDot(i, j).CompareTag(color)) {
-                        board.getDot(i, j).GetComponent<Dot>().isMatched = true; 
+                    if (board.allDots[i, j].CompareTag(color)) {
+                        board.allDots[i, j].GetComponent<Dot>().isMatched = true; 
                     } 
                 }
             }
@@ -234,7 +234,7 @@ public class FindMatches : MonoBehaviour {
     private int colRowMatch() {
         // Make a copy of currentMatches 
         List<GameObject> matchCopy = new List<GameObject>(); 
-        Dot currentDot = board.getCurrentDot(); 
+        Dot currentDot = board.currentDot; 
         // Make sure the copy contains the correct matches (current vs other Dot)
         if (currentDot.otherDot != null) {
             List<GameObject> thisMatches = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.tag));
@@ -291,7 +291,7 @@ public class FindMatches : MonoBehaviour {
 
     /// <summary>When bomb is needed, make a bomb here.</summary>
     public void makeBomb() {
-        Dot currentDot = board.getCurrentDot(); 
+        Dot currentDot = board.currentDot; 
         int matches = currentMatches.Count; 
 
         if (matches > 3) {
@@ -407,24 +407,24 @@ public class FindMatches : MonoBehaviour {
 
     private void floatingTextMessage() {
         int message = Random.Range(0, bombText.Length); 
-        floatingTextManager.Show(bombText[message] + "!", 25, Color.white, new Vector3(board.getCurrentDot().gameObject.transform.position.x, board.getCurrentDot().gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f);
+        floatingTextManager.Show(bombText[message] + "!", 25, Color.white, new Vector3(board.currentDot.gameObject.transform.position.x, board.currentDot.gameObject.transform.position.y, 0f), Vector3.up * 40f, 1f);
     }
 
     private bool ChekcForMatches() {
-        for (int i = 0; i < board.getWidth() - 2; i++) {
-            for (int j = 0; j < board.getHeight() - 2; j++) {
-                if (board.getDot(i, j) != null) {
+        for (int i = 0; i < board.width - 2; i++) {
+            for (int j = 0; j < board.height - 2; j++) {
+                if (board.allDots[i, j] != null) {
                     // grab this dot's tag 
-                    string dotTag = board.getDot(i, j).tag; 
+                    string dotTag = board.allDots[i, j].tag; 
                     // check right and two to the right
-                    if (board.getDot(i + 1, j) != null && board.getDot(i + 2, j) != null) {
-                        if (board.getDot(i + 1, j).CompareTag(dotTag) && board.getDot(i + 2, j).CompareTag(dotTag)) {
+                    if (board.allDots[i + 1, j] != null && board.allDots[i + 2, j] != null) {
+                        if (board.allDots[i + 1, j].CompareTag(dotTag) && board.allDots[i + 2, j].CompareTag(dotTag)) {
                             return true; 
                         }
                     }
                     // check up and two to the up
-                    if (board.getDot(i, j + 1) != null && board.getDot(i, j + 2) != null) {
-                        if (board.getDot(i, j + 1).CompareTag(dotTag) && board.getDot(i, j + 2).CompareTag(dotTag)) {
+                    if (board.allDots[i, j + 1] != null && board.allDots[i, j + 2] != null) {
+                        if (board.allDots[i, j + 1].CompareTag(dotTag) && board.allDots[i, j + 2].CompareTag(dotTag)) {
                             return true; 
                         }
                     } 
@@ -448,16 +448,16 @@ public class FindMatches : MonoBehaviour {
     private List<GameObject> GetMatches() {
         // find all possible matches 
         List<GameObject> allMatches = new List<GameObject>();
-        for (int i = 0; i < board.getWidth() - 2; i++) {
-            for (int j = 0; j < board.getHeight() - 2; j++) {
-                if (board.getDot(i, j) != null) {
+        for (int i = 0; i < board.height - 2; i++) {
+            for (int j = 0; j < board.height - 2; j++) {
+                if (board.allDots[i, j] != null) {
                     if (SwitchAndCheck(i, j, Vector2.right)) {
                         // not deadlocked
-                        allMatches.Add(board.getDot(i, j)); 
+                        allMatches.Add(board.allDots[i, j]); 
                     } 
                     if (SwitchAndCheck(i, j, Vector2.up)) {
                         // not deadlocked
-                        allMatches.Add(board.getDot(i, j)); 
+                        allMatches.Add(board.allDots[i, j]); 
                     }
                 }
             }

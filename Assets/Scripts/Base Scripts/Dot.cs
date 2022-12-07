@@ -102,8 +102,8 @@ public class Dot : MonoBehaviour {
             // Move Towards the target
             tempPos = new Vector2(targetX, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPos, moveSpeed); 
-            if (board.getDot(x, y) != this.gameObject) {
-                board.setDot(x, y, this.gameObject); 
+            if (board.allDots[x, y] != this.gameObject) {
+                board.allDots[x, y] = this.gameObject; 
             }
             findMatches.FindAllMatches(); 
         }
@@ -116,8 +116,8 @@ public class Dot : MonoBehaviour {
             // Move Towards the target
             tempPos = new Vector2(transform.position.x, targetY);
             transform.position = Vector2.Lerp(transform.position, tempPos, moveSpeed);  
-            if (board.getDot(x, y) != this.gameObject) {
-                board.setDot(x, y, this.gameObject); 
+            if (board.allDots[x, y] != this.gameObject) {
+                board.allDots[x, y] = this.gameObject; 
             }
             findMatches.FindAllMatches(); 
         }
@@ -152,7 +152,7 @@ public class Dot : MonoBehaviour {
                 x = prevX; 
                 y = prevY; 
                 yield return new WaitForSeconds(0.5f); 
-                board.setCurrentDot(null); 
+                board.currentDot = null; 
                 board.currentState = GameState.move; 
             } 
             else { 
@@ -195,7 +195,7 @@ public class Dot : MonoBehaviour {
             swipeAngle = Mathf.Atan2(finalTouchPos.y - firstTouchPos.y, finalTouchPos.x - firstTouchPos.x); 
             //Debug.Log((swipeAngle * Mathf.PI) + "π rad"); 
             board.currentState = GameState.wait; 
-            board.setCurrentDot(this); 
+            board.currentDot = this; 
             MoveDots(); 
         }
         else {
@@ -205,12 +205,12 @@ public class Dot : MonoBehaviour {
 
     /// <summary>move right, up, left, or down based on the angle of the swipe</summary>
     private void MoveDots() {
-        if (swipeAngle > -(Mathf.PI/4) && swipeAngle <= (Mathf.PI/4) && x < (board.getWidth() - 1)) {
+        if (swipeAngle > -(Mathf.PI/4) && swipeAngle <= (Mathf.PI/4) && x < (board.width - 1)) {
             // right swipe
             //Debug.Log("Rigth swipe"); 
             this.SwapDots(x + 1, y); 
         }
-        else if (swipeAngle > (Mathf.PI/4) && swipeAngle <= (3*Mathf.PI/4) && y < (board.getHeight() - 1)) {
+        else if (swipeAngle > (Mathf.PI/4) && swipeAngle <= (3*Mathf.PI/4) && y < (board.height - 1)) {
             // up swipe 
             //Debug.Log("Up swipe"); 
             this.SwapDots(x, y + 1); 
@@ -234,9 +234,9 @@ public class Dot : MonoBehaviour {
 
     /// <summary>swaps this dot with a left, right, up, or down neighbor dot</summary>
     private void SwapDots(int x, int y) {
-        otherDot = board.getDot(x, y); 
-        if (!board.isLockedTile(this) && otherDot != null) {
-            if (!board.isLockedTile(otherDot.GetComponent<Dot>())){
+        otherDot = board.allDots[x, y]; 
+        if (!board.lockedTiles[this.x, this.y] && otherDot != null) {
+            if (!board.lockedTiles[otherDot.GetComponent<Dot>().x, otherDot.GetComponent<Dot>().y]) {
             otherDot.GetComponent<Dot>().x = this.x; 
             otherDot.GetComponent<Dot>().y = this.y; 
             }
@@ -334,7 +334,7 @@ public class Dot : MonoBehaviour {
 
     protected void unmakeColorBomb() {
         isColorBomb = false; 
-        GameObject[] dots = board.getDots(); 
+        GameObject[] dots = board.dots; 
         GameObject dotToUse = Instantiate(dots[Random.Range(0, dots.Length)], transform.position, Quaternion.identity);
         this.gameObject.tag = dotToUse.tag; 
         mySprite.sprite = dotToUse.GetComponent<SpriteRenderer>().sprite; 

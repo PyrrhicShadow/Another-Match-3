@@ -15,10 +15,10 @@ public enum TileType {
 [System.Serializable]
 public class Tile { 
     [SerializeField] int _x; 
-    public int x { get { return _x; } set { _x = value; } } 
+    public int x { get { return _x; } set { _x = value; } }
     [SerializeField] int _y; 
-    public int y { get { return _y; } set { _y = value; } } 
-    [SerializeField] TileType _tile; 
+    public int y { get { return _y; } set { _y = value; } }
+    [SerializeField] TileType _tile;
     public TileType tile { get { return _tile; } set { _tile = value; } }
 }
 
@@ -30,14 +30,17 @@ public class Board : MonoBehaviour {
 
     [Header("Board properites")]
     public GameState currentState = GameState.pause; 
-    [SerializeField] int width = 7; 
-    [SerializeField] int height = 10;  
+    [SerializeField] int _width = 7; 
+    public int width { get { return _width; } private set { _width = value; } }
+    [SerializeField] int _height = 10;  
+    public int height { get { return _height; } private set { _height = value; } }
     [SerializeField] int offset = 20; 
-    [SerializeField] int eyeRatio = 0; // must be between 0 and 100 
+    public int eyeRatio { get; set; } = 0;
     public int balance { get; private set; } = 500; // controls the pace at which the game moves
 
     private BackgroundTile[,] allTiles; 
-    [SerializeField] GameObject[,] allDots; 
+    [SerializeField] GameObject[,] _allDots; 
+    public GameObject[,] allDots { get { return _allDots; } set { _allDots = value; } } 
     internal FindMatches findMatches { get; private set; }
     internal ScoreManager scoreManager { get; private set; } 
     internal SoundManager soundManager { get; private set; } 
@@ -46,14 +49,15 @@ public class Board : MonoBehaviour {
     private bool cancerDmg = false; 
 
     [Header("Board components")]
-    [SerializeField] Dot currentDot; 
+    [SerializeField] Dot _currentDot; 
+    public Dot currentDot { get { return _currentDot; } set { _currentDot = value; } }
     [SerializeField] Image moveIndicatorImage;  
     [SerializeField] Tile[] boardLayout; 
-    private BackgroundTile[,] breakableTiles; 
-    private bool[,] blankSpaces; 
-    private BackgroundTile[,] lockedTiles; 
-    private BackgroundTile[,] blockingTiles; 
-    private BackgroundTile[,] cancerTiles; 
+    public BackgroundTile[,] breakableTiles { get; private set; }
+    public bool[,] blankSpaces { get; private set; }
+    public BackgroundTile[,] lockedTiles { get; private set; } 
+    public BackgroundTile[,] blockingTiles { get; private set; }
+    public BackgroundTile[,] cancerTiles { get; private set; }
 
     [Header("Component prefabs")]
     [SerializeField] GameObject tilePrefab; 
@@ -66,8 +70,10 @@ public class Board : MonoBehaviour {
     private float refillDelay = 0.5f; 
 
     [Header("Dot types")]
-    [SerializeField] GameObject[] dots; 
-    [SerializeField] GameObject[] eyes; 
+    [SerializeField] GameObject[] _dots; 
+    public GameObject[] dots { get { return _dots; } private set { _dots = value; } }
+    [SerializeField] GameObject[] _eyes; 
+    public GameObject[] eyes { get {return _eyes; } private set { _eyes = value; } }
 
     // Awake. It's probably before start, right? 
     private void Awake() {
@@ -707,62 +713,6 @@ public class Board : MonoBehaviour {
         yield return new WaitForSeconds(refillDelay); 
     }
 
-/********************* Public Getters and Setters *********************/ 
-
-    /// <summary> gets a dot given its <paramref name="x"/> and <paramref name="y"/> </summary>
-    /// <param name="x">x-vlaue</param>
-    /// <param name="y">y-value</param>
-    public GameObject getDot(int x, int y) {
-        return allDots[x, y]; 
-    }
-
-    /// <summary>returns width</summary>
-    public int getWidth() {
-        return width; 
-    }
-
-    // <summary>returns height</summary>
-    public int getHeight() {
-        return height; 
-    }
-    
-    /// <summary>returns the current Dot</summary>
-    public Dot getCurrentDot() {
-        return currentDot; 
-    }
-    /// <summary>returns all dots </summary>
-    public GameObject[] getDots() {
-        return dots; 
-    }
-    /// <summary>returns all eyes (special dots) </summary>
-    public GameObject[] getEyes() {
-        return eyes; 
-    }
-
-    /// <summary>sets the given Dot's <paramref name="x"/>, <paramref name="y"/></summary>
-    /// <param name="x">the new x</param>
-    /// <param name="y">the new y</param>
-    /// <param name="dot">the given Dot</param>
-    public void setDot(int x, int y, GameObject dot) {
-        this.allDots[x, y] = dot; 
-    }
-
-    /// <summary>sets the CurrentDot to given Dot</summary>
-    public void setCurrentDot(Dot dot) {
-        currentDot = dot; 
-    }
-
-    /// <summary>sets the eyeRatio between 0 to 100 incl; returns false if value out of range.</summary>
-    public bool setEyeRatio(int eye) {
-        if (eye >= 0 && eye <= 100) {
-            this.eyeRatio = eye; 
-            return true; 
-        }
-        else {
-            return false; 
-        }
-    }
-
     public Level getLvl() {
         if (lvl >= 0 && lvl < world.levels.Length) {
             return world.levels[lvl]; 
@@ -774,10 +724,6 @@ public class Board : MonoBehaviour {
 
     public void ShuffleBoard() {
         StartCoroutine(ShuffleBoardCo()); 
-    }
-
-    public bool isLockedTile(Dot dot) {
-        return lockedTiles[dot.x, dot.y] != null;
     }
 
     public bool nullSpace(int i, int j) {
