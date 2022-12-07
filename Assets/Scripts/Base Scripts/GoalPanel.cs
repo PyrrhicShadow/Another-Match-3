@@ -5,34 +5,10 @@ using UnityEngine.UI;
 
 public class GoalPanel : MonoBehaviour {
     
-    [SerializeField] Image myImage; 
-    [SerializeField] Sprite mySprite; 
-    [SerializeField] Color myColor; 
-    [SerializeField] Text myText; 
-    [SerializeField] string goalText; 
+    [SerializeField] Image _image; 
+    public Sprite sprite { get { return _image.sprite; } set { _image.sprite = value; } }
+    public  Color color { get {return _image.color; } set { _image.color = value; } } 
+    [SerializeField] Text _text; 
+    public string text { get { return _text.text; } set { _text.text = value; } }
 
-    // Start is called before the first frame update
-    void Start() { 
-        SetUp(); 
-    }
-
-    private void SetUp() {
-        myImage.sprite = mySprite; 
-        myText.text = goalText; 
-        myImage.color = myColor; 
-    }
-
-    public void setSprite(Sprite newSprite) {
-        mySprite = newSprite; 
-    }
-
-    public void setSprite(Sprite newSprite, Color newColor) {
-        mySprite = newSprite; 
-        myColor = newColor; 
-    }
-
-    public void setText(string newText) {
-        goalText = newText; 
-        myText.text = goalText; 
-    }
 }

@@ -187,11 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3ab52b1489364438b84d37700c4847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myImage: {fileID: 8600493827027272524}
-  mySprite: {fileID: 0}
-  myColor: {r: 1, g: 1, b: 1, a: 1}
-  myText: {fileID: 8600493825891359814}
-  goalText: 
+  _image: {fileID: 8600493827027272524}
+  _text: {fileID: 8600493825891359814}
 --- !u!1 &8600493827027272530
 GameObject:
   m_ObjectHideFlags: 0

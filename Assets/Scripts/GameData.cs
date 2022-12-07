@@ -72,6 +72,7 @@ public class GameData : MonoBehaviour {
     [SerializeField] internal World world; 
     public SaveData saveData; 
     public string[] debugData; 
+    
     void Awake() {
         if (gameData == null) {
             DontDestroyOnLoad(this.gameObject); 

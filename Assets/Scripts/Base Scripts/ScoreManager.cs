@@ -7,13 +7,14 @@ using UnityEngine.Localization.Tables;
 
 [System.Serializable]
 public class BlankGoal {
-    public int numNeeded { get; set; } 
-    public int numCollected { get; set; } 
+    [SerializeField] int _numNeeded; 
+    public int numNeeded { get { return _numNeeded; } set { _numNeeded = value; } }
+    public int numCollected { get;  set; } 
     [SerializeField] GameObject goalObject; 
-    public Sprite sprite { get { return goalObject.GetComponent<SpriteRenderer>().sprite; } }
-    public Color color { get { return goalObject.GetComponent<SpriteRenderer>().color; } }
-    public string tag { get { return goalObject.tag; } }
-    public bool isComplete { get { return numCollected >= numNeeded; } }
+    public Sprite sprite { get { return goalObject.GetComponent<SpriteRenderer>().sprite; } private set { sprite = value; } }
+    public Color color { get { return goalObject.GetComponent<SpriteRenderer>().color; } private set { color = value; } }
+    public string tag { get { return goalObject.tag; } private set { tag = value; } }
+    public bool isComplete { get { return numCollected >= numNeeded; } private set { isComplete = value; } } 
 }
 
 public enum GameType {
@@ -22,8 +23,10 @@ public enum GameType {
 
 [System.Serializable]
 public class EndGameReqs {
-    public GameType gameType { get; private set; }
-    public int counter { get; set; } 
+    [SerializeField] GameType _gameType; 
+    public GameType gameType { get { return _gameType; } private set { _gameType = value; } }
+    [SerializeField] int _counter; 
+    public int counter { get { return _counter; } set { _counter = value; } } 
 }
 public class ScoreManager : MonoBehaviour {
     
@@ -157,12 +160,14 @@ public class ScoreManager : MonoBehaviour {
             
             // set the image and text of the goal 
             GoalPanel startPanel = startGoal.GetComponent<GoalPanel>(); 
-            startPanel.setSprite(levelGoals[i].sprite, levelGoals[i].color); 
-            startPanel.setText(levelGoals[i].numNeeded.ToString()); 
+            startPanel.sprite = levelGoals[i].sprite; 
+            startPanel.color =  levelGoals[i].color; 
+            startPanel.text = levelGoals[i].numCollected.ToString() + "/" + levelGoals[i].numNeeded;
 
             GoalPanel gamePanel = gameGoal.GetComponent<GoalPanel>(); 
-            gamePanel.setSprite(levelGoals[i].sprite, levelGoals[i].color); 
-            gamePanel.setText("0/" + levelGoals[i].numNeeded); 
+            gamePanel.sprite = levelGoals[i].sprite;
+            gamePanel.color = levelGoals[i].color; 
+            gamePanel.text = levelGoals[i].numCollected.ToString() + "/" + levelGoals[i].numNeeded; 
 
             // add this goal to list of current goals
             currentGoals.Add(gamePanel); 
@@ -172,10 +177,10 @@ public class ScoreManager : MonoBehaviour {
     public void UpdateGoals() {
         int goalsCompleted = 0;
         for (int i = 0; i < levelGoals.Length; i++) {
-            currentGoals[i].setText(levelGoals[i].numCollected.ToString() + "/" + levelGoals[i].numNeeded); 
+            currentGoals[i].text = levelGoals[i].numCollected.ToString() + "/" + levelGoals[i].numNeeded; 
             if (levelGoals[i].isComplete) {
                 goalsCompleted++; 
-                currentGoals[i].setText(levelGoals[i].numNeeded.ToString() + "/" + levelGoals[i].numNeeded); 
+                currentGoals[i].text = levelGoals[i].numNeeded.ToString() + "/" + levelGoals[i].numNeeded; 
             }
         }
 

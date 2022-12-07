@@ -8,7 +8,8 @@ using UnityEngine.Localization.Tables;
 public class FindMatches : MonoBehaviour {
 
     private Board board; 
-    [SerializeField] private List<GameObject> currentMatches; 
+    [SerializeField] private List<GameObject> _currentMatches; 
+    public List<GameObject> currentMatches { get { return _currentMatches; } private set { _currentMatches = value; } }
     private FloatingTextManager floatingTextManager; 
     private string[] bombText; 
 
@@ -236,8 +237,8 @@ public class FindMatches : MonoBehaviour {
         Dot currentDot = board.getCurrentDot(); 
         // Make sure the copy contains the correct matches (current vs other Dot)
         if (currentDot.otherDot != null) {
-            List<GameObject> thisMatches = new List<GameObject>(getCurrentMatches().FindAll(x => x.tag == currentDot.tag));
-            List<GameObject> otherMatches = new List<GameObject>(getCurrentMatches().FindAll(x => x.tag == currentDot.otherDot.GetComponent<Dot>().tag));
+            List<GameObject> thisMatches = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.tag));
+            List<GameObject> otherMatches = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.otherDot.GetComponent<Dot>().tag));
             if (thisMatches.Count > otherMatches.Count) {
                 Debug.Log("Matches for currentDot"); 
                 matchCopy = thisMatches; 
@@ -249,7 +250,7 @@ public class FindMatches : MonoBehaviour {
         }
         else {
             Debug.Log("otherDot not found"); 
-            matchCopy = new List<GameObject>(getCurrentMatches().FindAll(x => x.tag == currentDot.tag)); 
+            matchCopy = new List<GameObject>(currentMatches.FindAll(x => x.tag == currentDot.tag)); 
         }
 
         // Cycle through all of matchCopy and decide if a bomb needs to be made 
@@ -291,7 +292,7 @@ public class FindMatches : MonoBehaviour {
     /// <summary>When bomb is needed, make a bomb here.</summary>
     public void makeBomb() {
         Dot currentDot = board.getCurrentDot(); 
-        int matches = getCurrentMatches().Count; 
+        int matches = currentMatches.Count; 
 
         if (matches > 3) {
             // type of match
@@ -472,10 +473,5 @@ public class FindMatches : MonoBehaviour {
             return possibleMoves[dotToUse]; 
         }
         return null; 
-    }
-
-    /// <summary>returns currentMatches</summary>
-    public List<GameObject> getCurrentMatches() {
-        return currentMatches; 
     }
 }

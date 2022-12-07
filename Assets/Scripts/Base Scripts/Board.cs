@@ -35,10 +35,10 @@ public class Board : MonoBehaviour {
 
     private BackgroundTile[,] allTiles; 
     [SerializeField] GameObject[,] allDots; 
-    public FindMatches findMatches { get; private set; }
-    public ScoreManager scoreManager { get; private set; } 
-    public SoundManager soundManager { get; private set; } 
-    public FloatingTextManager floatingTextManager { get; private set; }
+    internal FindMatches findMatches { get; private set; }
+    internal ScoreManager scoreManager { get; private set; } 
+    internal SoundManager soundManager { get; private set; } 
+    internal FloatingTextManager floatingTextManager { get; private set; }
     private int streakValue = 1; 
     private bool cancerDmg = false; 
 
@@ -442,7 +442,7 @@ public class Board : MonoBehaviour {
             findMatches.makeBomb(); 
         }
 
-        findMatches.getCurrentMatches().Clear();
+        findMatches.currentMatches.Clear();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (allDots[i, j] != null) {
@@ -528,7 +528,7 @@ public class Board : MonoBehaviour {
             DestroyMatches(); 
             yield return new WaitForSeconds(refillDelay); 
         }
-        findMatches.getCurrentMatches().Clear(); 
+        findMatches.currentMatches.Clear(); 
         currentDot = null; 
 
         SpawnCancerTiles(); 
