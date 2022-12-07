@@ -14,9 +14,12 @@ public enum TileType {
 
 [System.Serializable]
 public class Tile { 
-    public int x; 
-    public int y; 
-    public TileType tile;
+    [SerializeField] int _x; 
+    public int x { get { return _x; } set { _x = value; } } 
+    [SerializeField] int _y; 
+    public int y { get { return _y; } set { _y = value; } } 
+    [SerializeField] TileType _tile; 
+    public TileType tile { get { return _tile; } set { _tile = value; } }
 }
 
 public class Board : MonoBehaviour {

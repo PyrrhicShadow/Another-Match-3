@@ -15,18 +15,18 @@ MonoBehaviour:
   width: 7
   height: 11
   boardLayout:
-  - x: 0
-    y: 0
-    tile: 4
-  - x: 0
-    y: 10
-    tile: 4
-  - x: 6
-    y: 0
-    tile: 4
-  - x: 6
-    y: 10
-    tile: 4
+  - _x: 0
+    _y: 0
+    _tile: 4
+  - _x: 0
+    _y: 10
+    _tile: 4
+  - _x: 6
+    _y: 0
+    _tile: 4
+  - _x: 6
+    _y: 10
+    _tile: 4
   dots:
   - {fileID: 8614924838474643066, guid: 5228ddf112f676946a3116a178d737c2, type: 3}
   - {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
@@ -50,18 +50,15 @@ MonoBehaviour:
   scoreGoal: 4
   backgroundColor: {r: 0.3137255, g: 0.1294118, b: 0.1764706, a: 1}
   levelGoals:
-  - numNeeded: 6
-    matchTag: tourmaline
+  - _numNeeded: 6
     goalObject: {fileID: 8552773647161803517, guid: 338ebe48bcbbef9459f2d57e2b816227, type: 3}
-  - numNeeded: 6
-    matchTag: diamond
+  - _numNeeded: 6
     goalObject: {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
-  - numNeeded: 6
-    matchTag: cancer
+  - _numNeeded: 6
     goalObject: {fileID: 3811408026724356143, guid: 422e1bd5dfa26c040bf26d4858c3bff1, type: 3}
   reqs:
-    gameType: 0
-    counter: 100
+    _gameType: 0
+    _counter: 100
   flavorText:
   - you never truly experienced
   - its battiness

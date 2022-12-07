@@ -32,18 +32,15 @@ MonoBehaviour:
   scoreGoal: 3
   backgroundColor: {r: 0.2470588, g: 0.2431373, b: 0.3137255, a: 1}
   levelGoals:
-  - numNeeded: 6
-    matchTag: ruby
+  - _numNeeded: 6
     goalObject: {fileID: 6422950250267594635, guid: 35584c7f5264cff4f82ad48bb9c1323a, type: 3}
-  - numNeeded: 6
-    matchTag: emerald
+  - _numNeeded: 6
     goalObject: {fileID: 4492141300796167634, guid: 06f6c540527b76d4ca9d770edf8618bf, type: 3}
-  - numNeeded: 6
-    matchTag: diamond
+  - _numNeeded: 6
     goalObject: {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
   reqs:
-    gameType: 1
-    counter: 100
+    _gameType: 1
+    _counter: 100
   flavorText:
   - when I did, I lost hope
   - lamented for a long time

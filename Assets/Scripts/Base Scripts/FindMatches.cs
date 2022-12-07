@@ -14,7 +14,7 @@ public class FindMatches : MonoBehaviour {
     private string[] bombText; 
 
     [Header("Localization")] 
-    [SerializeField] private LocalizedStringTable _localizedStringTable;
+    [SerializeField] LocalizedStringTable _localizedStringTable;
     private StringTable _currentStringTable;
 
     // Start is called before the first frame update

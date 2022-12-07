@@ -38,17 +38,14 @@ MonoBehaviour:
   scoreGoal: 4
   backgroundColor: {r: 0.3137255, g: 0.1294118, b: 0.1764706, a: 1}
   levelGoals:
-  - numNeeded: 6
-    matchTag: tourmaline
+  - _numNeeded: 6
     goalObject: {fileID: 8552773647161803517, guid: 338ebe48bcbbef9459f2d57e2b816227, type: 3}
-  - numNeeded: 6
-    matchTag: diamond
+  - _numNeeded: 6
     goalObject: {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
-  - numNeeded: 6
-    matchTag: pearl
+  - _numNeeded: 6
     goalObject: {fileID: 7226521100336894959, guid: a5d791a24f8ce66428b0404c0e92cf9b, type: 3}
   reqs:
-    gameType: 0
-    counter: 100
+    _gameType: 0
+    _counter: 100
   flavorText:
   - when you're ready

@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fe9f9330326c6428bfb9a29a2bab2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
-  sprite: {fileID: 4594637226539004723}
+  _hp: 2
+  _points: 10

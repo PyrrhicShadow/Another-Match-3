@@ -15,33 +15,33 @@ MonoBehaviour:
   width: 7
   height: 11
   boardLayout:
-  - x: 2
-    y: 4
-    tile: 2
-  - x: 2
-    y: 5
-    tile: 2
-  - x: 2
-    y: 6
-    tile: 2
-  - x: 3
-    y: 4
-    tile: 2
-  - x: 3
-    y: 5
-    tile: 2
-  - x: 3
-    y: 6
-    tile: 2
-  - x: 4
-    y: 4
-    tile: 2
-  - x: 4
-    y: 5
-    tile: 2
-  - x: 4
-    y: 6
-    tile: 2
+  - _x: 2
+    _y: 4
+    _tile: 2
+  - _x: 2
+    _y: 5
+    _tile: 2
+  - _x: 2
+    _y: 6
+    _tile: 2
+  - _x: 3
+    _y: 4
+    _tile: 2
+  - _x: 3
+    _y: 5
+    _tile: 2
+  - _x: 3
+    _y: 6
+    _tile: 2
+  - _x: 4
+    _y: 4
+    _tile: 2
+  - _x: 4
+    _y: 5
+    _tile: 2
+  - _x: 4
+    _y: 6
+    _tile: 2
   dots:
   - {fileID: 3483114213310253940, guid: 368bf467004bc5240bb13007384b6748, type: 3}
   - {fileID: 4492141300796167634, guid: 06f6c540527b76d4ca9d770edf8618bf, type: 3}
@@ -65,17 +65,14 @@ MonoBehaviour:
   scoreGoal: 5
   backgroundColor: {r: 0.368, g: 0, b: 0.011596, a: 1}
   levelGoals:
-  - numNeeded: 6
-    matchTag: amethyst
+  - _numNeeded: 6
     goalObject: {fileID: 8614924838474643066, guid: 5228ddf112f676946a3116a178d737c2, type: 3}
-  - numNeeded: 6
-    matchTag: ruby
+  - _numNeeded: 6
     goalObject: {fileID: 6422950250267594635, guid: 35584c7f5264cff4f82ad48bb9c1323a, type: 3}
-  - numNeeded: 6
-    matchTag: locked
+  - _numNeeded: 6
     goalObject: {fileID: 6176897707943177935, guid: e0eefcbfbc84b8845a257e3afea95c7d, type: 3}
   reqs:
-    gameType: 0
-    counter: 100
+    _gameType: 1
+    _counter: 100
   flavorText:
   - the ephemeral taste of defeat

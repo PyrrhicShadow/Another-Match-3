@@ -28,12 +28,4 @@ public class CameraScalar : MonoBehaviour {
             Camera.main.orthographicSize = board.getHeight() / 2 + padding / aspectRaio; 
         }
     }
-
-    public float getYOffset() {
-        return yOffset; 
-    }
-
-    public void setYOffset(float yOffset) {
-        this.yOffset = yOffset; 
-    }
 }
