@@ -18,8 +18,8 @@ public class LevelSelection : MonoBehaviour {
             panels[i].SetActive(false); 
         }
         if (data != null) {
-            for (int i = 0; i < data.saveData.activeCount(); i++) {
-                if (data.saveData.isActive(i)) {
+            for (int i = 0; i < data.saveData.actives.Length; i++) {
+                if (data.saveData.actives[i]) {
                     currentLevel = i; 
                 }
             }

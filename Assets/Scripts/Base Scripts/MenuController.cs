@@ -47,8 +47,8 @@ public class MenuController : MonoBehaviour {
     public void toSplashLose() {
         if (gameData != null) {
             SaveData thisLevel = gameData.saveData; 
-            if (board.scoreManager.score > thisLevel.getHighScore(lvl)) {
-                thisLevel.setHighScore(lvl, board.scoreManager.score); 
+            if (board.scoreManager.score > thisLevel.highScores[lvl]) {
+                thisLevel.highScores[lvl] = board.scoreManager.score; 
             }
         }
         SceneManager.LoadScene(sceneToLoad); 
@@ -64,18 +64,20 @@ public class MenuController : MonoBehaviour {
     public void winGame() {
         if (gameData != null) {
             SaveData thisLevel = gameData.saveData; 
-            thisLevel.setActive(lvl + 1, true); 
-            if (board.scoreManager.score > thisLevel.getHighScore(lvl)) {
-                thisLevel.setHighScore(lvl, board.scoreManager.score); 
+            if (lvl == thisLevel.Count() - 1) {
+                thisLevel.summon = true; 
+            }
+            else {
+                thisLevel.actives[lvl + 1] = true; 
+            }
+            if (board.scoreManager.score > thisLevel.highScores[lvl]) {
+                thisLevel.highScores[lvl] = board.scoreManager.score; 
             }
 
-            if (board.scoreManager.stars > thisLevel.getStar(lvl)) {
-                thisLevel.setStar(lvl, board.scoreManager.stars); 
+            if (board.scoreManager.stars > thisLevel.stars[lvl]) {
+                thisLevel.stars[lvl] = board.scoreManager.stars; 
             } 
 
-            if (lvl == thisLevel.Count() - 1) {
-                thisLevel.Summoned(); 
-            }
             gameData.debugData[lvl] = (lvl + 1).ToString() + ": " + board.scoreManager.reqs.counter + " (" + board.scoreManager.reqs.gameType + ")"; 
             gameData.Save(); 
         }
@@ -112,8 +114,8 @@ public class MenuController : MonoBehaviour {
 
         if (gameData != null) {
             SaveData thisLevel = gameData.saveData; 
-            if (board.scoreManager.score > thisLevel.getHighScore(lvl)) {
-                thisLevel.setHighScore(lvl, board.scoreManager.score); 
+            if (board.scoreManager.score > thisLevel.highScores[lvl]) {
+                thisLevel.highScores[lvl] = board.scoreManager.score; 
             }
         }
         

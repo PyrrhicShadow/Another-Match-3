@@ -26,7 +26,7 @@ public class RandomDot : MonoBehaviour {
     }
 
     private void ChangeSprite() {
-        if (data.saveData.hasSummoned()) {
+        if (data.saveData.summon) {
             myImage.sprite = heart; 
         }
         else {

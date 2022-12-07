@@ -18,11 +18,11 @@ MonoBehaviour:
   - _x: 2
     _y: 4
     _tile: 0
-  - _x: 3
-    _y: 4
-    _tile: 0
-  - _x: 3
+  - _x: 2
     _y: 5
+    _tile: 0
+  - _x: 2
+    _y: 6
     _tile: 0
   - _x: 3
     _y: 4

@@ -17,7 +17,7 @@ public class StartController : MonoBehaviour {
         // if gamedata.hasSummoned, make game and start x-scale = -1 and background color different
         GameData data = FindObjectOfType<GameData>(); 
         Vector3 flipX = new Vector3(-1, 1, 1); 
-        if (data.saveData.hasSummoned()) {
+        if (data.saveData.summon) {
             game.rectTransform.localScale = flipX; 
             start.rectTransform.localScale = flipX; 
             background.color = GameColors.bgColors[5]; 

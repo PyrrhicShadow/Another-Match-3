@@ -235,23 +235,17 @@ public class Dot : MonoBehaviour {
     /// <summary>swaps this dot with a left, right, up, or down neighbor dot</summary>
     private void SwapDots(int x, int y) {
         otherDot = board.allDots[x, y]; 
-        if (!board.lockedTiles[this.x, this.y] && otherDot != null) {
-            if (!board.lockedTiles[otherDot.GetComponent<Dot>().x, otherDot.GetComponent<Dot>().y]) {
+        if (!board.lockedTiles[this.x, this.y] && otherDot != null && !board.lockedTiles[otherDot.GetComponent<Dot>().x, otherDot.GetComponent<Dot>().y]) {
             otherDot.GetComponent<Dot>().x = this.x; 
             otherDot.GetComponent<Dot>().y = this.y; 
             }
-            else {
-                board.currentState = GameState.move; 
-            }
-            updatePrevXY(); 
-            this.x = x;
-            this.y = y;
-            StartCoroutine(CheckMoveCo());
-        }
         else {
-            updatePrevXY();  
             board.currentState = GameState.move; 
         }
+        this.updatePrevXY(); 
+        this.x = x;
+        this.y = y;
+        StartCoroutine(CheckMoveCo());
     }
 
     /// <summary>turns the current dot into a column bomb</summary>

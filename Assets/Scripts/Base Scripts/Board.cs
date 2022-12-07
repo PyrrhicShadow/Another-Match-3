@@ -87,10 +87,6 @@ public class Board : MonoBehaviour {
                 dots = myLvl.dots; 
                 eyes = myLvl.eyes; 
                 balance = myLvl.balance; 
-                bool summoned = false; // change after implimenting loading from save data
-                if (summoned) {
-                    eyeRatio = myLvl.eyeRatio; 
-                }
             }
         }
     }
@@ -112,6 +108,11 @@ public class Board : MonoBehaviour {
         scoreManager = gameObject.GetComponent<ScoreManager>(); 
         soundManager = FindObjectOfType<SoundManager>(); 
         floatingTextManager = FindObjectOfType<FloatingTextManager>(); 
+
+        GameData data = FindObjectOfType<GameData>(); 
+        if (data.saveData.summon) {
+            eyeRatio = world.levels[lvl].eyeRatio; 
+        }
 
         SetUp(); 
 

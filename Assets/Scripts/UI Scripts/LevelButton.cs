@@ -33,9 +33,9 @@ public class LevelButton : MonoBehaviour {
 
     private void LoadData() {
         if (gameData != null) {
-            if (gameData.saveData.isActive(lvl)) {
+            if (gameData.saveData.actives[lvl]) {
                 active = true; 
-                stars = gameData.saveData.getStar(lvl);
+                stars = gameData.saveData.stars[lvl];
             } 
             else {
                 active = false; 
@@ -80,7 +80,7 @@ public class LevelButton : MonoBehaviour {
     }
 
     public void ConfirmPanel() {
-        confirmPanel.GetComponent<ConfirmPanel>().setLvl(lvl); 
+        confirmPanel.GetComponent<ConfirmPanel>().lvl = this.lvl; 
         confirmPanel.SetActive(true); 
     }
 }

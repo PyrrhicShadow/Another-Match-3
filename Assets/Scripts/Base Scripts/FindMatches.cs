@@ -52,10 +52,10 @@ public class FindMatches : MonoBehaviour {
 
     private IEnumerator FindAllMatchesCo() {
         
-        for (int i = 0; i < board.height; i++) {
+        for (int i = 0; i < board.width; i++) {
             for (int j = 0; j < board.height; j++) {
                 GameObject currentDot = board.allDots[i, j]; 
-                if (currentDot != null) {
+                if (board.allDots[i, j] != null) {
                     if (i > 0 && i < (board.width - 1)) {
                         GameObject leftDot = board.allDots[i - 1, j]; 
                         GameObject rightDot = board.allDots[i + 1, j]; 
@@ -448,7 +448,7 @@ public class FindMatches : MonoBehaviour {
     private List<GameObject> GetMatches() {
         // find all possible matches 
         List<GameObject> allMatches = new List<GameObject>();
-        for (int i = 0; i < board.height - 2; i++) {
+        for (int i = 0; i < board.width - 2; i++) {
             for (int j = 0; j < board.height - 2; j++) {
                 if (board.allDots[i, j] != null) {
                     if (SwitchAndCheck(i, j, Vector2.right)) {

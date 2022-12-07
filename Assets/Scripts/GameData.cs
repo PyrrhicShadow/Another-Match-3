@@ -7,46 +7,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 [Serializable]
 public class SaveData {
-    [SerializeField] private bool[] actives; 
-    [SerializeField] private int[] highScores; 
-    [SerializeField] private int[] stars; 
-    [SerializeField] private bool summon; 
-
-    public void setActive(int i, bool status) {
-        actives[i] = status; 
-    }
-
-    public bool isActive(int i) {
-        return actives[i]; 
-    } 
-
-    public int activeCount() {
-        return actives.Length; 
-    }
-
-    public void setStar(int i, int star) {
-        stars[i] = star; 
-    }
-
-    public int getStar(int i) {
-        return stars[i];
-    }
-
-    public void setHighScore(int i, int score) {
-        highScores[i] = score; 
-    }
-
-    public int getHighScore(int i) {
-        return highScores[i];
-    }
-
-    public void Summoned() {
-        summon = true; 
-    }
-
-    public bool hasSummoned() {
-        return summon; 
-    }
+    public bool[] actives { get; set; } 
+    public int[] highScores { get; set; } 
+    public int[] stars { get; set; }
+    public bool summon { get; set; } 
 
     public void NewSave(int lvls) {
         actives = new bool[lvls]; 

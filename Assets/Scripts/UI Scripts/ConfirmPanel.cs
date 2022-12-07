@@ -11,7 +11,8 @@ public class ConfirmPanel : MonoBehaviour {
     [Header("Level Info")]
     [SerializeField] string sceneToLoad; 
     private GameData gameData; 
-    [SerializeField] int lvl; 
+    [SerializeField] int _lvl; 
+    public int lvl { get { return _lvl ;} set { _lvl = value; } }
     private int stars; 
     private int highScore; 
     [SerializeField] World world; 
@@ -92,8 +93,8 @@ public class ConfirmPanel : MonoBehaviour {
         if (gameData != null) {
             if (lvl <= gameData.saveData.Count()){
                 SaveData thisLevel = gameData.saveData; 
-                stars = thisLevel.getStar(lvl); 
-                highScore = thisLevel.getHighScore(lvl); 
+                stars = thisLevel.stars[lvl]; 
+                highScore = thisLevel.highScores[lvl]; 
             }
             else {
                 Debug.Log("Level not found");
@@ -118,9 +119,5 @@ public class ConfirmPanel : MonoBehaviour {
     public void Play() {
         PlayerPrefs.SetInt("CurrentLevel", lvl);
         SceneManager.LoadScene(sceneToLoad); 
-    }
-
-    public void setLvl(int lvl) {
-        this.lvl = lvl; 
     }
 }
