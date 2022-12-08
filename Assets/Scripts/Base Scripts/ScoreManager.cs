@@ -186,7 +186,7 @@ public class ScoreManager : MonoBehaviour {
 
         if (goalsCompleted >= levelGoals.Length) {
             if (menuController != null) {
-                Debug.Log("You win!"); 
+                // Debug.Log("You win!"); 
                 WinGame(); 
             }
         }
@@ -231,7 +231,7 @@ public class ScoreManager : MonoBehaviour {
         }
 
         if (counter <= 0) {
-            Debug.Log("You lose :("); 
+            // Debug.Log("You lose :("); 
             LoseGame(); 
         }
     }

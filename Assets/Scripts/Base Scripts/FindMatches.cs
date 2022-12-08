@@ -305,7 +305,7 @@ public class FindMatches : MonoBehaviour {
                             currentDot.isMatched = false; 
                             currentDot.makeColorBomb(); 
                             floatingTextMessage(); 
-                            Debug.Log("Color bomb generatd");
+                            // Debug.Log("Color bomb generatd");
                         }
                     }
                     // then, is other dot matched?
@@ -316,7 +316,7 @@ public class FindMatches : MonoBehaviour {
                                 otherDot.isMatched = false; 
                                 otherDot.makeColorBomb(); 
                                 floatingTextMessage(); 
-                                Debug.Log("Color bomb generatd");
+                                // Debug.Log("Color bomb generatd");
                             }
                         }
                     }
@@ -331,7 +331,7 @@ public class FindMatches : MonoBehaviour {
                             currentDot.isMatched = false; 
                             currentDot.makeAdjBomb(); 
                             floatingTextMessage(); 
-                            Debug.Log("Adjacent bomb generatd");
+                            // Debug.Log("Adjacent bomb generatd");
                         }
                     }
                     // then, is other dot matched?
@@ -342,7 +342,7 @@ public class FindMatches : MonoBehaviour {
                                 otherDot.isMatched = false; 
                                 otherDot.makeAdjBomb(); 
                                 floatingTextMessage(); 
-                                Debug.Log("Adjacent bomb generatd");
+                                // Debug.Log("Adjacent bomb generatd");
                             }
                         }
                     }
@@ -359,7 +359,7 @@ public class FindMatches : MonoBehaviour {
                                 currentDot.isMatched = false; 
                                 currentDot.makeRowBomb(); 
                                 floatingTextMessage(); 
-                                Debug.Log("Row bomb generatd");
+                                // Debug.Log("Row bomb generatd");
                             }
                         }
                         // then, is other dot matched?
@@ -370,7 +370,7 @@ public class FindMatches : MonoBehaviour {
                                     otherDot.isMatched = false; 
                                     otherDot.makeRowBomb(); 
                                     floatingTextMessage(); 
-                                    Debug.Log("Row bomb generatd");
+                                    // Debug.Log("Row bomb generatd");
                                 }
                             }
                         }
@@ -384,7 +384,7 @@ public class FindMatches : MonoBehaviour {
                                 currentDot.isMatched = false; 
                                 currentDot.makeColBomb(); 
                                 floatingTextMessage(); 
-                                Debug.Log("Column bomb generatd");
+                                // Debug.Log("Column bomb generatd");
                             }
                         }
                         // then, is other dot matched?
@@ -395,7 +395,7 @@ public class FindMatches : MonoBehaviour {
                                     otherDot.isMatched = false; 
                                     otherDot.makeColBomb(); 
                                     floatingTextMessage(); 
-                                    Debug.Log("Column bomb generatd");
+                                    // Debug.Log("Column bomb generatd");
                                 }
                             }
                         }
