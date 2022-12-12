@@ -70,19 +70,19 @@ public class Dot : MonoBehaviour {
             if (!this.isColBomb && !this.isRowBomb && !this.isColorBomb && !this.isAdjBomb) {
                 if (Input.GetKeyDown("up") || Input.GetKeyDown("down")) {
                     this.makeColBomb(); 
-                    Debug.Log("Player created a column bomb"); 
+                    // Debug.Log("Player created a column bomb"); 
                 }
                 else if (Input.GetKeyDown("right") || Input.GetKeyDown("left")) {
                     this.makeRowBomb(); 
-                    Debug.Log("Player created a row bomb");
+                    // Debug.Log("Player created a row bomb");
                 }
                 else if (Input.GetKeyDown("c")) {
                     this.makeColorBomb(); 
-                    Debug.Log("Player created a color bomb");
+                    // Debug.Log("Player created a color bomb");
                 }
                 else if (Input.GetKeyDown("a")) {
                     this.makeAdjBomb(); 
-                    Debug.Log("Player created an adjacent bomb");
+                    // Debug.Log("Player created an adjacent bomb");
                 }
             }
             else {
@@ -227,7 +227,7 @@ public class Dot : MonoBehaviour {
         }
         else {
             // invalid move
-            Debug.Log("Invalid move"); 
+            // Debug.Log("Invalid move"); 
             board.currentState = GameState.move; 
         }
     }
@@ -294,22 +294,22 @@ public class Dot : MonoBehaviour {
     public void unmakeBomb() {
         if (isColBomb) {
             unmakeColBomb(); 
-            Debug.Log("Player returned a column bomb into a " + this.tag + " dot");
+            // Debug.Log("Player returned a column bomb into a " + this.tag + " dot");
         }
         else if (isRowBomb) {
             unmakeRowBomb(); 
-            Debug.Log("Player returned a row bomb into a " + this.tag + " dot");
+            // Debug.Log("Player returned a row bomb into a " + this.tag + " dot");
         }
         else if (isAdjBomb) {
             unmakeAdjBomb(); 
-            Debug.Log("Player returned an adjacent bomb into a " + this.tag + " dot");
+            // Debug.Log("Player returned an adjacent bomb into a " + this.tag + " dot");
         }
         else if (isColorBomb) {
             unmakeColorBomb(); 
-            Debug.Log("Player returned a color bomb into a " + this.tag + " dot");
+            // Debug.Log("Player returned a color bomb into a " + this.tag + " dot");
         }
         else {
-            Debug.Log("No bomb detected.");
+            // Debug.Log("No bomb detected.");
         }
     }
 

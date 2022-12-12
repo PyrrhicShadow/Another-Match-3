@@ -307,7 +307,7 @@ public class ScoreManager : MonoBehaviour {
         if (tier > 0 && tier < (GameColors.bgColors.Length) && bgTier != tier) {
             background.color = GameColors.bgColors[tier]; 
             bgTier = tier; 
-            Debug.Log("Background tier increased to " + tier); 
+            // Debug.Log("Background tier increased to " + tier); 
         }
     }
 
