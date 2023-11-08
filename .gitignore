@@ -2,6 +2,7 @@
 hey.ogg*
 oh.ogg*
 /Builds/Another Match 3 PC/
+*.ini
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
